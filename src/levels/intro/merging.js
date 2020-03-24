@@ -5,6 +5,7 @@ exports.level = {
     "en_US": "Merging in Git",
     "de_DE": "Mergen in git",
     "es_AR": "Mergeando en Git",
+    "es_ES": "Haciendo merge en Git",
     "pt_BR": "Merge no Git",
     "gl"   : "Merge en Git",
     "fr_FR": "Faire des 'merge' (fusions de branches) avec Git",
@@ -13,13 +14,15 @@ exports.level = {
     "zh_CN": "Git Merge",
     "zh_TW": "git 中的 merge",
     "ru_RU": "Слияния веток в Git",
-    "uk": "Злиття гілок в Git"
+    "uk": "Злиття гілок в Git",
+    "vi": "Gộp nhánh trong Git"
   },
   "hint": {
     "en_US": "Remember to commit in the order specified (bugFix before master)",
     "de_DE": "Denk dran in der angegebenen Reihenfolge zu committen (erst bugFix, dann master)",
     "ja"　　　: "指示された順番でコミットすること（masterの前にbugFixで）",
     "es_AR": "Acordate de commitear en el orden especificado (bugFix antes de master)",
+    "es_ES": "Acuérdate de hacer commit en el orden especificado (bugFix antes de master)",
     "pt_BR": "Lembre-se de commitar na ordem especificada (bugFix antes de master)",
     "gl"   : "Lembrate de facer commit na orde específica (bugFix antes de master)",
     "fr_FR": "Pensez à faire des commits dans l'ordre indiqué (bugFix avant master)",
@@ -27,7 +30,8 @@ exports.level = {
     "zh_TW": "記住按指定的順序 commit（bugFix 比 master 優先）",
     "ko": "말씀드린 순서대로 커밋해주세요 (bugFix에 먼저 커밋하고 master에 커밋)",
     "ru_RU": "Не забудь делать коммиты в правильном порядке (сначала bugFix, потом master)",
-    "uk": "Не забудь робити коміти в правильному порядку (спочатку bugFix, а вже потім master)"
+    "uk": "Не забудь робити коміти в правильному порядку (спочатку bugFix, а вже потім master)",
+    "vi": "Nhớ là commit theo đúng thứ tự(bugFix trước master)"
   },
   "disabledMap": {
     "git revert": true
@@ -250,7 +254,7 @@ exports.level = {
               "",
               "¡Genial! Ya sabemos cómo commitear y cómo crear ramas. Ahora tenemos que aprender algún modo de unificar el trabajo de dos ramas diferentes.  Esto nos va a permitir abrir una nueva rama de desarrollo, implementar alguna nueva funcionalidad, y después unirla de nuevo con el trabajo principal.",
               "",
-              "El primer método para combinarlas que vamos a explorar es `git merge`. Mergear en Git crea un commit especial que tiene dos padres diferentes. Un commit con dos padres escencialmente significa \"Quiero incluir todo el trabajo de este padre de acá y este otro padre de acá, *y* del conjunto de todos sus ancestros\"",
+              "El primer método para combinarlas que vamos a explorar es `git merge`. Mergear en Git crea un commit especial que tiene dos padres diferentes. Un commit con dos padres esencialmente significa \"Quiero incluir todo el trabajo de este padre de acá y este otro padre de acá, *y* del conjunto de todos sus ancestros\"",
               "",
               "Es más simple visualizarlo, veámoslo a continuación"
             ]
@@ -304,6 +308,75 @@ exports.level = {
               "* Mergeá la rama `bugFix` a `master` usando `git merge`",
               "",
               "*Acordate: siempre podés volver a ver este mensaje tipeando \"objective\"!*"
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Haciendo merge en ramas",
+              "",
+              "¡Genial! Ya sabemos cómo crear un commit y cómo crear ramas. Ahora tenemos que aprender algún modo de unificar el trabajo de dos ramas diferentes.  Esto nos va a permitir abrir una nueva rama de desarrollo, implementar alguna nueva funcionalidad, y después unirla de nuevo con el trabajo principal.",
+              "",
+              "El primer método para combinarlas que vamos a explorar es `git merge`. Hacer merge en Git crea un commit especial que tiene dos padres diferentes. Un commit con dos padres escencialmente significa \"Quiero incluir todo el trabajo de estos dos padres , *y* del conjunto de todos sus ancestros\"",
+              "",
+              "Es más simple visualizarlo, veámoslo a continuación"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Aquí tenemos dos ramas, y cada una tiene un commit que le es único. Esto significa que ninguna de las ramas incluye \"todo el trabajo\" que hay en nuestro repositorio. Hagamos un merge para solucionar eso.",
+              "",
+              "Vamos a `merge`ar la rama `bugFix` a `master`"
+            ],
+            "afterMarkdowns": [
+              "¡Caramba! ¿Viste eso? Antes de nada, `master` ahora apunta a un commit que tiene dos padres. Si sigues las flechas por el árbol de commits empezando desde `master` vas a cruzarte con cada commit del repositorio hasta llegar a la raíz. Esto significa que `master` ahora contiene todo el trabajo que hay en el repositorio.",
+              "",
+              "Además, ¿viste cómo cambiaron los colores de los commits? Para ayudar al aprendizaje, he incluido algunas convenciones de colores. Cada rama tiene un color propio. Cada commmit se vuelve del color resultante de mezclar los colores de todas las ramas que lo contienen.",
+              "",
+              "Así que aquí vemos que el color de la rama `master` participa en la mezcla de todos los commits, pero que el de `bugFix` no. Arreglemos eso..."
+            ],
+            "command": "git merge bugFix",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hagamos merge de `master` a `bugFix`:"
+            ],
+            "afterMarkdowns": [
+              "Como `bugFix` era un ancestro de `master`, git no tuvo que hacer ningún trabajo; simplemente movió `bugFix` al mismo commit al que estaba anexado `master`.",
+              "",
+              "Ahora todos los commits son del mismo color, lo que significa que cada rama contiene todo el trabajo que hay en el repositorio. ¡Genial!"
+            ],
+            "command": "git checkout bugFix; git merge master",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit; git merge bugFix"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, sigue estos pasos:",
+              "",
+              "* Crea una nueva rama, llamada `bugFix`",
+              "* Haz checkout de la rama `bugFix` usando `git checkout bugFix`",
+              "* Crea un commit",
+              "* Vuelve a `master` con `git checkout`",
+              "* Crea otro commit",
+              "* Haz merge de la rama `bugFix` a `master` usando `git merge`",
+              "",
+              "*Recuerda: siempre puedes volver a ver este mensaje escribiendo \"objective\"!*"
             ]
           }
         }
@@ -856,6 +929,75 @@ exports.level = {
               "* Змерджи (злий) гілку `bugFix` в `master` за допомогою `git merge`",
               "",
               "*Не забувай, ти можеш завжди повернутися до цього діалогу за допомогою \"objective\"!*"
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Nhánh và gộp nhánh",
+              "",
+              "Tuyệt! Ta đã biết làm sao để commit và tạo nhánh. Giờ ta cần học cách để tập hợp thành quả của 2 nhánh khác biệt lại với nhau. Đây sẽ là cách để ta phân tách để phát triển chức năng, rồi sau đó hợp nhất nó trở lại.",
+              "",
+              "Cách đầu tiên để hợp nhất thành quả cần xem xét đến là lệnh `git merge`. Merge trong Git là tạo ra một commit đặc biệt mà có 2 người cha độc nhất. Một commit mà có 2 cha căn bản nghĩa là \"Tôi muốn có thành quả của ông này và ông kia nữa, *và* tất cả ông cha của họ.\"",
+              "",
+              "Trực quan thì dễ hiểu hơn, sang trang tiếp theo nào"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Ở đây ta có 2 nhánh; mỗi nhánh có 1 commit độc nhất. Có nghĩa là chẳng nhánh nào có đủ \"thành quả\" trong kho chứa của ta cả. Sửa nó bằng merge nào.",
+              "",
+              "Ta sẽ `merge` nhánh `bugFix` vào `master`"
+            ],
+            "afterMarkdowns": [
+              "Wao! Thấy chứ? Trước tiên, `master` giờ đã trỏ đến commit có 2 cha. Nếu bạn lần theo mũi tên lên trên từ `master`, bạn sẽ gặp tất cả các commit lên đến commit gốc. Có nghĩa là `master` giờ đã chứa tất cả thành quả trong kho.",
+              "",
+              "Đồng thời, bạn thấy màu commit thay đổi chứ? Để bạn dễ học hơn, tôi đã phối hợp một số bảng màu. Mỗi nhánh có một màu duy nhất. Mỗi commit mang màu pha trộn của tất cả nhánh chứa nó.",
+              "",
+              "Vì vậy, ở đây chúng ta thấy rằng màu nhánh `master` được pha trộn vào tất cả các commit, nhưng màu` bugFix` thì không. Hãy sửa nó nào ..."
+            ],
+            "command": "git merge bugFix",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hãy gộp nhánh `master` vào `bugFix` nào:"
+            ],
+            "afterMarkdowns": [
+              "Vì `bugFix` là bậc cha ông của `master`, git chẳng phải làm gì cả; nó đơn giản chỉ chuyển `bugFix` vào commit mà `master` đang trỏ tới.",
+              "",
+              "Giờ thì tất cả commit đã có cùng màu, nghĩa là mỗi nhánh đã chứa tất cả thành quả trong kho! Ồ hố!"
+            ],
+            "command": "git checkout bugFix; git merge master",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout master; git commit; git merge bugFix"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Để hoàn thành cấp độ này, hãy làm theo các bước bên dưới:",
+              "",
+              "* Tạo một nhánh mới tên là `bugFix`",
+              "* Chuyển sang nhánh `bugFix` với `git checkout bugFix`",
+              "* Commit một lần",
+              "* Trở về `master` với `git checkout`",
+              "* Commit một lần nữa",
+              "* Gộp nhánh `bugFix` vào `master` với `git merge`",
+              "",
+              "*Nhớ rằng, bạn luôn luôn có thể bật lại hội thoại này với lệnh \"objective\"!*"
             ]
           }
         }

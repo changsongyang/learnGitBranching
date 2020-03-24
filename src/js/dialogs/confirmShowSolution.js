@@ -49,6 +49,16 @@ exports.dialog = {
       ]
     }
   }],
+  'es_ES': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## ¿Estás seguro de que quieres ver la solución?',
+        '',
+        '¡Creo en ti! ¡Ánimo!'
+      ]
+    }
+  }],
   'pt_BR': [{
     type: 'ModalAlert',
     options: {
@@ -112,6 +122,16 @@ exports.dialog = {
         '## Впевнений, що хочеш побачити розв’язок?',
         '',
         'Я вірю в тебе! Ти впораєшся!'
+      ]
+    }
+  }],
+  'vi': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Bạn chắc là muốn xem đáp án chứ?',
+        '',
+        'Tôi tin ở bạn! Bạn có thể làm được!'
       ]
     }
   }]

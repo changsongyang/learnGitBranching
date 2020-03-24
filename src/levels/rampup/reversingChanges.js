@@ -9,19 +9,23 @@ exports.level = {
     "ja"   : "変更を元に戻す",
     "fr_FR": "Annuler des changements avec Git",
     "es_AR": "Revirtiendo cambios en git",
+    "es_ES": "Revirtiendo cambios en git",
     "pt_BR": "Revertendo mudanças no Git",
     "gl"   : "Revertindo cambios en git",
     "ko"   : "Git에서 작업 되돌리기",
     "zh_CN": "撤销变更",
     "zh_TW": "在 git 中取消修改 ",
     "ru_RU": "Отмена изменений в Git",
-    "uk": "Відміна змін в Git"
+    "uk": "Відміна змін в Git",
+    "vi": "Hoàn tác thay đổi trong Git",
+
   },
   "hint": {
     "en_US": "Notice that revert and reset take different arguments.",
     "de_DE": "Beachte, dass revert und reset unterschiedliche Argumente benötigen",
     "fr_FR": "Notez que `revert` et `reset` n'ont pas les mêmes arguments.",
     "es_AR": "Notá que revert y reset toman parámetros distintos",
+    "es_ES": "Observa que revert y reset utilizan parámetros distintos",
     "pt_BR": "Lembre que revert e reset recebem parâmetros diferentes",
     "gl"   : "Lembra que revert e reset usan parámetros distintos",
     "zh_CN": "注意 revert 和 reset 使用的参数不同。",
@@ -29,7 +33,8 @@ exports.level = {
     "ko": "revert와 reset이 받는 인자가 다름을 기억하세요",
     "ja"   : "revertとresetとで引数が異なることに注意。",
     "ru_RU": "Обрати внимание, что revert и reset принимают разные параметры.",
-    "uk": "Зверни увагу на те що revert та reset приймають різні параметри"
+    "uk": "Зверни увагу на те що revert та reset приймають різні параметри",
+    "vi": "Lưu ý rằng hoàn tác(revert) và đặt lại(reset) có những đối số khác nhau.",
   },
   "startDialog": {
     "en_US": {
@@ -153,6 +158,69 @@ exports.level = {
               "Para completar este nivel, revertí los dos commits más recientes, tanto en `local` como en `pushed`.",
               "",
               "Tené en cuenta que `pushed` es una rama remota y `local` es una rama local -- eso debería ayudarte a elegir qué métodos usar."
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Revirtiendo cambios en git",
+              "",
+              "Hay varias maneras de revertir cambios en git. Y, tal como al commitear, revertir cambios en git tiene tanto un componente de bajo nivel (indexar archivos o fragmentos individualmente) como un componente de alto nivel (cómo son efectivamente revertidos los cambios). Nuestra aplicación se va a concentrar en esto último.",
+              "",
+              "Hay dos formas principales de deshacer cambios en git -- uno es usando `git reset` y el otro es usando `git revert`. Vamos a ver cada uno de ellos a continuación",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "## Git Reset",
+              "",
+              "`git reset` deshace los cambios moviendo la referencia de una rama hacia atrás en el tiempo a un commit anterior. En este sentido puedes imaginarlo como \"reescribir la historia\". `git reset` va a mover la rama hacia atrás, como si el commit nunca se hubiera hecho.",
+              "",
+              "Veamos cómo es eso:"
+            ],
+            "afterMarkdowns": [
+              "¡Genial! git simplemente movió la referencia de la rama master atrás hacia `C1`. Ahora tu repositorio local está en un estado como si `C2` nunca hubiera ocurrido"
+            ],
+            "command": "git reset HEAD~1",
+            "beforeCommand": "git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "## Git Revert",
+              "",
+              "Mientras que resetear los cambios funciona estupendamente para ramas locales en tu máquina, su método de \"reescribir la historia\" no funciona para ramas remotas que otros están usando.",
+              "",
+              "Para revertir cambios y *compartir* esa _revertida_ con otros, necesitamos usar `git revert`. Veámoslo en acción"
+            ],
+            "afterMarkdowns": [
+              "Extraño. Hay un nuevo commit aplicado sobre el que queríamos revertir. Eso es porque este nuevo commit `C2'` introduce *cambios* - sólo que esos cambios son exactamente los necesarios para revertir los que introdujo `C2`.",
+              "",
+              "Cuando utilices revert, puedes hacer push sobre ese cambio para compartirlo con otros."
+            ],
+            "command": "git revert HEAD",
+            "beforeCommand": "git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, deshaz los dos commits más recientes, tanto en `local` como en `pushed`.",
+              "",
+              "Ten en cuenta que `pushed` es una rama remota y `local` es una rama local -- eso debería ayudarte a elegir qué métodos usar."
             ]
           }
         }
@@ -785,6 +853,69 @@ exports.level = {
               "Щоб пройти цей рівень відміни два останні коміти на гілках `local` та `pushed`.",
               "",
               "Зауваж, що `pushed` це віддалена гілка, а `local` це локальна гілка -- це має допомогти з вибором методу."
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Hoàn tác trong Git",
+              "",
+              "Có rất nhiều cách để hoàn tác thay đổi trong Git. Và cũng tương tự như commit, hủy thay đổi trong Git có cả thành phần bậc thấp (tạm thời lưu trữ một số tệp hoặc đoạn độc lập) và thành phần bậc cao (cách mà các thay đổi thực sự bị hủy). Ứng dụng của chúng tôi tập trung vào cái sau.",
+              "",
+              "Có 2 cách nguyên thủy để hủy thay đổi trong Git -- một là dùng `git reset` và cách khác là dùng `git revert`. Chúng ta sẽ xem xét từng cái trong hội thoại sau",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "## Git Reset",
+              "",
+              "`git reset` hoàn tác bằng cách chuyển tham chiếu của nhánh ngược lên commit cũ hơn. Bạn có thể hiểu nó như kiểu \"viết lại lịch sử;\" `git reset` sẽ dịch chuyển nhánh lên trên như thể commit chưa bao giờ được tạo ra vậy.",
+              "",
+              "Cùng xem thử nó trông thế nào nào:"
+            ],
+            "afterMarkdowns": [
+              "Hay! Git chuyển tham chiếu của master trở lại `C1`; bây giờ kho cá nhân của ta trông như thể commit `C2` chưa bao giờ xảy ra vậy."
+            ],
+            "command": "git reset HEAD~1",
+            "beforeCommand": "git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "## Git Revert",
+              "",
+              "Trong khi git reset hoạt động rất tốt tại nhánh cục bộ trên máy cá nhân, cách thức \"viết lại lịch sử\" chẳng hề có tác dụng lên nhánh ở phương xa mà người khác sử dụng.",
+              "",
+              "Để có thể hoàn tác và *chia sẻ* hoàn tác đó với người khác, thì ta cần sử dụng `git revert`. Xem thử cách thức nó hoạt động nào"
+            ],
+            "afterMarkdowns": [
+              "Lạ nhỉ, một commit mới được thả vào bên dưới commit mà ta muốn hoàn tác. Đó là bởi vì commit mới `C2'` này có chứa *thay đổi* -- đó là những thay đổi về hoàn tác commit `C2`.",
+              "",
+              "Dùng revert thì bạn có thể đẩy thay đổi mình lên và chia sẻ với người khác."
+            ],
+            "command": "git revert HEAD",
+            "beforeCommand": "git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Để hoàn thành cấp độ này, hoàn tác commit gần nhất trên cả `local` (`cục bộ`) và `pushed` (`được đẩy`). Bạn sẽ hoàn tác tổng cộng 2 commit(một trên mỗi nhánh).",
+              "",
+              "Nhớ rằng `pushed` là nhánh ở phương xa và `local` là nhánh địa phương -- như thế thì bạn sẽ chọn được phương án phù hợp."
             ]
           }
         }

@@ -8,13 +8,15 @@ exports.level = {
     "de_DE": "Git Fetch",
     "ja"   : "Git Fetch",
     "es_AR": "git fetch",
+    "es_ES": "git fetch",
     "pt_BR": "Git Fetch",
     "gl"   : "Git Fetch",
     "zh_CN": "Git Fetch",
     "zh_TW": "git fetch",
     "ru_RU": "Git fetch",
     "uk"   : "Git fetch",
-    "ko"   : "Git Fetch"
+    "ko"   : "Git Fetch",
+    "vi"   : "Git Fetch"
   },
   "hint": {
     "en_US": "just run git fetch!",
@@ -22,13 +24,15 @@ exports.level = {
     "de_DE": "Einfach git fetch ausführen!",
     "ja"   : "単にgit fetchを実行！",
     "es_AR": "Simplemente ¡hacé git fetch!",
+    "es_ES": "Simplemente ¡escribe git fetch!",
     "pt_BR": "Simplesmente chame git fetch!",
     "gl"   : "¡Sinxelamente fai git fetch!",
     "zh_CN": "只需要运行 git fetch 命令!",
     "zh_TW": "只要下 git fetch 指令",
     "ru_RU": "Просто выполните git fetch!",
     "uk"   : "Просто виконай git fetch!",
-    "ko"   : "그냥 git fetch를 하세요!"
+    "ko"   : "그냥 git fetch를 하세요!",
+    "vi"   : "Gõ git fetch là được!"
   },
   "startDialog": {
     "en_US": {
@@ -217,7 +221,7 @@ exports.level = {
               "* baja los commits que el remoto tiene pero no están en nuestro repositorio local, y...",
               "* actualiza a dónde apuntan nuestras ramas remotas (por ejemplo, `o/master`)",
               "",
-              "`git fetch` escencialmente sincroniza nuestra representación _local_ del repositorio remoto con el _verdadero_ estado del repositorio remoto (en este momento).",
+              "`git fetch` esencialmente sincroniza nuestra representación _local_ del repositorio remoto con el _verdadero_ estado del repositorio remoto (en este momento).",
               "",
               "Si recordás la lección anterior, dijimos que las ramas remotas reflejan el estado de los repositorios remotos _desde_ la última vez que hablaste con ellos. ¡`git fetch` es la manera en que hablás con esos remotos! Espero que ahora esté clara la conexión entre las ramas remotas y `git fetch`.",
               "",
@@ -245,6 +249,79 @@ exports.level = {
           "options": {
             "markdowns": [
               "Para completar este nivel, simplemente corré `git fetch` y bajate todos los commits"
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Fetch",
+              "",
+              "Trabajar con remotos en git en realidad se reduce a transferir datos _de_ y _hacia_ otros repositorios. Mientras podamos mandar commits de un lado al otro, podemos compartir cualquier tipo de actualización registrada por git (y, por ende, compartir trabajo, archivos nuevos, ideas nuevas, cartas de amor, etc).",
+              "",
+              "En esta lección aprenderemos cómo traer (hacer `fetch`) datos _desde_ un repositorio remoto - el comando para esto se llama, convenientemente, `git fetch`).",
+              "",
+              "Vas a notar que a medida que actualicemos nuestra representación de nuestro repositorio remoto, nuestras ramas _remotas_ van a actualizarse para reflejar esa nueva representación. Esto está ligado a la lección anterior sobre ramas remotas"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Antes de entrar en los detalles de `git fetch`, veámoslo en acción. Aquí tenemos un repositorio remoto que contiene dos commits que nuestro repositorio local no tiene."
+            ],
+            "afterMarkdowns": [
+              "¡Allá vamos! Bajamos los commits `C2` y `C3` a nuestro repositorio local, y nuestra rama remota `o/master` fue actualizada para reflejar este cambio."
+            ],
+            "command": "git fetch",
+            "beforeCommand": "git clone; git fakeTeamwork 2"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### ¿Qué hace fetch?",
+              "",
+              "`git fetch` hace dos simples pasos, y sólo dos simples pasos:",
+              "",
+              "* baja los commits que el remoto tiene pero no están en nuestro repositorio local, y...",
+              "* actualiza a dónde apuntan nuestras ramas remotas (por ejemplo, `o/master`)",
+              "",
+              "`git fetch` escencialmente sincroniza nuestra representación _local_ del repositorio remoto con el _verdadero_ estado del repositorio remoto (en este momento).",
+              "",
+              "Si recuerdas la lección anterior, dijimos que las ramas remotas reflejan el estado de los repositorios remotos _desde_ la última vez que hablaste con ellos. ¡`git fetch` es la manera en la que hablas con esos remotos! Espero que ahora esté clara la conexión entre las ramas remotas y `git fetch`.",
+              "",
+              "Usualmente, `git fetch` habla con el repositorio a través de internet (usando un protocolo como `http://` o `git://`).",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### ¿Qué *no* hace fetch?",
+              "",
+              "Sin embargo, `git fetch` no modifica en absoluto _tu_ estado local. No va a actualizar tu rama `master` ni va a cambiar nada sobre cómo se ve tu sistema de archivos en este momento.",
+              "",
+              "Es importante entender esto, porque un montón de desarrolladores piensan que correr `git fetch` hará que su estado local refleje el estado del remoto. `git fetch` puede descargar los datos necesarios para hacerlo, pero *no* cambia ninguno de tus archivos locales. Vamos a aprender otros comandos para hacer eso más adelante :D",
+              "",
+              "Entonces, después de todo, puedes pensar sobre `git fetch` como un proceso de descarga."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, simplemente ejecuta `git fetch` y bájate todos los commits"
             ]
           }
         }
@@ -902,6 +979,79 @@ exports.level = {
           "options": {
             "markdowns": [
               "레벨을 마치기 위해, `git fetch`를 수행하고 모든 커밋들을 내려 받으세요!"
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Fetch",
+              "",
+              "Lam việc với git remote về căn bản là chuyển giao dữ liệu _qua_ và _lại_ giữa các kho chứa. Miễn là ta có thể chia sẻ qua lại các commit, ta có thể chia sẻ bất kỳ cập nhật gì được theo dõi bở git (và từ đó chia sẻ thành quả, tập tin mới, ý tưởng mới, thư tình, các kiểu con đà điểu.).",
+              "",
+              "Ở bài học này ta sẽ học cách lấy dữ liệu về _từ_ một kho chứa từ xa -- lệnh đó là `git fetch`.",
+              "",
+              "Bạn sẽ nhận thấy rằng khi ta cập nhật đại điện kho chứa từ xa, Nhánh _từ xa_ của ta cũng được cập nhật để phản ánh đại diện đó. Điều này liên quan đến bài học trước về nhánh từ xa"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Trước khi đi vào chi tiết về `git fetch`, hãy xem cách nó hoạt động! Ở đây ta có một kho chứa từ xa trong đó chứa 2 commit mà kho chứa địa phương của ta không có."
+            ],
+            "afterMarkdowns": [
+              "Đó! Commit `C2` và `C3` đã được tải xuống kho chứa cục bộ của ta, và nhánh từ xa `o/master` của ta đã được cập nhật để phản ánh điều này."
+            ],
+            "command": "git fetch",
+            "beforeCommand": "git clone; git fakeTeamwork 2"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Fetch làm gì",
+              "",
+              "`git fetch` thực hiện 2 bước chính, và chỉ 2 bước chính. Nó:",
+              "",
+              "* tải xuống commit có trên kho chứa từ xa mà kho chứa cục bộ của ta không có, và...",
+              "* cập nhật nơi mà nhánh từ xa của ta trỏ tới (ví dụ nhánh `o/master`)",
+              "",
+              "Về căn bản thì `git fetch` đưa đại diện _địa phương_ của kho chứa từ xa của ta về trạng thái đồng bộ với trạng thái _thực tế_ của kho chứa từ xa (ngay lúc này).",
+              "",
+              "Nếu bạn còn nhớ thì trong bài học trước, chúng tôi có đề cập rằng nhánh từ xa phản ánh trạng thái của kho chứa từ xa _kể từ_ kể từ lần cuối bạn tương tác với các nhánh từ xa đó. `git fetch` chính là cách để tương tác với cách nhánh từ xa! Hi vọng chúng tôi đã làm sáng tỏ sự liên kết giữa nhánh từ xa và `git fetch`.",
+              "",
+              "`git fetch` thường tương tác với kho chứa từ xa bằng Internet (thông qua các giao thức như `http://` hoặc `git://`).",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### fetch không làm gì",
+              "",
+              "Tuy nhiên, `git fetch` không hề thay đổi trạng thái kho chứa _địa phương_ của bạn. Nó sẽ không cập nhật nhánh `master` hay thay đổi bất kỳ điều gì trong hệ thống tập tin hiện tại của bạn.",
+              "",
+              "Điều này rất quan trọng, vì nhiều nhà phát triển nghĩ rằng `git fetch` sẽ làm kho chứa địa phương của họ phản ánh trạng thái của kho chúa từ xa. Nó có thể tải xuống tất cả dữ liệu cần thiết, nhưng nó thực tế _không_ thay đổi bất cứ thứ gì trên tập tin địa phương của bạn. Ta sẽ học lệnh để làm điều đó sau :D",
+              "",
+              "Nói tóm lại, bạn có thể coi `git fetch` thuần túy như một bước tải xuống."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Để hoàn thành cấp độ này, đơn giản hãy gõ `git fetch` để tải xuống tất cả commit!"
             ]
           }
         }

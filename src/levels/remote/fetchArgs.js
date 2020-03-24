@@ -8,13 +8,15 @@ exports.level = {
     "zh_CN": "Git fetch 的参数",
     "zh_TW": "fetch 的參數",
     "es_AR": "Parámetros de fetch",
+    "es_ES": "Parámetros de fetch",
     "pt_BR": "Parâmetros do fetch",
     "gl"   : "Parámetros de fetch",
     "de_DE": "Optionen für Fetch",
     "ja"   : "Fetchの引数",
     "ru_RU": "Аргументы для fetch",
     "ko"   : "Fetch의 인자들",
-    "uk"   : "Аргументи для fetch"
+    "uk"   : "Аргументи для fetch",
+    "vi"   : "Tham số fetch"
   },
   "hint": {
     "en_US": "Pay attention how the commit ids may have swapped! You can read slides again with \"help level\"",
@@ -22,13 +24,15 @@ exports.level = {
     "zh_CN": "注意下提交对象的 id 是如何交换的! 你可以通过 `help level` 重新阅读本关卡的所有对话框!",
     "zh_TW": "注意 commit 的 id 是怎麼被交換的！你可以透過 `help level` 來閱讀對話視窗！",
     "es_AR": "¡Prestá atención a cómo podrían haberse invertido los ids de los commits! Podés volver a leer toda la lección usando \"help level\"",
+    "es_ES": "¡Presta atención a cómo podrían haberse invertido los ids de los commits! Puedes volver a leer toda la lección usando \"help level\"",
     "pt_BR": "Preste atenção em como os identificadores dos commits podem ter trocado! Você pode ler os slides novamente com \"help level\"",
     "gl"   : "Preste atención en como poderían invertirse os ids dos commits! Podes volver ler toda a lección usando \"help level\"",
     "de_DE": "Beachte wie die Commit IDs getauscht wurden! Du kannst den Einführungsdialog mit \"help level\" erneut anzeigen",
     "ja"   : "コミットIDの入れ替わりに注意！スライドを復習するには`help level`を実行",
     "ru_RU": "Обратите внимание на то, как номера коммитов могут меняться! Вы можете прочесть слайды вновь, воспользовавшись командой \"help level\"",
     "ko"   : "커밋 ID가 바뀔수도있으니 주의하세요! \"help level\"을 입력하면 슬라이드들을 다시 읽어볼수 있습니다.",
-    "uk"   : "Зверни увагу на те, що номери комітів можуть змінюватися! Слайди уроку можна переглянути ще раз командою \"help level\""
+    "uk"   : "Зверни увагу на те, що номери комітів можуть змінюватися! Слайди уроку можна переглянути ще раз командою \"help level\"",
+    "vi"   : "Lưu ý id của các commit bị tráo đổi, bạn có thể dùng \"help level\" để đọc lại hội thoại"
   },
   "startDialog": {
     "en_US": {
@@ -343,7 +347,7 @@ exports.level = {
               "",
               "Este es el único problemita, igual: `<origen>` es ahora un lugar en el *remoto*, y `<destino>` es un lugar *local* en donde poner esos commits. Es exactamente lo opuesto a git push, y eso tiene sentido dado que ¡estamos transfiriendo los datos en la dirección opuesta!",
               "",
-              "Habiendo dicho esto, dificilmente alguien use esto en la práctica. Lo estoy presentando principalmente como un modo de conceptualizar que `fetch` y `push` son bastante similares, sólo que en direcciones opuestas."
+              "Habiendo dicho esto, difícilmente alguien use esto en la práctica. Lo estoy presentando principalmente como un modo de conceptualizar que `fetch` y `push` son bastante similares, sólo que en direcciones opuestas."
             ]
           }
         },
@@ -395,6 +399,129 @@ exports.level = {
               "Bueno, demasiada charla. Para completar este nivel, fetcheáte sólo los commits especificados en la visualización del objetivo. ¡Amigate con esos comandos!",
               "",
               "Vas a tener que especificar el origen y el destino para ambos comandos fetch. Prestá atención al objetivo dado que ¡los IDs pueden estar invertidos!"
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Parámetros de git fetch",
+              "",
+              "Acabamos de aprender todo sobre los parámetros de push, como el parámetro `<lugar>`, e incluso las referencias separadas por dos puntos (`<origen>:<destino>`). ¿Podremos usar todo ese conocimiento para `git fetch`, también?",
+              "",
+              "¡Dalo por hecho! Los parámetros para `git fetch` son realmente *muy, muy* similares a los de `git push`. Es el mismo tipo de conceptos, pero aplicados en la dirección opuesta (dado que ahora estás bajando commits en lugar de subirlos).",
+              "",
+              "Veamos los conceptos de a uno en uno..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### El parámetro `<lugar>`",
+              "",
+              "Si especificas un lugar con git fetch como en el comando siguiente:",
+              "",
+              "`git fetch origin foo`",
+              "",
+              "Git va a ir a la rama `foo` en el remoto, va a traer todos los commits que no estén presentes localmente, y luego los aplicará sobre la rama `o/foo` localmente.",
+              "",
+              "Veámoslo en acción (refresquemos el concepto)."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Especificando un lugar..."
+            ],
+            "afterMarkdowns": [
+              "Sólo bajamos los commits de `foo` y los ubicamos en `o/foo`"
+            ],
+            "command": "git fetch origin foo",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Te podrás estar preguntando \"¿Por qué git aplicó esos commits sobre la rama `origin/foo` en lugar de aplicarlos sobre la rama `foo` local? Pensé que el parámetro `<lugar>` era un lugar que existía tanto local como remotamente\"",
+              "",
+              "Bueno, git hace una excepción especial en este caso, porque podrías tener trabajo en la rama `foo` que no quieras mezclar. Esto hace referencia a la lección anterior sobre `git fetch` - no actualiza tus ramas locales no-remotas, sólo descarga los commits (para que pueadas verlos o mergearlos después).",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "\"Bueno, y, en ese caso, ¿qué pasa si explícitamente defino el origen y destino con `<origen>:<destino>`?\"",
+              "",
+              "Si te sientes lo suficientemente seguro como para traer commits *directamente* a una rama local, entonces, sí, puedes especificarlo usando una referencia con dos puntos. No puedes traer commits a una rama que sobre la que hayas hecho checkout, pero en cualquier otro caso git te lo va a permitir.",
+              "",
+              "Este es el único problema, igual: `<origen>` es ahora un lugar en el *remoto*, y `<destino>` es un lugar *local* en donde poner esos commits. Es exactamente lo opuesto a git push, y eso tiene sentido dado que ¡estamos transfiriendo los datos en la dirección opuesta!",
+              "",
+              "Habiendo dicho esto, difícilmente alguien use esto en la práctica. Lo estoy presentando principalmente como un modo de conceptualizar que `fetch` y `push` son bastante similares, sólo que en direcciones opuestas."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Veamos esta locura en acción:"
+            ],
+            "afterMarkdowns": [
+              "¡Caramba! Mira: git resolvió `foo~1` como un lugar en el origin y bajó esos commits a `bar` (que era una rama local). Observa como `foo` y `o/foo` no fueron actualizados, dado que especificamos un destino."
+            ],
+            "command": "git fetch origin foo~1:bar",
+            "beforeCommand": "git branch foo; git clone; git branch bar; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "¿Qué pasa si el destino no existe antes de ejecutar este comando? Veamos el último ejemplo pero sin que `bar` exista de antemano."
+            ],
+            "afterMarkdowns": [
+              "Mira: es IGUAL que git push. Git creó el destino localmente antes de hacer el fetch, tal como git creará el destino en el remoto antes de hacer push (si no existiera)."
+            ],
+            "command": "git fetch origin foo~1:bar",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "¿Sin argumentos?",
+              "",
+              "Si `git fetch` no recibe ningún argumento, simplemente descarga todos los commits del remoto a todas las ramas remotas..."
+            ],
+            "afterMarkdowns": [
+              "Bastante simple, pero merece la pena verlo al menos una vez."
+            ],
+            "command": "git fetch",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo; git fakeTeamwork master"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bueno, demasiada charla. Para completar este nivel, haz fetch sólo de los commits especificados en la visualización del objetivo. ¡Familiarízate con esos comandos!",
+              "",
+              "Vas a tener que especificar el origen y el destino para ambos comandos fetch. Presta atención al objetivo dado que ¡los IDs pueden estar invertidos!"
             ]
           }
         }
@@ -954,7 +1081,7 @@ exports.level = {
             "markdowns": [
               "Wenn das so ist, was passiert dann wenn ich explizit Quelle und Ziel im Ort angebe?",
               "",
-              "Wenn du Commits wirklich per `fetch` *direkt* auf einen lokalen Branch holen willst, dann, ja, kannst du das mit einer Ref-Spezifikation erreichen. Das funktioniert nicht mit deinem gerade ausgecheckten Branch, aber davon abgesehen lässt Git es zu.",
+              "Wenn du Commits wirklich per `fetch` *direkt* auf einen lokalen Branch holen willst, dann kannst du das mit einer Ref-Spezifikation erreichen. Das funktioniert nicht mit deinem gerade ausgecheckten Branch, aber davon abgesehen lässt Git es zu.",
               "",
               "Nur ein Haken -- `<Quelle>` bezeichnet jetzt einen Ort auf dem *entfernten* Server und `<Ziel>` ist ein *lokaler* Ort, wo die Commits hin sollen. Es ist genau umgekehrt wie bei `git push` und das ist logisch, denn wir übertragen die Daten ja auch in die umgekehrte Richtung!",
               "",
@@ -1379,6 +1506,129 @@ exports.level = {
               "Гаразд, годі балакати! Щоб пройти цей рівень, звантаж лише вказані на візуалізації коміти. Прояви фантазію, підбираючи команди!",
               "",
               "Тобі потрібно вказати і джерело і призначення для обидвох fetch-команд. Слідкуй за змінами на візуалізації, ID комітів можуть змінюватися!"
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Tham số Git fetch",
+              "",
+              "Chúng ta vừa tìm hiểu về tham số của git push, sự tuyệt vời của tham số `<vị trí>`, và thậm chí cả refspecs (`<nguồn>:<đích>`). Liệu ta có thể áp dụng điều này vào `git fetch` không nhỉ?",
+              "",
+              "Đoán chuẩn rồi đấy! Tham số cho lệnh `git fetch` thực ra *rất, rất* giống với `git push`. Chúng có chung khái niệm nhưng được áp dụng cho hướng ngược lại(vì bây giờ ta tải xuống commit chứ không phải tải lên).",
+              "",
+              "Hãy lần lượt đi qua từng khái niệm một..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Tham số `<vị trí>`",
+              "",
+              "Nếu bạn chỉ định vị trí cho `git fetch` như câu lệnh dưới:",
+              "",
+              "`git fetch origin foo`",
+              "",
+              "Git sẽ lênh nhánh `foo` trên kho chứa từ xa, lấy toàn bộ các commit chưa có trên kho chứa cục bộ và thả chúng xuống nhánh `o/foo` ở kho chứa cục bộ.",
+              "",
+              "Hãy xem một ví dụ (vẫn là câu lệnh trên nhưng mà trực quan hơn)."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Thông qua chỉ định vị trí..."
+            ],
+            "afterMarkdowns": [
+              "Ta chỉ tải xuống commit ở trên nhánh `foo` và đặt chúng ở nhánh `o/foo`"
+            ],
+            "command": "git fetch origin foo",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Có thể bạn sẽ thắc mắc -- tại sao git lại thả các commit xuống nhánh `o/foo` thay vì nhánh `foo` ở kho chứa cục bộ? Tôi tưởng tham số `<vị trí>` tồn tại ở cả kho chứa cục bộ và kho chứa từ xa mà?",
+              "",
+              "Chà trong trường hợp này git ứng xử có một chút ngoại lệ đặc biệt, vì có thể bạn đang làm việc trên nhánh `foo` ở kho chứa cục bộ mà bạn không muốn nó bị làm rối!! Điều này liên kết đến bài học trước về `git fetch` -- nó không cập nhật nhánh cục bộ không liên kết nhánh từ xa của bạn(nhánh không có tiền tố `origin/`), nó chỉ tải xuống các commit( mà bạn có thể xem xét hoặc hợp nhất sau).",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "\"Nếu vậy, thì điều gì sẽ xảy ra nếu tôi chỉ định cả nguồn và đích với `<nguồn>:<đích>`?\"",
+              "",
+              "Nếu bạn nhất quyết muốn tải commit *trực tiếp* xuống nhánh cục bộ,thì bạn có thể chỉ định điều này bằng cách dùng refspec hai chấm. Bạn không thể nạp commit vào nhánh mà bạn đang đứng, nhưng git sẽ cho phép bạn làm điều này:",
+              "",
+              "Đây là cách duy nhất -- `<nguồn>` là vị trí trên kho *từ xa* và `<đích>` là vị trí *cục bộ* để đặt các commit. Điều này hoàn toàn ngược lại với `git push`, và đó là tất nhiên thôi vì ta đang chuyển giao dữ liệu theo hướng ngược lại!",
+              "",
+              "Thực tế là, các nhà phát triển rất hiếm khi làm điều này. Tôi giới thiệu về nó chủ yếu là vì muốn giải thích rõ hơn việc `fetch` và `push` là khá tương đồng, chỉ là theo hướng ngược lại."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Lấy một ví dụ điên rồ..."
+            ],
+            "afterMarkdowns": [
+              "Wao! Thấy chứ, git diễn giải `foo~1` thành một vị trí trên kho chứa từ xa sau đó tải xuống các commit lên nhánh `bar` ở kho chứa cục bộ. Để ý rằng nhánh `foo` và `o/foo` không hề được cập nhật vì ta đã chỉ định đích đến."
+            ],
+            "command": "git fetch origin foo~1:bar",
+            "beforeCommand": "git branch foo; git clone; git branch bar; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Nếu như đích đến chưa hề tồn tại trước khi tôi chạy lệnh thì sao? Cùng xem lại ví dụ vừa rồi nhưng lần này nhánh `bar` chưa hề tồn tại."
+            ],
+            "afterMarkdowns": [
+              "Thấy chứ, nó Y HỆT với git push. Git tạo ra đích đến ở kho chứa cục bộ trước khi nạp, cũng giống như git sẽ tạo ra đích đến trên kho chứa từ xa trước khi đẩy (trong trường hợp nó không tồn tại)."
+            ],
+            "command": "git fetch origin foo~1:bar",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo 2"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Không có tham số?",
+              "",
+              "Nếu lệnh `git fetch` không nhận được bất kỳ tham số nào, nó sẽ tải xuống tất cả các commit có trên kho chứa từ xa lên tất cả các nhánh từ xa ở kho chứa cục bộ..."
+            ],
+            "afterMarkdowns": [
+              "Khá là đơn giản, nhưng mà cũng nên xem qua thử."
+            ],
+            "command": "git fetch",
+            "beforeCommand": "git branch foo; git clone; git fakeTeamwork foo; git fakeTeamwork master"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Được rồi, lý thuyết như vậy là đủ rồi! Để hoàn thành cấp độ này, hãy chỉ nạp những commit được chỉ định trong mô tả mục tiêu. Thoải mái ứng biến với những câu lệnh nhé!",
+              "",
+              "Bạn sẽ phải chỉ định nguồn và dích cho lệnh fetch. Chú ý đến mô tả mục tiêu vì các ID có thể bị xáo trộn!"
             ]
           }
         }

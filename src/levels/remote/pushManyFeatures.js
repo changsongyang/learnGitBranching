@@ -7,6 +7,7 @@ exports.level = {
     "zh_CN": "你随时都可以使用 undo 或 reset 命令。",
     "zh_TW": "你隨時都可以使用 undo 或 reset 指令。",
     "es_AR": "Acordate que siempre podés usar los comandos reset y undo",
+    "es_ES": "Recuerda que siempre puedes usar los comandos reset y undo",
     "pt_BR": "Lembre-se que você sempre pode usar undo ou reset",
     "gl"   : "Lembra que sempre podes usar undo ou reset",
     "de_DE": "Denk dran, du kannst immer undo oder reset benutzen, um deine Befehle zurück zu nehmen.",
@@ -14,13 +15,15 @@ exports.level = {
     "fr_FR": "Rappelez-vous que vous pouvez toujours utiliser les commandes undo et reset.",
     "ru_RU": "Помни - ты всегда можешь отменить команды с помощью undo или reset",
     "ko"   : "명령어를 undo와 reset으로 되돌릴 수 있다는 것을 잊지마세요",
-    "uk"   : "Пам'ятай, ти в будь-який момент можеш використовувати команди undo або reset"
+    "uk"   : "Пам'ятай, ти в будь-який момент можеш використовувати команди undo або reset",
+    "vi"   : "Nhớ rằng bạn luôn luôn có thể hoàn tác hoặc soạn lại câu lệnh "
   },
   "name": {
     "en_US": "Push Master!",
     "zh_CN": "推送主分支",
     "zh_TW": "push master！",
     "es_AR": "¡Push Master!",
+    "es_ES": "¡Push Master!",
     "pt_BR": "Push Master!",
     "gl"   : "Empurra ó Master!",
     "de_DE": "Push Master!",
@@ -28,7 +31,8 @@ exports.level = {
     "fr_FR": "Maître du push !",
     "ru_RU": "Push Мастер!",
     "ko"   : "Push Master!",
-    "uk"   : "Push Maйстер!"
+    "uk"   : "Push Maйстер!",
+    "vi"   : "Push Master!"
   },
   "compareOnlyMasterHashAgnostic": true,
   "startDialog": {
@@ -186,6 +190,59 @@ exports.level = {
               "* El remoto fue actualizado, así que vamos a tener que integrar esos cambios también",
               "",
               ":O ¡Intenso! ¡Éxitos! Completar este nivel representa un gran avance."
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Haciendo merge con ramas de trabajo",
+              "",
+              "Ahora que estás cómodo fetcheando, pulleando y pusheando, pongamos a prueba estas habilidades con un nuevo flujo de trabajo.",
+              "",
+              "Es bastante común que los desarrolladores en los grandes proyectos trabajen sobre ramas específicas para cada tarea (feature branches o ramas de trabajo) basadas en `master`, y que las integren sólo cuando estén listas. Esto es similar a la lección anterior, en la que hicimos push de las ramas periféricas al remoto, pero aquí tenemos un paso más.",
+              "",
+              "Algunos desarrolladores sólo pushean y pullean cuando están en `master`: de ese modo, `master` siempre se mantiene actualizado con el remoto (`o/master`).",
+              "",
+              "Entonces, en este flujo de trabajo combinamos dos cosas:",
+              "",
+              "* integramos el trabajo de las ramas específicas a `master`, y",
+              "* pusheamos y pulleamos del remoto"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Refresquemos un poco cómo actualizar `master` y pushear nuestro trabajo."
+            ],
+            "afterMarkdowns": [
+              "Ahora ejecutamos dos comandos que:",
+              "",
+              "* rebasearon nuestro trabajo sobre los nuevos commits del remoto, y",
+              "* publicamos nuestro trabajo en ese remoto"
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git commit; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Este nivel es bastante pesado. Aquí tienes algunas ideas para resolverlo:",
+              "",
+              "* Tenemos tres ramas específicas -- `side1` `side2` and `side3`",
+              "* Queremos hacer push de cada una de esas ramas, en orden, al remoto",
+              "* El remoto fue actualizado, así que vamos a tener que integrar esos cambios también",
+              "",
+              ":O ¡Genial! ¡Éxito! Completar este nivel representa un gran avance."
             ]
           }
         }
@@ -663,6 +720,59 @@ exports.level = {
               "* Віддалений репозиторій теж змінився, тож нам потрібно об'єднати всі ці зміни",
               "",
               ":O Чимале завдання! Успіху! Виконання цього рівня буде великим кроком."
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Sáp nhập các nhánh tính năng",
+              "",
+              "Giờ thì bạn đã quen thuộc với tìm nạp, kéo và đẩy, bây giờ chúng tôi sẽ kiểm tra kỹ năng của bạn với một quy trình làm việc mới.",
+              "",
+              "Trong các dự án lớn, các nhà phát triển thường làm việc trên các nhánh tính năng (được phân nhánh từ `master`) và chỉ thực hiện tích hợp sau khi công việc hoàn thành. Điều này tương tự như mô tả trong bài học trước (đẩy nhánh bên sang kho lưu trữ từ xa), nhưng chúng ta sẽ đi sâu hơn một chút trong phần này.",
+              "",
+              "Một vài nhà phát triển chỉ thực hiện đẩy và kéo khi ở trên nhánh `master` -- như vậy thì nhánh `master` luôn luôn được cập nhật với nhánh từ xa (`o/master`).",
+              "",
+              "Vậy nên với quy trình làm việc này chúng tôi đã kết hợp 2 việc:",
+              "",
+              "* tích hợp nhánh chức năng lên nhánh `master`, và",
+              "* đẩy và kéo từ nhánh từ xa"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hãy xem qua cách cập nhật nhánh `master` và đẩy lên nhánh từ xa hoạt động như thế nào."
+            ],
+            "afterMarkdowns": [
+              "Ta thực thi 2 câu lệnh làm việc sau:",
+              "",
+              "* tái bố trí (`rebase`) thành quả của ta lên commit của nhánh từ xa, và",
+              "* xuất bản thành quả của ta lên nhánh từ xa"
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git commit; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Cấp độ này khá là phức tạp đấy -- để hoàn thành thì hãy xem qua hướng dẫn cơ bản sau:",
+              "",
+              "* Có 3 nhánh chức năng là -- `side1` `side2` vả `side3`",
+              "* Chúng tôi muốn bạn đẩy từng nhánh chức năng, theo thứ tự, lên nhánh từ xa",
+              "* Nhánh từ xa cũng đã được cập nhật, nên ta cũng cần sát nhập thay đổi đó nữa",
+              "",
+              ":O khoai đây! Cố lên nhé, hoàn thành cấp độ này là lên trình nhiều lắm đấy."
             ]
           }
         }

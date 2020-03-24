@@ -19,19 +19,22 @@ exports.level = {
     "fr_FR": "Choisir seulement 1 commit",
     "de_DE": "Einen Commit pflücken",
     "es_AR": "Tomando un único commit",
+    "es_ES": "Tomando un único commit",
     "pt_BR": "Pegando um único commit",
     "gl"   : "Escollendo un único commit",
     "ja": "一つのコミットのみを取得",
     "zh_CN": "只取一个提交记录",
     "zh_TW": "只取一個 commit",
     "ru_RU": "Выберем один коммит.",
-    "uk": "Вибираємо всього один коміт"
+    "uk": "Вибираємо всього один коміт",
+    "vi": "Chỉ lấy 1 commit"
   },
   "hint": {
     "en_US": "Remember, interactive rebase or cherry-pick is your friend here",
     "de_DE": "Vergiss nicht: hier kommst du mit interaktivem Rebase oder Cherry-Picking weiter",
     "fr_FR": "Souvenez-vous, les rebases interactifs ou cherry-pick sont vos amis ici.",
     "es_AR": "Acordate, el rebase interactivo o cherry-pick son tus amigos acá",
+    "es_ES": "Recuerda, el rebase interactivo y el cherry-pick son tus amigos",
     "pt_BR": "Lembre-se, o rebase interativo ou o cherry-pick são seus amigos aqui",
     "gl"   : "Recorda, o rebase interativo ou cherry-pick é un dos teus colegas aquí",
     "ja": "このレベルではインタラクティブモードのrebaseやcherry-pickがクリアのカギです",
@@ -39,7 +42,8 @@ exports.level = {
     "zh_CN": "你有两个朋友，cherry-pick 和 rebase -i",
     "zh_TW": "記住，使用互動式的 rebase 或者 cherry-pick 會很有幫助",
     "ru_RU": "Не забывай, что интерактивный rebase и cherry-pick – это твои друзья!",
-    "uk": "Не забувай, що інтерактивний rebase та cherry-pick -- це твої друзі!"
+    "uk": "Не забувай, що інтерактивний rebase та cherry-pick -- це твої друзі!",
+    "vi": "Hãy nhớ 2 anh bạn tương tác rebase và cherry-pick!"
       },
   "startDialog": {
     "en_US": {
@@ -152,6 +156,45 @@ exports.level = {
           "options": {
             "markdowns": [
               "Este es un nivel más avanzado, así que está en vos decidir cuál de los dos comandos querés usar, pero para completar el nivel asegurate de que `master` recibe el commit que `bugFix` referencia."
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commits localmente stackeados",
+              "",
+              "Esta es una escena que suele pasar cuando uno desarrolla: estoy tratando de encontrar un bug bastante escurridizo. Para ayudar en mi tarea de detective, agrego un par de comandos de debug, y algunas sentencias para imprimir el estado de mi sistema.",
+              "",
+              "Todas estas cosas de imprimir y debuggear estan en su propia rama. Finalmente encuentro el problema, lo soluciono, ¡y disfruto!",
+              "",
+              "El único problema es que ahora necesito llevar mi `bugFix` a la rama `master`. Si simplemente fast-forwardeo `master`, entonces `master` va a tener todos mis agregados de debugging, lo cual no es deseable. Tiene que haber otro modo..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Necesitamos decirle a git que sólo copie uno de los commits. Esto es tal como los niveles anteriores de mover commits por ahí -- podemos usar los mismos comandos:",
+              "",
+              "* `git rebase -i`",
+              "* `git cherry-pick`",
+              "",
+              "Para conseguir este resultado."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Este es un nivel más avanzado, así que debes decidir cuál de los dos comandos quieres usar, pero para completar el nivel asegurate de que `master` recibe el commit que `bugFix` referencia."
             ]
           }
         }
@@ -505,6 +548,45 @@ exports.level = {
           "options": {
             "markdowns": [
               "На цьому рівні тобі вирішувати якими командами користуватися, але щоб пройти цей рівень, впевнись що в `master` потрапить коміт, на який посилається `bugFix`."
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit xếp chồng tại địa phương",
+              "",
+              "Có tình huống thế này thường hay xảy ra trong quá trình phát triển: Tôi dang cố dò lỗi nhưng mà nó lại khá là trúc trắc. Để hỗ trợ cho việc này, thêm vào vài dòng lệnh gỡ lỗi và lệnh in.",
+              "",
+              "Mấy lệnh gỡ lỗi và in này nằm yên trong commit của chúng. Cuối cùng thì tôi cũng tìm ra lỗi, gỡ xong, ngon rồi!",
+              "",
+              "Bây giờ thì lại phải đưa `bugFix` trở về nhánh `master`. Nếu mà đơn giản dùng fast-forwarded lên `master`, thì `master` lại có tất cả các lệnh gỡ lỗi kia(chẳng muốn chút nào). Phải có cách khác chứ nhỉ..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Ta cần phải bảo git chỉ sao chép 1 commit thôi. Điều này giống với cấp độ trước về điều chỉnh vị trí -- ta có thể dùng các câu lệnh tương tự:",
+              "",
+              "* `git rebase -i`",
+              "* `git cherry-pick`",
+              "",
+              "Để đạt được mục tiêu này."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bây giờ là cấp độ cao hơn rồi nên bạn hãy tự quyết định nên dùng câu lệnh nào, nhưng để hoàn thành được cấp độ, hãy đàm bảo rằng `master` nhận được commit mà `bugFix` tham chiếu tới."
             ]
           }
         }

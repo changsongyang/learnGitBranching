@@ -7,6 +7,7 @@ exports.level = {
     "zh_CN": "远程追踪",
     "zh_TW": "remote tracking",
     "es_AR": "Trackeando remotos",
+    "es_ES": "Trackeando remotos",
     "pt_BR": "Seguindo remotos",
     "gl"   : "Traceando os remotos",
     "de_DE": "Remote Tracking",
@@ -14,13 +15,15 @@ exports.level = {
     "fr_FR": "Suivi de branche distante",
     "ru_RU": "Слежка за удалённым репозиторием",
     "ko"   : "원격 저장소 추적하기",
-    "uk"   : "Слідкуємо за віддаленим репозиторієм"
+    "uk"   : "Слідкуємо за віддаленим репозиторієм",
+    "vi"   : "Theo dõi từ xa"
   },
   "hint": {
     "en_US": "Remember there are two ways to set remote tracking!",
     "zh_CN": "记住，有两种设置 remote tracking 的方法!",
     "zh_TW": "記住喔，有兩個方式可以去設定 remote tracking",
     "es_AR": "¡Acordate de que hay dos formas de trackear un remoto!",
+    "es_ES": "¡Recuerda que hay dos formas de trackear un remoto!",
     "pt_BR": "Lembre-se que há duas formas de seguir um ramo remoto!",
     "gl"   : "¡Lembrate de que hai dúas formas de seguir unha rama remota!",
     "de_DE": "Nicht vergessen, es gibt zwei Arten Remote Tracking einzurichten!",
@@ -28,7 +31,8 @@ exports.level = {
     "fr_FR": "Rappelez-vous qu'il existe deux façons de configurer le suivi de branche distante !",
     "ru_RU": "Помни, есть два способа установить слежку за удалённым репозиторием!",
     "ko"   : "원격 추적하기를 설정하는데에는 두가지 방법이 있습니다!",
-    "uk"   : "Пам'ятай, є два способи слідкувати за віддаленим репозиорієм!"
+    "uk"   : "Пам'ятай, є два способи слідкувати за віддаленим репозиорієм!",
+    "vi"   : "Hãy nhớ rằng, có 2 cách để thiết lập theo dõi từ xa!"
   },
   "startDialog": {
     "en_US": {
@@ -311,7 +315,7 @@ exports.level = {
             "markdowns": [
               "### ¿Puedo especificarlo yo?",
               "",
-              "¡Claro que sí! Podés hacer que cualquier rama que quieras trackee `o/master`, y si lo hicieras, esa rama va a tener el mismo destino implícito de push y objetivo implícito de merge que `master`. Eso signfica que podés correr `git push` en una rama llamada `absolutamenteNoEsMaster` y ¡que tu trabajo se pushee a la rama `master` del remoto!",
+              "¡Claro que sí! Podés hacer que cualquier rama que quieras trackee `o/master`, y si lo hicieras, esa rama va a tener el mismo destino implícito de push y objetivo implícito de merge que `master`. Eso significa que podés correr `git push` en una rama llamada `absolutamenteNoEsMaster` y ¡que tu trabajo se pushee a la rama `master` del remoto!",
               "",
               "Hay dos formas de establecer esta propiedad. La primera es checkoutear una nueva rama usando una rama remota como la referencia especificada. Ejecutar",
               "",
@@ -382,6 +386,126 @@ exports.level = {
           "options": {
             "markdowns": [
               "¡Ok! Para este nivel, pusheá tu trabajo a la rama `master` del remoto *sin* estar parado sobre `master` localmente. Te dejo que te des cuenta del resto solo, que para algo este es el curso avanzado :P"
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Ramas que trackean remotos",
+              "",
+              "Una de las cosas que te pueden haber parecido \"mágicas\" de las últimas lecciones es que git sabía que la rama `master` estaba relacionada con `o/master`. Obviamente, estas ramas tienen nombres parecidos, y podría parecer lógico conectar la rama `master` del remoto con la rama `master` local, pero esta conexión es bien evidente en dos escenarios:",
+              "",
+              "* Durante una operación de pull, los commits se descargan a `o/master` y después se *mergean* a la rama `master`. El objetivo implícito del merge se determina con esta conexión.",
+              "* Durante un push, el trabajo de la rama `master` se sube a la rama `master` del remoto (que estaba representada localmente por `o/master`). El *destino* del push se determina con esta conexión entre `master` y `o/master`.",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Trackeando remotos",
+              "",
+              "Resumiendo, esta conexión entre `master` y `o/master` se explica simplemente por la propiedad de \"trackear (seguir) remotos\" de las ramas. La rama `master` está configurada para trackear `o/master` -- osea, que hay un objetivo implícito para el merge y un destino implícito para de la rama `master`.",
+              "",
+              "Podrías estar pensando cómo esa propiedad apareció en tu rama `master` si no ejecutaste ningún comando para especificarlo. Bueno, cuando clonas un repositorio con git, esta propiedad es asignada por ti automáticamente.",
+              "",
+              "Durante un clone, git crea una rama remota por cada rama en el remoto (por ejemplo, ramas como `o/master`). Pero después crea una rama local que trackea la rama activa del remote, que suele ser `master`.",
+              "",
+              "Una vez completado el git clone, sólo tienes una única rama local (para que no te asustes) pero puedes ver todas las ramas del remoto (si fueses curioso). ¡Es lo mejor de ambos mundos!",
+              "",
+              "Esto también explica por qué podrías ver un mensaje como este durante la clonación:",
+              "",
+              "    local branch \"master\" set to track remote branch \"o/master\"",
+              "",
+              "    rama local \"master\" establecida para trackear la rama remota \"o/master\""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### ¿Puedo especificarlo yo?",
+              "",
+              "¡Claro que sí! Puedes hacer que cualquier rama que quieras trackee `o/master`, y si lo hicieras, esa rama va a tener el mismo destino implícito de push y objetivo implícito de merge que `master`. Eso significa que puedes ejecutar `git push` en una rama llamada `absolutamenteNoEsMaster` y ¡que tu trabajo se pushee a la rama `master` del remoto!",
+              "",
+              "Hay dos formas de establecer esta propiedad. La primera es hacer checkout sobre una nueva rama usando una rama remota como la referencia especificada. Ejecutar",
+              "",
+              "`git checkout -b absolutamenteNoEsMaster o/master`",
+              "",
+              "Crea una nueva rama llamada `absolutamenteNoEsMaster` y la hace trackear a `o/master`."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Basta de charla, ¡veamos un ejemplo! Vamos a hacer checkout de una nueva rama llamada `foo` y hacer que trackee a `master` en el remoto."
+            ],
+            "afterMarkdowns": [
+              "Como puedes ver, usamos el objetivo implícito de merge `o/master` para actualizar la rama `foo`. ¡Observa cómo `master` no fue actualizada!"
+            ],
+            "command": "git checkout -b foo o/master; git pull",
+            "beforeCommand": "git clone; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Lo mismo aplica para git push"
+            ],
+            "afterMarkdowns": [
+              "Zas. Hacemos push de nuestro trabajo a la rama `master` del remoto incluso cuando nuestra rama se llamaba totalmente distinto"
+            ],
+            "command": "git checkout -b foo o/master; git commit; git push",
+            "beforeCommand": "git clone"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Forma número 2",
+              "",
+              "Otra forma de especificar la rama a trackear es usar la opción `git branch -u`. Ejecutando",
+              "",
+              "`git branch -u o/master foo`",
+              "",
+              "establecemos que la rama `foo` trackee a `o/master`. Si encima estás parado en `foo`, incluso puedes obviarlo:",
+              "",
+              "`git branch -u o/master`",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Veamos rápidamente esta otra forma de especificar la rama a trackear..."
+            ],
+            "afterMarkdowns": [
+              "Lo mismo que antes, sólo que con un comando bastante más explícito. ¡Muy útil!"
+            ],
+            "command": "git branch -u o/master foo; git commit; git push",
+            "beforeCommand": "git clone; git checkout -b foo"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "¡Perfecto! Para este nivel, haz push de tu trabajo a la rama `master` del remoto *sin* estar parado sobre `master` localmente. Te dejo que te des cuenta del resto solo, que para algo este es el curso avanzado :P"
             ]
           }
         }
@@ -1443,6 +1567,124 @@ exports.level = {
           "options": {
             "markdowns": [
               "Гаразд! На цьому рівні збережімо свою роботу у віддалену гілку `master` *без* переходу на локальну `master`. Про решту здогадайся сам, раз ти вже дойшов до цього рівня :P"
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Theo dõi nhánh từ xa",
+              "",
+              "Trong những bài học vừa qua có một điểu có vẻ như là \"ma thuật\" đó là git lại biết được nhánh `master` có liên kết đến nhánh `o/master`. Đúng là chúng có tên tương tự và nhánh `master` ở kho chứa từ xa có kết nối đến nhánh `master` ở kho chứa địa phương có vẻ như là hợp lý, nhưng kết nối này được thể hiện rõ ràng trong 2 trường hợp:",
+              "",
+              "* Trong quá trình thực hiện thao tác kéo, các commit được tải xuống nhánh `o/master` và sau đó *hợp nhất* vào nhánh `master`. Mục tiêu hợp nhất dược ngầm định bởi kết nối này.",
+              "* Trong quá trình thực hiện thao tác đẩy, thảnh quả trên nhánh `master` được đẩy lên nhánh `master` từ xa (sau dó được biểu thị bằng nhánh `o/master` ở kho chứa địa phương). *Đích đến* của lệnh đẩy được xác định bằng kết nối giữa nhánh `master` và nhánh `o/master`.",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Theo dõi từ xa",
+              "",
+              "Nói tóm lại, kết nối giữa nhánh `master` và nhánh `o/master` đơn giản được giải thích bằng thuộc tính \"theo dõi từ xa\" (\"remote tracking\") của các nhánh. Nhánh `master` được thiết lập để theo dõi nhánh `o/master` -- Điều này có nghĩa là nhánh `master` được chỉ định đích của lệnh đẩy và mục tiêu hợp nhất sau khi kéo.",
+              "",
+              "Có thể bạn sẽ thắc mắc rằng tại sao thuộc tính này được thiết lập lên nhánh `master` trong khi bạn chẳng hề chạy một câu lệnh nào chỉ định điều này. Chà, khi bạn dùng git để nhân bản kho chứa, thì thuộc tính này đã được tự động thiết lập cho bạn rồi. ",
+              "",
+              "Trong quá trình thực hiện nhân bản, git tạo ra nhánh từ xa trên kho chứa địa phương cho tất cả các nhánh trên kho chứa từ xa (các nhánh như `o/master`). Sau đó nó sẽ tạo một nhánh địa phương theo dõi nhánh hoạt dộng hiện tại của kho chứa từ xa, đa phần các trường hợp là nhánh `master`.",
+              "",
+              "Một khi quá trình nhân bản hoàn thành, bạn sẽ chỉ có một nhánh địa phương (để bạn không thấy quá tải) nhưng bạn có thể thấy tất cả các nhánh trên kho chứa từ xa (phòng trường hợp bạn thấy tò mò). Đây là phương án tối ưu!",
+              "",
+              "Điều này giải thích việc sau khi nhân bản bạn có thể thấy dòng lệnh sau xuất hiện:",
+              "",
+              "    local branch \"master\" set to track remote branch \"o/master\""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Tôi có thể tự chỉ định chứ?",
+              "",
+              "Tất nhiên là được chứ! Bạn có thế khiến bất kỳ nhánh nào theo dõi nhánh `o/master`, và nếu bạn làm vậy, nhánh đó sẽ được được chỉ định đích của lệnh đẩy và mục tiêu hợp nhất giống như nhánh `master`. Điều này có nghĩa là bạn có thể chạy lệnh `git push` trên nhánh có tên là `totallyNotMaster` và thành quả của bạn sẽ được đẩy lên nhánh `master` ở kho chứa từ xa!",
+              "",
+              "Có 2 cách để thiết lập thuộc tính này. Cách đầu tiên là chuyển sang một nhánh mới từ một nhánh từ xa bằng cách thực hiện",
+              "",
+              "`git checkout -b totallyNotMaster o/master`",
+              "",
+              "Tạo ra một nhánh mới `totallyNotMaster` và thiết lập cho nó theo dõi nhánh `o/master`."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Nói vậy là đủ rồi, hãy xem thử một mô tả nào! Ta sẽ chuyển sang một nhánh tên là `foo` và thiết lập cho nó theo dõi nhánh `master` trên kho chứa từ xa."
+            ],
+            "afterMarkdowns": [
+              "Như bạn đã thấy, chúng tôi đã sử dụng mục tiêu ngầm `o / master` để cập nhật nhánh` foo. Để ý rằng nhánh `master` không được cập nhật!!"
+            ],
+            "command": "git checkout -b foo o/master; git pull",
+            "beforeCommand": "git clone; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Điểu này cũng được áp dụng cho lệnh git push"
+            ],
+            "afterMarkdowns": [
+              "Bùùm. Ta đã đẩy thành quả lên nhánh `master` ở kho chứa tù xa mặc dù nhánh của ta có tên hoàn toàn khác biệt"
+            ],
+            "command": "git checkout -b foo o/master; git commit; git push",
+            "beforeCommand": "git clone"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Cách thứ #2",
+              "",
+              "Cách khác để thiết lập theo dõi trên một nhánh đó là đơn giản sử dụng lệnh `git branch -u`. Thực hiện",
+              "",
+              "`git branch -u o/master foo`",
+              "",
+              "sẽ thiết lập nhánh `foo` theo dõi nhánh `o/master`. Nếu nhánh `foo` đang được `HEAD` trỏ tới bạn có thể bỏ tham số này:",
+              "",
+              "`git branch -u o/master`",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hãy xem thử cách khác để thiết lập theo dõi..."
+            ],
+            "afterMarkdowns": [
+              "Y hệt như trước, nhưng lệnh này biểu hiện rõ ràng hơn. Tuyệt!"
+            ],
+            "command": "git branch -u o/master foo; git commit; git push",
+            "beforeCommand": "git clone; git checkout -b foo"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Được rồi! Ở cấp độ này hãy để thành quả lên nhánh `master` trên kho lưu trữ từ xa mà không chuyển sang nhánh `master` tại kho địa phương. Hãy tự tìm ra cách nhé, giờ là khóa học nâng cao rồi :P"
             ]
           }
         }

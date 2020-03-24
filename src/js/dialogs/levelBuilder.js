@@ -94,6 +94,25 @@ exports.dialog = {
       ]
     }
   }],
+  'es_ES': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## ¡Bienvenido al constructor de niveles!',
+        '',
+        'Estos son los pasos principales:',
+        '',
+        '  * Prepara el entorno inicial usando comandos de Git',
+        '  * Define el árbol inicial con ```define start```',
+        '  * Introduce la serie de comandos de git que representan la solución óptima',
+        '  * Crea el árbol objetivo con ```define goal```. El objetivo también determina la solución',
+        '  * Opcionalmente, crea pistas con ```define hint```',
+        '  * Dale un nombre con ```define name```',
+        '  * Opcionalmente, crea un mensaje inicial con ```edit dialog```',
+        '  * ¡Introduce el comando ```finish``` para obtener tu nivel en formato JSON!'
+      ]
+    }
+  }],
   'pt_BR': [{
     type: 'ModalAlert',
     options: {
@@ -229,4 +248,23 @@ exports.dialog = {
       ]
     }
   }],
+  'vi': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Chào mừng đến trình tạo cấp độ!',
+        '',
+        'Có những bước chính sau:',
+        '',
+        '  * Khởi tạo môi trường với các lệnh git',
+        '  * Định nghĩa cây để bắt đầu với ```define start```',
+        '  * Nhập chuỗi lệnh git để tạo đáp án (tốt nhất) của bạn',
+        '  * Định nghĩa cây mục tiêu với ```define goal```. Định nghĩa mục tiêu đồng thời cũng xác định đáp án',
+        '  * Có thể định nghĩa gợi ý với ```define hint```',
+        '  * Chỉnh sửa tên với ```define name```',
+        '  * Có thể định nghĩa hội thoại bắt đầu với ```edit dialog```',
+        '  * Nhập lệnh ```finish``` xuất cấp độ của bạn dưới dạng JSON!'
+      ]
+    }
+  }]
 };

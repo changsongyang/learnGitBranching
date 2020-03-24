@@ -2,6 +2,7 @@
 
 var AppConstants = require('../constants/AppConstants');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
+var util = require('../util');
 var EventEmitter = require('events').EventEmitter;
 
 var ActionTypes = AppConstants.ActionTypes;
@@ -19,13 +20,15 @@ var langLocaleMap = {
   de: 'de_DE',
   pt: 'pt_BR',
   ru: 'ru_RU',
-  uk: 'uk'
+  uk: 'uk',
+  vi: 'vi'
 };
 
 var headerLocaleMap = {
   'zh-CN': 'zh_CN',
   'zh-TW': 'zh_TW',
-  'pt-BR': 'pt_BR'
+  'pt-BR': 'pt_BR',
+  'es-ES': 'es_ES'
 };
 
 var supportedLocalesList = Object.values(langLocaleMap)
@@ -82,6 +85,7 @@ AppConstants.StoreSubscribePrototype,
   dispatchToken: AppDispatcher.register(function(payload) {
     var action = payload.action;
     var shouldInform = false;
+    var oldLocale = _locale;
 
     switch (action.type) {
       case ActionTypes.CHANGE_LOCALE:
@@ -95,6 +99,12 @@ AppConstants.StoreSubscribePrototype,
           shouldInform = true;
         }
         break;
+    }
+
+    if (util.isBrowser() && oldLocale !== _locale) {
+      var url = new URL(document.location.href);
+      url.searchParams.set('locale', _locale);
+      window.history.replaceState({}, '', url.href);
     }
 
     if (shouldInform) {

@@ -1,4 +1,7 @@
 exports.level = {
+  "disabledMap": {
+    "git fakeTeamwork": true,
+  },
   "goalTreeString": "{\"branches\":{\"master\":{\"target\":\"C3\",\"id\":\"master\",\"remoteTrackingBranchID\":\"o/master\",\"localBranchesThatTrackThis\":null},\"o/master\":{\"target\":\"C3\",\"id\":\"o/master\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"master\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"master\":{\"target\":\"C3\",\"id\":\"master\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "git commit;git commit;git push",
   "startTree": "{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\",\"remoteTrackingBranchID\":\"o/master\"},\"o/master\":{\"target\":\"C1\",\"id\":\"o/master\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}}",
@@ -7,6 +10,7 @@ exports.level = {
     "zh_CN": "Git Push",
     "zh_TW": "git push",
     "es_AR": "git push",
+    "es_ES": "git push",
     "pt_BR": "Git Push",
     "gl"   : "Git Push",
     "de_DE": "Git Push",
@@ -14,20 +18,23 @@ exports.level = {
     "fr_FR": "Git push",
     "ru_RU": "Git push",
     "uk"   : "Git push",
-    "ko"   : "Git push"
+    "ko"   : "Git push",
+    "vi"   : "Git push"
   },
   "hint": {
     "en_US": "Remember you have to clone before you can push!",
     "zh_CN": "推送之前需要先克隆",
     "zh_TW": "push 之前你需要先 clone",
     "es_AR": "¡Acordate que tenés que clonar antes de pushear!",
+    "es_ES": "¡Recuerda que tienes que clonar antes de hacer push!",
     "pt_BR": "Lembre-se de clonar antes de fazer o push!",
     "de_DE": "Denk dran, dass du einen Clone brauchst bevor du Pushen kannst!",
     "ja"   : "Pushができるようになるには、まずリポジトリをcloneする必要があるのをお忘れなく",
     "fr_FR": "Rappelez-vous que vous devez cloner avant de pouvoir faire un push !",
     "ru_RU": "Помните, что прежде чем push-ить вам нужно склонировать репозиторий!",
     "uk"   : "Пам’ятай, що перед тим як щось push-нути потрібно склонувати репозиторій!",
-    "ko"   : "push를 하기전에 clone을 먼저해야 된다는것을 기억하세요!"
+    "ko"   : "push를 하기전에 clone을 먼저해야 된다는것을 기억하세요!",
+    "vi"   : "Nhớ rằng bạn phải clone trước khi push!"
   },
   "startDialog": {
     "en_US": {
@@ -152,6 +159,47 @@ exports.level = {
           "options": {
             "markdowns": [
               "Para completar este nivel, simplemente compartí dos nuevos commits con el remoto. Igual, no te confíes, ¡ya se van a complicar las lecciones!"
+            ]
+          }
+        }
+      ]
+    },
+    "es_ES": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## git push",
+              "",
+              "Entendido, entonces ya descargué los cambios de un repositorio remoto y los integré en mi trabajo localmente. Esto suena muy bien... pero ¿cómo comparto _mis_ cambios con el resto?",
+              "",
+              "Bueno, la forma de subir el trabajo compartido es la opuesta a cómo descargar trabajo. Y ¿qué es lo opuesto a `git pull`? ¡`git push`!",
+              "",
+              "`git push` es el responsable de subir _tus_ cambios a un remoto específico y de actualizar ese remoto para incluir tus nuevos commits. Cuando `git push` termina, todos tus amigos pueden descargar tu trabajo del remoto.",
+              "",
+              "Puedes imaginarte `git push` como un comando para \"publicar\" tu trabajo. Tiene un par de sutilezas con las que vamos a meternos pronto, pero empecemos poco a poco."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Aquí tenemos algunos cambios que nuestro remoto no tiene. ¡Subámoslos!"
+            ],
+            "afterMarkdowns": [
+              "Ahí está: el remoto recibió el commit `C2`, la rama `master` de ese remoto se actualizó para apuntar a `C2`, y nuestro *propio* reflejo del remoto (`o/master`) también fue actualizado. ¡Todo está en sincronía!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, simplemente comparte dos nuevos commits con el remoto. Igualmente, no te confíes, ¡las lecciones van a empezar a complicarse!"
             ]
           }
         }
@@ -536,6 +584,49 @@ exports.level = {
           "options": {
             "markdowns": [
               "이번 레벨을 마치기 위해, 두개의 새 커밋을 원격 저장소에 공유해봅시다. 마음의 준비를 단단히 하세요, 이제부터 강의들이 훨씬 어려워질거니까요!"
+            ]
+          }
+        }
+      ]
+    },
+    "vi": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Push",
+              "",
+              "Được rồi, ta đã biết cách nạp thay đổi từ kho chứa từ xa và kết hợp chúng vào các nhánh cục bộ. Khá là tuyệt rồi... nhưng nếu tôi muốn chia sẻ tác phẩm tuyệt vời _của tôi_ với mọi người khác thì sao?",
+              "",
+              "Chà, cách tải lên thì phải ngược với tải xuống rồi. Vậy thì đối nghịch của `git pull`(kéo) là gì? `git push`(đẩy)!",
+              "",
+              "`git push` có trách nhiệm tải lên thay đổi _của bạn_ vào nhánh từ xa được chỉ định và cập nhật nhánh đó để kết hợp với commit đẩy lên của bạn. Một khi lệnh `git push` hoàn thành, tất cả bạn bè của bạn có thể tải xuống thay đổi của nhánh từ xa đó đó.",
+              "",
+              "Bạn có thể xem `git push` là câu lệnh để \"xuất bản\" thành quả công việc của bạn. Lệnh này có nhiều tính năng tinh tế mà ta sẽ tìm hiểu nhanh thôi, nhưng giờ hãy cứ bắt đầu với từng bước nhỏ đã...",
+              "",
+              "*lưu ý --`git push` mà không có tham số hành xử tùy biến phụ thuộc vào cài đặt của git là `push.default`. Giá trị mặc định cho cài đặt này phụ thuộc vào phiên bản git mà bạn đang sử dụng, còn ở bài học của chúng ta thì ta sẽ sử dụng giá trị `upstream` (ngược dòng). Bây giờ thì đó chưa phải là vấn đề gì lớn, nhưng chúng tôi khuyến nghị bạn kiểm tra cài đặt của mình trước khi đẩy lên dự án của bạn.*"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Ở đây ta có một vài thay đổi mà kho chứa từ xa không có. Hãy tải chúng lên!"
+            ],
+            "afterMarkdowns": [
+              "Đó -- kho chứa từ xa đã nhận được commit `C2`, nhánh `master` ở kho chứa từ xa đã được cập nhật lên `C2`, và phản chiếu nhánh từ xa *của ta* (`o/master`) cũng được cập nhật luôn. Mọi thứ đã đồng bộ!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Để hoàn thành cấp độ này, đơn giản là hãy chia sẻ 2 commit mới với kho chứa từ xa. Chuẩn bị tinh thần nhé, vì các bài học sẽ khó dần lên nhiều đấy!"
             ]
           }
         }
