@@ -58,6 +58,7 @@ var Level = Sandbox.extend({
     this.startOffCommand();
 
     this.handleOpen(options.deferred);
+    LevelActions.setIsSolvingLevel(true);
   },
 
   getIsGoalExpanded: function() {
@@ -65,10 +66,18 @@ var Level = Sandbox.extend({
   },
 
   handleOpen: function(deferred) {
+    LevelActions.setIsSolvingLevel(true);
     deferred = deferred || Q.defer();
 
     // if there is a multiview in the beginning, open that
     // and let it resolve our deferred
+    if (GlobalStateStore.getShouldDisableLevelInstructions()) {
+      setTimeout(function() {
+        deferred.resolve();
+      }, 100);
+      return;
+    }
+
     if (this.level.startDialog && !this.testOption('noIntroDialog')) {
       new MultiView(Object.assign(
         {},
@@ -166,6 +175,14 @@ var Level = Sandbox.extend({
 
   startOffCommand: function() {
     var method = this.options.command.get('method');
+    if (GlobalStateStore.getShouldDisableLevelInstructions()) {
+      Main.getEventBaton().trigger(
+        'commandSubmitted',
+        'hint; show goal'
+      );
+      return;
+    }
+
     if (!this.testOption('noStartCommand') && method !== 'importLevelNow') {
       Main.getEventBaton().trigger(
         'commandSubmitted',
@@ -182,10 +199,10 @@ var Level = Sandbox.extend({
   },
 
   initGoalVisualization: function() {
-    var onlyMaster = TreeCompare.onlyMasterCompared(this.level);
+    var onlyMain = TreeCompare.onlyMainCompared(this.level);
     // first we make the goal visualization holder
     this.goalCanvasHolder = new CanvasTerminalHolder({
-      text: (onlyMaster) ? intl.str('goal-only-master') : undefined,
+      text: (onlyMain) ? intl.str('goal-only-main') : undefined,
       parent: this
     });
 
@@ -206,7 +223,9 @@ var Level = Sandbox.extend({
     // repo visualization a bit to make room. This way, you could have the goal window hang out on
     // the right side of the screen and still see the repo visualization.
     this.goalVis.customEvents.on('drag', function(event, ui) {
-      if (ui.position.left > 0.5 * $(window).width()) {
+      // our left is a negative value now that we start goal windows on the
+      // right, so we have to take absolute value
+      if (Math.abs(ui.position.left) < 0.4 * $(window).width()) {
         if (!$('#goalPlaceholder').is(':visible')) {
           $('#goalPlaceholder').show();
           this.mainVis.myResize();
@@ -558,6 +577,7 @@ var Level = Sandbox.extend({
     delete this.mainVis;
     delete this.goalVis;
     delete this.goalCanvasHolder;
+    LevelActions.setIsSolvingLevel(false);
   },
 
   getInstantCommands: function() {

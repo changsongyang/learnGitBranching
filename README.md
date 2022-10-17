@@ -7,13 +7,13 @@ LearnGitBranching is a git repository visualizer, sandbox, and a series of educa
 
 You can input a variety of commands into LearnGitBranching (LGB) -- as commands are processed, the nearby commit tree will dynamically update to reflect the effects of each command:
 
-![demo-gif](https://user-images.githubusercontent.com/7308241/39848730-040bd09e-53df-11e8-964e-2d48f35a4355.gif)
+![demo-gif](https://user-images.githubusercontent.com/6324814/108740487-02c3c400-7536-11eb-9dd1-53275cdf76fb.gif)
 
 This visualization combined with tutorials and "levels" can help both beginners and intermediate developers polish their version control skills. A quick demo is available here:
-https://pcottle.github.com/learnGitBranching/?demo
+https://pcottle.github.io/learnGitBranching/?demo
 
 Or, you can launch the application normally here:
-https://pcottle.github.com/learnGitBranching/
+https://pcottle.github.io/learnGitBranching/
 
 ### Sandbox Mode
 
@@ -37,42 +37,19 @@ You can share a link to LearnGitBranching with an arbitrary set of commands that
 
 ### Level Builder
 
-You can build levels with `build level`. The dialog will walk you through the process, and at the end you can `export level` to get a JSON blob. Paste that in a gist or directly into an issue and I can check it out / merge in your changes! You can also share this level directly with friends by having them run "import level" or simply specify a gist ID in the url params like so:
+You can build levels with the `build level` command. A dialog will walk you through the process, and at the end it will show you a JSON blob that represents the level you just created. Paste that in a [gist](https://gist.github.com) or directly into an issue and I can check it out / merge in your changes! You can also share this level directly with friends by having them run `import level` and paste the JSON in the resulting text field, or simply send them a custom URL with the the gist ID in the parameters, like so:
 https://pcottle.github.io/learnGitBranching/?gist_level_id=a84407351f9c9f0cb241
 
 ## Reporting Bugs / Opening Issues
 
 When reporting bugs, try running the command `debug_copyTree()` in your JS console when in a state just before reproducing a bug. This can avoid having to copy all the commands you used to get into a specific state. (I can then use the `importTreeNow` command to get to that exact state)
 
-## How the app works / Contributing functionality
-
-LearnGitBranching is a pretty simple application (from a technical perspective). There's no backend database or any AJAX requests -- it's a 100% clientside application written in JavaScript. The production version (on github.io) literally just serves up an HTML page with some JS and CSS. The rest of the magic lies in the 9k+ lines of JavaScript :P
-
-Because the app contains a lot of code, I have written everything into Nodejs-style modules. The modules are packaged together with the `Browserify` and then sent down in a format the browser can understand.
-
-As of December 2013, I've migrated the build process to use Grunt >0.4, since the older version was giving a lot of people build headaches. It should be fairly rock solid now!
-
-Here is the high-level process of the build:
-
-* The code is written into the node.js modules which require other modules
-* CSS is written into just one stylesheet (there is not a whole ton of styling)
-* New HTML is written into a template HTML file (`template.index.html`). Only needed
-  for new views
-* The app is "built", which outputs:
-  * `index.html` in the root directory
-  * CSS and JS files in `./build` directory
-* If the app is being built for production, then these CSS and JS files
-  are hashed (to bust caches) and tests are run
-* That's it!
-
-Thus, if you build the app locally, all you have to do in order to run the app is just open up `index.html` in the root directory of the repo. Pretty simple
-
 ## Building yourself / Contributing Functionality
 
 For contributing core functionality in the app, you'll probably want to test your changes
-at least once before submitting a pull request. That means you'll need the "Grunt.js" build tool to build the app:
+at least once before submitting a pull request. That means you'll need the "gulp.js" build tool to build the app:
 
-https://gruntjs.com/getting-started
+https://gulpjs.com/docs/en/getting-started/quick-start
 
 You'll also need `yarn` to download all the dependencies of the project.
 
@@ -85,13 +62,14 @@ yarn install
 
 git checkout -b newAwesomeFeature
 vim ./src/js/git/index.js # some changes
-yarn grunt fastBuild # skips tests and linting, faster build
+yarn gulp fastBuild # skips tests and linting, faster build
 
 # after building you can open up your browser to the index.html
+open ./index.html
 # file generated and see your changes
 
 vim ./src/js/git/index.js # more changes
-yarn grunt build # runs tests and lint
+yarn gulp build # runs tests and lint
 
 git commit -am "My new sweet feature!"
 git push
@@ -100,7 +78,34 @@ git push
 
 Alternatively, you can also build and run the app in a pre-configured online workspace:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/pcottle/learnGitBranching/blob/master/src/js/git/index.js)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/pcottle/learnGitBranching/blob/main/src/js/git/index.js)
+
+
+## Other Technical Details
+
+LearnGitBranching is a pretty simple application (from a technical perspective). There's no backend database or any AJAX requests -- it's a 100% clientside application written in JavaScript. The production version (on github.io) literally just serves up an HTML page with some JS and CSS.
+
+Here is the high-level process of the build:
+
+* CSS is written into just one stylesheet (there is not a whole ton of styling)
+* New HTML is written into a template HTML file (`template.index.html`). This is only needed
+  for new views
+* The app is "built", which outputs:
+  * `index.html` in the root directory
+  * CSS and JS files in `./build` directory
+* If the app is being built for production, then these CSS and JS files
+  are hashed (to bust caches) and tests are run
+* That's it!
+
+Thus, if you build the app locally, all you have to do in order to run the app is just open up `index.html` in the root directory of the repo. Pretty simple
+
+### Docker
+
+You can run the most recently built stable image with `docker run -p 8080:80 ghcr.io/pcottle/learngitbranching:main`. Access your environment with at [http://localhost:8080/](<http://localhost:8080/>)
+
+You can build the app and image with the command: `docker build -t ghcr.io/pcottle/learngitbranching:latest`. See the [Makefile](Makefile) for information on how to build locally with docker.
+
+## Some of our amazing contributors
 
 [//]: contributor-faces
 <a href="https://github.com/pcottle"><img src="https://avatars0.githubusercontent.com/u/1135007?v=4" title="pcottle" width="80" height="80"></a>
@@ -133,6 +138,8 @@ Alternatively, you can also build and run the app in a pre-configured online wor
 <a href="https://github.com/tym-network"><img src="https://avatars1.githubusercontent.com/u/2879545?v=4" title="tym-network" width="80" height="80"></a>
 <a href="https://github.com/zhyu"><img src="https://avatars1.githubusercontent.com/u/1728523?v=4" title="zhyu" width="80" height="80"></a>
 <a href="https://github.com/mgarciaisaia"><img src="https://avatars1.githubusercontent.com/u/1190974?v=4" title="mgarciaisaia" width="80" height="80"></a>
+<a href="https://github.com/YourSenseiCreeper"><img src="https://avatars1.githubusercontent.com/u/6324814?&v=4" title="YourSenseiCreeper" width="80" height="80"></a>
+<a href="https://github.com/olsza"><img src="https://avatars1.githubusercontent.com/u/12556170?v=4" title="Olsza" width="80" height="80"></a>
 
 [//]: contributor-faces
 
@@ -161,6 +168,8 @@ And the following heroes for assisting in translating:
 * Vasil Kulakov ("coyl") & Lyubov Agadjanyan ("shayenblue")
 * Aliaksei Berkau ("alexeiberkov")
 * Mizunashi Mana ("mizunashi-mana")
+* YourSenseiCreeper
+* Olsza
 
 Also huge shoutout for everyone who has put up a pull request that was pulled! Check out the 30+ contributors we have in the [Contributors View](https://github.com/pcottle/learnGitBranching/graphs/contributors)
 

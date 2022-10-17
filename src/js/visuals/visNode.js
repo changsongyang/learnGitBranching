@@ -394,7 +394,7 @@ var VisNode = VisBase.extend({
     var y = circle.attr('cy');
 
     var maxWidth = this.gitVisuals.paper.width;
-    var maxHeight = this.gitVisuals.paper.height;
+    var maxHeight = this.gitVisuals.paper.height - circle.attrs.r;
     var elasticity = 0.8 / speed;
     var dt = 1.0;
 
@@ -451,7 +451,7 @@ var VisNode = VisBase.extend({
     text.attr({
       'font-size': this.getFontSize(this.get('id')),
       'font-weight': 'bold',
-      'font-family': 'Monaco, Courier, font-monospace',
+      'font-family': 'Menlo, Monaco, Consolas, \'Droid Sans Mono\', monospace',
       opacity: this.getOpacity()
     });
 

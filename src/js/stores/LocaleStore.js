@@ -21,14 +21,21 @@ var langLocaleMap = {
   pt: 'pt_BR',
   ru: 'ru_RU',
   uk: 'uk',
-  vi: 'vi'
+  vi: 'vi',
+  sl: 'sl_SI',
+  pl: 'pl',
+  it: 'it_IT',
+  ta: 'ta_IN'
 };
 
 var headerLocaleMap = {
   'zh-CN': 'zh_CN',
   'zh-TW': 'zh_TW',
   'pt-BR': 'pt_BR',
-  'es-ES': 'es_ES'
+  'es-MX': 'es_MX',
+  'es-ES': 'es_ES',
+  'it-IT': 'it_IT',
+  'sl-SI': 'sl_SI'
 };
 
 var supportedLocalesList = Object.values(langLocaleMap)

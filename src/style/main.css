@@ -10,7 +10,7 @@ body {
 }
 
 html, body {
-  font-family: Monaco, Courier, monospace;
+  font-family: Menlo, Monaco, Consolas, 'Droid Sans Mono', monospace;
   color: #eee;
 }
 
@@ -60,6 +60,31 @@ div.modalTerminal p {
 
 .textAlignCenter {
   text-align: center;
+}
+
+.visuallyHidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.noStyle {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  text-indent: inherit;
+  text-shadow: inherit;
+  appearance: none;
 }
 
 /* Box Model */
@@ -125,7 +150,7 @@ body,
   -webkit-box-align: center;
   -moz-box-align: center;
   -ms-flex-align: center;
-  justify-content	: center;
+  justify-content: center;
 }
 
 .startAlign {
@@ -232,7 +257,7 @@ div.canvasTerminalHolder {
   height: 0;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 10px;
   z-index: 3;
 }
 
@@ -258,6 +283,14 @@ body.hgMode .visBackgroundColor {
 #interfaceWrapper {
   min-width: 600px;
   min-height: 400px;
+}
+
+div.ui-draggable-handle {
+  cursor: grab;
+}
+
+div.ui-draggable-dragging div.ui-draggable-handle {
+  cursor: grabbing;
 }
 
 div.canvasTerminalHolder > div.terminal-window-holder > div.wrapper {
@@ -292,14 +325,24 @@ div.canvasTerminalHolder > div.terminal-window-holder div.inside {
   border-radius: 0 0 5px 5px;
 }
 
+div.inside  pre {
+  white-space: normal;
+  line-height: 24px;
+}
+
 #controls {
   max-width: 400px;
 }
 
 div.canvasTerminalHolder > div.terminal-window-holder {
-  max-width: 500px;
-  min-width: 500px;
+  max-width: 400px;
+  min-width: 400px;
   overflow: visible !important;
+}
+
+
+div.canvasTerminalHolder > div.terminal-window-holder div.inside svg {
+  top: unset !important;
 }
 
 /* Toolbar */
@@ -433,6 +476,10 @@ div.toolbar > div.controls div.box.flex1 div:hover {
 
 }
 
+div.ui-draggable div.controls div.box.flex1 div {
+  cursor: pointer;
+}
+
 div.controls div.box.flex1 div.close {
   background-color: #fb625f;
 }
@@ -553,7 +600,7 @@ p.commandLine span.prompt {
 
 #commandLineBar p.command {
   margin: 0;
-  margin-left: 12px;
+  margin-left: 20px;
 }
 
 #commandLineBar #commandTextField {
@@ -685,11 +732,12 @@ div.helperBar.show {
   -o-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
-  height: 85px;
+  min-height: 85px;
 }
 
 div.helperBar.show.BaseHelperBar {
   height: auto;
+  min-height: auto;
 }
 
 #commandLineBar,
@@ -1268,4 +1316,13 @@ div.gitDemonstrationView {
 .uiButtonWhite:active {
   border-top-color: #9bcbeb;
   background: #9bcbeb;
+}
+
+
+
+#shadow{
+  position: absolute;
+  bottom: 0px;
+  left: 21px;
+  opacity: 0.4;
 }

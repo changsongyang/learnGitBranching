@@ -208,6 +208,14 @@ var commandConfig = {
     }
   },
 
+  gc: {
+    displayName: 'gc',
+    regex: /^git +gc($|\s)/,
+    execute: function(engine, command) {
+      engine.pruneTree(false);
+    }
+  },
+
   pull: {
     regex: /^git +pull($|\s)/,
     options: [
@@ -222,6 +230,9 @@ var commandConfig = {
 
       var commandOptions = command.getOptionsMap();
       var generalArgs = command.getGeneralArgs();
+      if (commandOptions['--rebase']) {
+        generalArgs = commandOptions['--rebase'].concat(generalArgs);
+      }
       command.twoArgsForOrigin(generalArgs);
       assertOriginSpecified(generalArgs);
       // here is the deal -- git pull is pretty complex with
@@ -252,8 +263,8 @@ var commandConfig = {
       } else if (firstArg) {
         source = firstArg;
         assertIsBranch(engine.origin, source);
-        // get o/master locally if master is specified
-        destination = engine.origin.refs[source].getPrefixedID();
+        // get o/main locally if main is specified
+        destination = engine.origin.resolveID(source).getPrefixedID();
       } else {
         // can't be detached
         if (engine.getDetachedHead()) {
@@ -296,7 +307,7 @@ var commandConfig = {
       switch (generalArgs.length) {
         // git fakeTeamwork
         case 0:
-          branch = 'master';
+          branch = 'main';
           numToMake = 1;
           break;
 
@@ -307,7 +318,7 @@ var commandConfig = {
             numToMake = 1;
           } else {
             numToMake = parseInt(generalArgs[0], 10);
-            branch = 'master';
+            branch = 'main';
           }
           break;
 
@@ -393,8 +404,8 @@ var commandConfig = {
         // technically we have a destination here as the remote branch
         source = firstArg;
         assertIsBranch(engine.origin, source);
-        // get o/master locally if master is specified
-        destination = engine.origin.refs[source].getPrefixedID();
+        // get o/main locally if main is specified
+        destination = engine.origin.resolveID(source).getPrefixedID();
       }
       if (source) { // empty string fails this check
         assertIsRef(engine.origin, source);
@@ -447,8 +458,8 @@ var commandConfig = {
         assertIsRemoteBranch(engine, remoteBranch);
         assertIsBranch(engine, branch);
         engine.setLocalToTrackRemote(
-          engine.refs[branch],
-          engine.refs[remoteBranch]
+          engine.resolveID(branch),
+          engine.resolveID(remoteBranch)
         );
         return;
       }
@@ -615,7 +626,8 @@ var commandConfig = {
       '--interactive-test',
       '--aboveAll',
       '-p',
-      '--preserve-merges'
+      '--preserve-merges',
+      '--onto'
     ],
     regex: /^git +rebase($|\s)/,
     execute: function(engine, command) {
@@ -642,6 +654,17 @@ var commandConfig = {
             }
           );
         }
+        return;
+      }
+
+      if (commandOptions['--onto']) {
+        var args = commandOptions['--onto'].concat(generalArgs);
+        command.threeArgsImpliedHead(args, ' --onto');
+
+        engine.rebaseOnto(args[0], args[1], args[2], {
+          preserveMerges: commandOptions['-p'] || commandOptions['--preserve-merges']
+        });
+
         return;
       }
 
@@ -743,7 +766,7 @@ var commandConfig = {
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
         destination = validateBranchName(engine, refspecParts[1]);
-        if (source === "" && !engine.origin.refs[destination]) {
+        if (source === "" && !engine.origin.resolveID(destination)) {
           throw new GitError({
             msg: intl.todo(
               'cannot delete branch ' + options.destination + ' which doesnt exist'
@@ -770,7 +793,7 @@ var commandConfig = {
             sourceObj.getRemoteTrackingBranchID()) {
           assertBranchIsRemoteTracking(engine, source);
           var remoteBranch = sourceObj.getRemoteTrackingBranchID();
-          destination = engine.refs[remoteBranch].getBaseID();
+          destination = engine.resolveID(remoteBranch).getBaseID();
         } else {
           destination = validateBranchName(engine, source);
         }
@@ -854,6 +877,48 @@ var commandConfig = {
 
       command.twoArgsImpliedHead(generalArgs);
       engine.tag(generalArgs[0], generalArgs[1]);
+    }
+  },
+
+  switch: {
+    sc: /^(gsw|git sw)($|\s)/,
+    regex: /^git +switch($|\s)/,
+    options: [
+      '-c',
+      '-'
+    ],
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      var commandOptions = command.getOptionsMap();
+
+      var args = null;
+      if (commandOptions['-c']) {
+        // the user is really trying to just make a
+        // branch and then switch to it. so first:
+        args = commandOptions['-c'].concat(generalArgs);
+        command.twoArgsImpliedHead(args, '-c');
+
+        var validId = engine.validateBranchName(args[0]);
+        engine.branch(validId, args[1]);
+        engine.checkout(validId);
+        return;
+      }
+
+      if (commandOptions['-']) {
+        // get the heads last location
+        var lastPlace = engine.HEAD.get('lastLastTarget');
+        if (!lastPlace) {
+          throw new GitError({
+            msg: intl.str('git-result-nothing')
+          });
+        }
+        engine.HEAD.set('target', lastPlace);
+        return;
+      }
+
+      command.validateArgBounds(generalArgs, 1, 1);
+
+      engine.checkout(engine.crappyUnescape(generalArgs[0]));
     }
   }
 };

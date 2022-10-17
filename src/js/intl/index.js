@@ -6,7 +6,9 @@ var strings = require('../intl/strings').strings;
 var getDefaultLocale = LocaleStore.getDefaultLocale;
 
 var fallbackMap = {
-  'zh_TW': 'zh_CN'
+  'zh_TW': 'zh_CN',
+  'es_AR': 'es_ES',
+  'es_MX': 'es_ES'
 };
 
 // lets change underscores template settings so it interpolates
@@ -14,7 +16,7 @@ var fallbackMap = {
 var templateSettings = Object.assign({}, _.templateSettings);
 templateSettings.interpolate = /\{(.+?)\}/g;
 var template = exports.template = function(str, params) {
-  return _.template(str, params, templateSettings);
+  return _.template(str, templateSettings)(params);
 };
 
 var str = exports.str = function(key, params) {
@@ -57,7 +59,7 @@ var str = exports.str = function(key, params) {
 
 var getIntlKey = exports.getIntlKey = function(obj, key, overrideLocale) {
   if (!obj || !obj[key]) {
-    throw new Error('that key ' + key + 'doesn\'t exist in this blob' + obj);
+    throw new Error('that key ' + key + ' doesn\'t exist in this blob ' + obj);
   }
   if (!obj[key][getDefaultLocale()]) {
     console.warn(

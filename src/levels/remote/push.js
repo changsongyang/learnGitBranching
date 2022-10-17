@@ -2,9 +2,9 @@ exports.level = {
   "disabledMap": {
     "git fakeTeamwork": true,
   },
-  "goalTreeString": "{\"branches\":{\"master\":{\"target\":\"C3\",\"id\":\"master\",\"remoteTrackingBranchID\":\"o/master\",\"localBranchesThatTrackThis\":null},\"o/master\":{\"target\":\"C3\",\"id\":\"o/master\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"master\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"master\":{\"target\":\"C3\",\"id\":\"master\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}}",
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C3\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\",\"localBranchesThatTrackThis\":null},\"o/main\":{\"target\":\"C3\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":[\"main\"]}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C3\",\"id\":\"main\",\"remoteTrackingBranchID\":null,\"localBranchesThatTrackThis\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "git commit;git commit;git push",
-  "startTree": "{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\",\"remoteTrackingBranchID\":\"o/master\"},\"o/master\":{\"target\":\"C1\",\"id\":\"o/master\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}}",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "name": {
     "en_US": "Git Pushin'",
     "zh_CN": "Git Push",
@@ -12,14 +12,17 @@ exports.level = {
     "es_AR": "git push",
     "es_ES": "git push",
     "pt_BR": "Git Push",
-    "gl"   : "Git Push",
+    "gl": "Git Push",
     "de_DE": "Git Push",
-    "ja"   : "Git Push",
+    "ja": "Git Push",
     "fr_FR": "Git push",
     "ru_RU": "Git push",
-    "uk"   : "Git push",
-    "ko"   : "Git push",
-    "vi"   : "Git push"
+    "uk": "Git push",
+    "ko": "Git push",
+    "vi": "Git push",
+    "sl_SI": "Git Push",
+    "pl": "Git push",
+    "it_IT": "Git Push"
   },
   "hint": {
     "en_US": "Remember you have to clone before you can push!",
@@ -29,12 +32,15 @@ exports.level = {
     "es_ES": "¡Recuerda que tienes que clonar antes de hacer push!",
     "pt_BR": "Lembre-se de clonar antes de fazer o push!",
     "de_DE": "Denk dran, dass du einen Clone brauchst bevor du Pushen kannst!",
-    "ja"   : "Pushができるようになるには、まずリポジトリをcloneする必要があるのをお忘れなく",
+    "ja": "Pushができるようになるには、まずリポジトリをcloneする必要があるのをお忘れなく",
     "fr_FR": "Rappelez-vous que vous devez cloner avant de pouvoir faire un push !",
     "ru_RU": "Помните, что прежде чем push-ить вам нужно склонировать репозиторий!",
-    "uk"   : "Пам’ятай, що перед тим як щось push-нути потрібно склонувати репозиторій!",
-    "ko"   : "push를 하기전에 clone을 먼저해야 된다는것을 기억하세요!",
-    "vi"   : "Nhớ rằng bạn phải clone trước khi push!"
+    "uk": "Пам’ятай, що перед тим як щось push-нути потрібно склонувати репозиторій!",
+    "ko": "push를 하기전에 clone을 먼저해야 된다는것을 기억하세요!",
+    "vi": "Nhớ rằng bạn phải clone trước khi push!",
+    "sl_SI": "Najprej moraš klonirati, preden lahko pushaš!",
+    "pl": "Najpierw sklonuj, potem pushuj!",
+    "it_IT": "Ricorda di clonare il repository prima di usare push!"
   },
   "startDialog": {
     "en_US": {
@@ -64,7 +70,7 @@ exports.level = {
               "Here we have some changes that the remote does not have. Let's upload them!"
             ],
             "afterMarkdowns": [
-              "There we go -- the remote received commit `C2`, the branch `master` on the remote was updated to point at `C2`, and our *own* reflection of the remote (`o/master`) was updated as well. Everything is in sync!"
+              "There we go -- the remote received commit `C2`, the branch `main` on the remote was updated to point at `C2`, and our *own* reflection of the remote (`o/main`) was updated as well. Everything is in sync!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -96,7 +102,7 @@ exports.level = {
               "",
               "Vous pouvez voir `git push` comme une commande qui \"publie\" votre travail. Elle présente quelques subtilités que nous allons voir rapidement, mais commençons par le B.A.-BA...",
               "",
-              "*Note : le comportement de `git push` avec aucun argument varie avec l'un des réglages de configuration de git nommé `push.default`. La valeur par défaut de ce réglage dépend de la version de git utilisée, mais nous allons utiliser la valeur `upstream` dans nos leçons. Cela ne change pas grand chose pour ces exercices, mais vérifiez tout de même vos réglages avant de pusher vos propres projets.*"
+              "*Note : le comportement de `git push` avec aucun argument varie selon l'un des réglages de configuration de Git nommé `push.default`. La valeur par défaut de ce réglage dépend de la version de Git utilisée, mais nous allons utiliser la valeur `upstream` dans nos leçons. Cela ne change pas grand chose pour ces exercices, mais vérifiez tout de même vos réglages avant de pusher vos propres projets.*"
             ]
           }
         },
@@ -107,7 +113,7 @@ exports.level = {
               "Nous avons fait ici quelques changements que le dépôt distant n'a pas. Envoyons-les !"
             ],
             "afterMarkdowns": [
-              "Et voilà : le dépôt distant a reçu le commit `C2`, la branche `master` a été mise à jour sur `C2`, et votre *propre* représentation de la branche distante (`o/master`) a aussi été mise à jour. Tout est synchronisé !"
+              "Et voilà : le dépôt distant a reçu le commit `C2`, la branche `main` a été mise à jour sur `C2`, et votre *propre* représentation de la branche distante (`o/main`) a aussi été mise à jour. Tout est synchronisé !"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -135,7 +141,7 @@ exports.level = {
               "",
               "Bueno, la forma de subir el trabajo compartido es la opuesta a cómo descargar trabajo. Y ¿qué es lo opuesto a `git pull`? ¡`git push`!",
               "",
-              "`git push` es el responsable de subir _tus_ cambios a un remoto específico y de actualizar ese remoto para incluir tus nuevos commits. Cuando `git push` termina, todos tus amigos pueden descargar tu trabajo del remoto.",
+              "`git push` es el responsable de subir _tus_ cambios a un remoto específico y de actualizar ese remoto para incluir tus nuevos commits. Cuando `git push` termina, cualquiera puede descargar tu trabajo del remoto.",
               "",
               "Podés pensar en `git push` como un comando para \"publicar\" tu trabajo. Tiene un par de sutilezas con las que vamos a meternos pronto, pero empecemos de a poco."
             ]
@@ -148,7 +154,7 @@ exports.level = {
               "Acá tenemos algunos cambios que nuestro remoto no tiene. ¡Subámoslos!"
             ],
             "afterMarkdowns": [
-              "Ahí está: el remoto recibió el commit `C2`, la rama `master` de ese remoto se actualizó para apuntar a `C2`, y nuestro *propio* reflejo del remoto (`o/master`) también fue actualizado. ¡Todo está en sincronía!"
+              "Ahí está: el remoto recibió el commit `C2`, la rama `main` de ese remoto se actualizó para apuntar a `C2`, y nuestro *propio* reflejo del remoto (`o/main`) también fue actualizado. ¡Todo está en sincronía!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -189,7 +195,7 @@ exports.level = {
               "Aquí tenemos algunos cambios que nuestro remoto no tiene. ¡Subámoslos!"
             ],
             "afterMarkdowns": [
-              "Ahí está: el remoto recibió el commit `C2`, la rama `master` de ese remoto se actualizó para apuntar a `C2`, y nuestro *propio* reflejo del remoto (`o/master`) también fue actualizado. ¡Todo está en sincronía!"
+              "Ahí está: el remoto recibió el commit `C2`, la rama `main` de ese remoto se actualizó para apuntar a `C2`, y nuestro *propio* reflejo del remoto (`o/main`) también fue actualizado. ¡Todo está en sincronía!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -232,7 +238,7 @@ exports.level = {
               "Aqui temos algumas mudanças que o repositório remoto não contém. Vamos subi-las!"
             ],
             "afterMarkdowns": [
-              "Aqui vamos nós -- o repositório remoto recebeu o commit `C2`, o ramo `master` no repositório remoto foi atualizado para apontar para `C2`, e a *nossa* reflexão do remoto (`o/master`) foi atualizada também. Está tudo sincronizado!"
+              "Aqui vamos nós -- o repositório remoto recebeu o commit `C2`, o ramo `main` no repositório remoto foi atualizado para apontar para `C2`, e a *nossa* reflexão do remoto (`o/main`) foi atualizada também. Está tudo sincronizado!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -275,7 +281,7 @@ exports.level = {
               "Aquí temos algúns cambios que o repositorio remoto non contén. ¡Imos subilas!"
             ],
             "afterMarkdowns": [
-              "Ahí imos -- o repositorio remoto recibiu o commit `C2`, a rama `master` do repositorio remoto foi actualizado para apuntar para `C2`, e o *noso* reflexo do remoto (`o/master`) foi atualizado tamén. ¡Está todo sincronizado!"
+              "Ahí imos -- o repositorio remoto recibiu o commit `C2`, a rama `main` do repositorio remoto foi actualizado para apuntar para `C2`, e o *noso* reflexo do remoto (`o/main`) foi atualizado tamén. ¡Está todo sincronizado!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -316,7 +322,7 @@ exports.level = {
               "這裡我們有了一些 remote 所沒有的 commit。讓我們來上傳它們吧！"
             ],
             "afterMarkdowns": [
-              "我說的沒錯吧！remote 收到了 commit `C2`，同時在 remote 上的 `master` branch 也一起更新並且指向 `C2`，同時我們*自己的* `o/master` 也一併更新了！"
+              "我說的沒錯吧！remote 收到了 commit `C2`，同時在 remote 上的 `main` branch 也一起更新並且指向 `C2`，同時我們*自己的* `o/main` 也一併更新了！"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -332,7 +338,7 @@ exports.level = {
         }
       ]
     },
-    "zh_CN":{
+    "zh_CN": {
       "childViews": [
         {
           "type": "ModalAlert",
@@ -360,7 +366,7 @@ exports.level = {
               "这里我们准备了一些远程仓库中没有的提交记录, 咱们开始先上传吧!"
             ],
             "afterMarkdowns": [
-              "过去了, 远程仓库接收了 `C2`，远程仓库中的 `master` 分支也被更新到指向 `C2` 了，我们的远程分支 (o/master) 也同样被更新了。所有的分支都同步了！"
+              "过去了, 远程仓库接收了 `C2`，远程仓库中的 `main` 分支也被更新到指向 `C2` 了，我们的远程分支 (o/main) 也同样被更新了。所有的分支都同步了！"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -401,7 +407,7 @@ exports.level = {
               "Hier haben wir ein paar Änderungen, die auf dem Remote noch fehlen. Und hoch damit!"
             ],
             "afterMarkdowns": [
-              "Na bitte -- das Remote hat den Commit `C2` bekommen, der `master` auf dem Remote ist entsprechend aktualisiert worden und unsere *eigene* Abbildung des `master` auf dem Remote namens `o/master` wurde auch aktualisiert. Alles im Lot!"
+              "Na bitte -- das Remote hat den Commit `C2` bekommen, der `main` auf dem Remote ist entsprechend aktualisiert worden und unsere *eigene* Abbildung des `main` auf dem Remote namens `o/main` wurde auch aktualisiert. Alles im Lot!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -419,45 +425,45 @@ exports.level = {
     },
     "ru_RU": {
       "childViews": [
-          {
-              "type": "ModalAlert",
-              "options": {
-                  "markdowns": [
-                      "## Git Push",
-                      "",
-                      "Хорошо, мы скачали изменения с удалённого репозитория и включили их в наши локальные наработки. Всё это замечательно, но как нам поделиться _своими_ наработками и изменениями с другими участниками проекта?",
-                      "",
-                      "Способ, которым мы воспользуемся, является противоположным тому способу, которым мы пользовались ранее для скачивания наработок (`git pull`). Этот способ - использование команды `git push`!",
-                      "",
-                      "Команда `git push` отвечает за загрузку _ваших_ изменений в указанный удалённый репозиторий, а также включение ваших коммитов в состав удалённого репозитория. По окончании работы команды `git push` все ваши друзья смогут скачать себе все сделанные вами наработки.",
-                      "",
-                      "Вы можете рассматривать команду `git push` как \"публикацию\" своей работы. Эта команда скрывает в себе множество тонкостей и нюансов, с которыми мы познакомимся в ближайшее время, а пока что давайте начнём с малого...",
-                      "",
-                      "*замечание - поведение команды `git push` без аргументов варьируется в зависимости от значения `push.default`, указанной в настройках git-а. Значение по умолчанию зависит от версии git, которую вы используете, однако в наших уроках мы будем использовать значение `upstream`. Лучше всегда проверять эту опцию прежде чем push-ить ваши настоящие проекты.*"
-                  ]
-              }
-          },
-          {
-              "type": "GitDemonstrationView",
-              "options": {
-                  "beforeMarkdowns": [
-                      "Здесь у нас имеются изменения, которых нет в удалённом репозитории. Давайте же закачаем их туда!"
-                  ],
-                  "afterMarkdowns": [
-                      "Вот так - удалённый репозиторий получил новый коммит `C2`, ветка `master` на удалённом репозитории теперь указывает на `C2`, и наше *собственное* локальное отображение удалённого репозитория (`o/master`) изменилось соответственно. Всё синхронизировалось!"
-                  ],
-                  "command": "git push",
-                  "beforeCommand": "git clone; git commit"
-              }
-          },
-          {
-              "type": "ModalAlert",
-              "options": {
-                  "markdowns": [
-                      "Чтобы выполнить задачу этого упражнения, просто поделитесь своими двумя новыми коммитами с удалённым репозиторием. Соберитесь, потому что все последующие уроки будут намного сложнее предыдущих!"
-                  ]
-              }
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Push",
+              "",
+              "Хорошо, мы скачали изменения с удалённого репозитория и включили их в наши локальные наработки. Всё это замечательно, но как нам поделиться _своими_ наработками и изменениями с другими участниками проекта?",
+              "",
+              "Способ, которым мы воспользуемся, является противоположным тому способу, которым мы пользовались ранее для скачивания наработок (`git pull`). Этот способ - использование команды `git push`!",
+              "",
+              "Команда `git push` отвечает за загрузку _ваших_ изменений в указанный удалённый репозиторий, а также включение ваших коммитов в состав удалённого репозитория. По окончании работы команды `git push` все ваши друзья смогут скачать себе все сделанные вами наработки.",
+              "",
+              "Вы можете рассматривать команду `git push` как \"публикацию\" своей работы. Эта команда скрывает в себе множество тонкостей и нюансов, с которыми мы познакомимся в ближайшее время, а пока что давайте начнём с малого...",
+              "",
+              "*замечание - поведение команды `git push` без аргументов варьируется в зависимости от значения `push.default`, указанной в настройках git-а. Значение по умолчанию зависит от версии git, которую вы используете, однако в наших уроках мы будем использовать значение `upstream`. Лучше всегда проверять эту опцию прежде чем push-ить ваши настоящие проекты.*"
+            ]
           }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Здесь у нас имеются изменения, которых нет в удалённом репозитории. Давайте же закачаем их туда!"
+            ],
+            "afterMarkdowns": [
+              "Вот так - удалённый репозиторий получил новый коммит `C2`, ветка `main` на удалённом репозитории теперь указывает на `C2`, и наше *собственное* локальное отображение удалённого репозитория (`o/main`) изменилось соответственно. Всё синхронизировалось!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Чтобы выполнить задачу этого упражнения, просто поделитесь своими двумя новыми коммитами с удалённым репозиторием. Соберитесь, потому что все последующие уроки будут намного сложнее предыдущих!"
+            ]
+          }
+        }
       ]
     },
     "ja": {
@@ -487,7 +493,7 @@ exports.level = {
               "ここにリモートにはないいくつかの変更点があります。これをアップロードしてみましょう！"
             ],
             "afterMarkdowns": [
-              "さて、いってみましょう -- リモートはコミット`C2`を受け取り、リモート上の`master`ブランチは`C2`の位置に更新され、私たち*自身*のリモートブランチ(`o/master`)も良い具合に更新されました。全てが同期されました！"
+              "さて、いってみましょう -- リモートはコミット`C2`を受け取り、リモート上の`main`ブランチは`C2`の位置に更新され、私たち*自身*のリモートブランチ(`o/main`)も良い具合に更新されました。全てが同期されました！"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -530,7 +536,7 @@ exports.level = {
               "Ось ми маємо деякі зміни яких нема в віддаленому сховищі. Надішлімо їх!"
             ],
             "afterMarkdowns": [
-              "Ось, маєш -- віддалене сховище отримало  `C2`, гілку `master` на ньому було оновлено й тепер вона посилається на `C2`, а наше *власне* відображення віддаленого репо  (`o/master`) було також оновлено. Все синхронізовано!"
+              "Ось, маєш -- віддалене сховище отримало  `C2`, гілку `main` на ньому було оновлено й тепер вона посилається на `C2`, а наше *власне* відображення віддаленого репо  (`o/main`) було також оновлено. Все синхронізовано!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -573,7 +579,7 @@ exports.level = {
               "여기 원격저장소에는 없는 변경이 있습니다. 이것들을 업로드 해 봅시다!"
             ],
             "afterMarkdowns": [
-              "자 됬습니다 -- 원격 저장소가 커밋 `C2`를 받았고, 원격 저장소의 브랜치 `master`가 `C2`라는 지점까지 갱신 되었습니다. 그리고 원격 저장소의 반영인 *우리의* 원격 브랜치 (`o/master`)또한 잘 갱신 되었습니다. 모든게 동기화되어 있습니다!"
+              "자, 됐습니다 -- 원격 저장소가 커밋 `C2`를 받았고, 원격 저장소의 브랜치 `main`가 `C2`라는 지점까지 갱신 되었습니다. 그리고 원격 저장소의 반영인 *우리의* 원격 브랜치 (`o/main`)또한 잘 갱신 되었습니다. 모든게 동기화되어 있습니다!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -616,7 +622,7 @@ exports.level = {
               "Ở đây ta có một vài thay đổi mà kho chứa từ xa không có. Hãy tải chúng lên!"
             ],
             "afterMarkdowns": [
-              "Đó -- kho chứa từ xa đã nhận được commit `C2`, nhánh `master` ở kho chứa từ xa đã được cập nhật lên `C2`, và phản chiếu nhánh từ xa *của ta* (`o/master`) cũng được cập nhật luôn. Mọi thứ đã đồng bộ!"
+              "Đó -- kho chứa từ xa đã nhận được commit `C2`, nhánh `main` ở kho chứa từ xa đã được cập nhật lên `C2`, và phản chiếu nhánh từ xa *của ta* (`o/main`) cũng được cập nhật luôn. Mọi thứ đã đồng bộ!"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git commit"
@@ -627,6 +633,137 @@ exports.level = {
           "options": {
             "markdowns": [
               "Để hoàn thành cấp độ này, đơn giản là hãy chia sẻ 2 commit mới với kho chứa từ xa. Chuẩn bị tinh thần nhé, vì các bài học sẽ khó dần lên nhiều đấy!"
+            ]
+          }
+        }
+      ]
+    },
+    "sl_SI": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Push",
+              "",
+              "Ok, sedaj sem fetchal spremembe iz oddaljenega repota in jih vključil v moje lokalno delo. To je že super ... toda kako delim _moje_ super delo z vsemi ostalimi?",
+              "",
+              "No, način da naložiš deljeno delo, je ravno nasproten, kot da ga preneseš. In kaj je nasprotje `git pull`? `git push`!",
+              "",
+              "`git push` je odgovoren za nalaganje _tvojih_ sprememb na določen oddaljen repozitorij in posodobitev tega repozitorija, da vključi tvoje nove commite. Ko se `git push` izvede, lahko vsi tvoji prijatelji prenesejo tvoje delo iz repozitorija.",
+              "",
+              "`git push` si lahko predstavljaš kot ukaz, ki \"objavi\" tvoje delo. Ima kopico majhnih stvari, katere bomo raziskali v kratkem, ampak začnimo z majhnimi koraki ...",
+              "",
+              "*Opomba -- obnašanje `git push` brez argumentov je odvisno od nastavitev gita imenovanih `push.default`. Privzeta vrednost za to nastavitev je odvisna od različice gita, ki jo uporabljaš, ampak mi bomo uporabljali `upstream` vrednost v naši lekciji. To ni neka velika stvar, ampak jo je vredno preveriti, preden pushamo na svojem projektu.*"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Tu imamo nekaj sprememb, ki jih oddaljen repo nima. Dajmo jih naložiti!"
+            ],
+            "afterMarkdowns": [
+              "Tako je -- oddaljen repo je prejel commit `C2`, branch `main` na oddaljenem repotu je bil posodobljen, da kaže na `C2` in naš *lasten* prikaz oddaljenega repota (`o/main`) je bil prav tako posodobljen. Vse je usklajeno!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Za dokončanje te stopnje, preprosto deli dva nova commita z oddaljenim repotom. Nato pa se pripni, ker bodo lekcije postale dosti težje!"
+            ]
+          }
+        }
+      ]
+    },
+    "pl": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git push",
+              "",
+              "Ok, pobraliśmy zmiany ze zdalnego repozytorium i włączyliśmy je do naszej pracy lokalnie. Wszystko fajnie, ale... jak mamy się podzielić _naszą_ wspaniałą pracą ze wszystkimi innymi?",
+              "",
+              "Cóż, wysyłanie współdzielonej pracy jest przeciwieństwem pobierania współdzielonej pracy. A co jest przeciwieństwem `git pull`? `git push`!",
+              "",
+              "Polecenie `git push` odpowiada za przesłanie i aktualizację _naszych_ zmian na wybranego remote'a, aby zawierał nowe commity. Gdy `git push` zostanie ukończony, wszyscy twoi przyjaciele będą mogli pobrać twoją pracę z serwera zdalnego.",
+              "",
+              "Możesz myśleć o `git push` jak o poleceniu do \"publikowania\" swojej pracy. Ma ono wiele szczegółów, które wkrótce omówimy, ale zacznijmy od małych kroczków...",
+              "",
+              "*Uwaga 1 -- zachowanie `git push` bez argumentów różni się w zależności od jednego z ustawień Git o nazwie `push.default`. Domyślna wartość tego ustawienia zależy od wersji Git, której używasz. W naszych lekcjach będziemy używać wartości `upstream`. Nie jest to wielka sprawa, ale warto sprawdzić swoje ustawienia przed użyciem `push` we własnych projektach.*",
+              "",
+              "*Uwaga 2 -- odpowiednik gałęzi na zdalnym repozytorium będziemy nazywać remote'em. Nazwa ta jest wykorzystywana w Polsce, dlatego będziemy jej używać, aby nie wprowadzać zawiłego nazewnictwa.*"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Tutaj mamy kilka zmian, których nie ma remote. Załadujmy je!"
+            ],
+            "afterMarkdowns": [
+              "No i proszę -- remote otrzymał commit `C2`, gałąź `main` na zdalnym repozytorium została zaktualizowana do `C2`. Nasze *własne* odzwierciedlenie zdalnego (`o/main`) również zostało zaktualizowane. Wszystko jest zsynchronizowane!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Aby zakończyć ten poziom, wystarczy, że podzielisz się dwoma nowymi commitami z innymi użytkownikami repozytorium. Ale zapnij pasy i przygotuj się na ostrą jazdę na kolejnych lekcjach!"
+            ]
+          }
+        }
+      ]
+    },
+    "it_IT": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Push",
+              "",
+              "Ok, ho recuperato tutti gli aggiornamenti dal repository remoto e li ho incorporati al mio repository locale. Fin qui tutto apposto ma... come faccio a condividere il _mio_ fantastico lavoro con gli altri?",
+              "",
+              "Bene, per caricare il lavoro da condividere si deve fare l'opposto dello scaricarlo. E qual è l'opposto di `git pull`? `git push`!",
+              "",
+              "`git push` è responsabile dell'inviare le _tue_ modifiche ad uno specifico repository remoto e di aggiornarlo per far sì che incorpori i tuoi nuovi commit. Una volta eseguito `git push`, tutti i tuoi amici possono scaricare il tuo lavoro dal repository remoto.",
+              "",
+              "Puoi considerare `git push` come un comando per \"pubblicare\" il tuo lavoro. Ha una serie di sottigliezze che vedremo più avanti, per ora iniziamo dalle basi...",
+              "",
+              "*nota -- il comportamento di `git push` senza argomenti dipende da un'impostazione di git chiamata `push.default`. Il valore predefinito di quest'impostazione dipende dalla versione di git in uso; noi andremo ad usare il valore `upstream` nelle lezioni. Non è un problema, ma vale la pena controllare le impostazioni prima di usare push nei tuoi progetti.*"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Qui abbiamo alcuni cambiamenti che non sono presenti nel repository remoto. Andiamo a caricarli!"
+            ],
+            "afterMarkdowns": [
+              "Ecco qui -- il repository remoto ha ricevuto il commit `C2`, il ramo `main` sul remoto è stato aggiornato a puntare a `C2`, ed anche il *nostro* riflesso del repository remoto (`o/main`) è stato aggiornato. Tutto è stato sincronizzato!"
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Per terminare questo livello, condividi due nuovi commit con il repository remoto. Preparati però, perché le prossime lezioni saranno belle toste!"
             ]
           }
         }

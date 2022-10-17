@@ -137,14 +137,14 @@ GitEngine.prototype.defaultInit = function() {
 };
 
 GitEngine.prototype.init = function() {
-  // make an initial commit and a master branch
+  // make an initial commit and a main branch
   this.rootCommit = this.makeCommit(null, null, {rootCommit: true});
   this.commitCollection.add(this.rootCommit);
 
-  var master = this.makeBranch('master', this.rootCommit);
+  var main = this.makeBranch('main', this.rootCommit);
   this.HEAD = new Ref({
     id: 'HEAD',
-    target: master
+    target: main
   });
   this.refs[this.HEAD.get('id')] = this.HEAD;
 
@@ -330,7 +330,7 @@ GitEngine.prototype.makeOrigin = function(treeString) {
       msg: intl.str('git-error-origin-exists')
     });
   }
-  treeString = treeString || this.printTree(this.exportTreeForBranch('master'));
+  treeString = treeString || this.printTree(this.exportTreeForBranch('main'));
 
   // this is super super ugly but a necessary hack because of the way LGB was
   // originally designed. We need to get to the top level visualization from
@@ -338,8 +338,8 @@ GitEngine.prototype.makeOrigin = function(treeString) {
   // visualization and ask the main vis to create a new vis/git pair. Then
   // we grab the gitengine out of that and assign that as our origin repo
   // which connects the two. epic
-  var masterVis = this.gitVisuals.getVisualization();
-  var originVis = masterVis.makeOrigin({
+  var mainVis = this.gitVisuals.getVisualization();
+  var originVis = mainVis.makeOrigin({
     localRepo: this,
     treeString: treeString
   });
@@ -381,7 +381,7 @@ GitEngine.prototype.makeOrigin = function(treeString) {
 };
 
 GitEngine.prototype.makeRemoteBranchIfNeeded = function(branchName) {
-  if (this.refs[ORIGIN_PREFIX + branchName]) {
+  if (this.doesRefExist(ORIGIN_PREFIX + branchName)) {
     return;
   }
   // if its not a branch on origin then bounce
@@ -394,7 +394,7 @@ GitEngine.prototype.makeRemoteBranchIfNeeded = function(branchName) {
 };
 
 GitEngine.prototype.makeBranchIfNeeded = function(branchName) {
-  if (this.refs[branchName]) {
+  if (this.doesRefExist(branchName)) {
     return;
   }
   var where = this.findCommonAncestorForRemote(
@@ -405,7 +405,7 @@ GitEngine.prototype.makeBranchIfNeeded = function(branchName) {
 };
 
 GitEngine.prototype.makeRemoteBranchForRemote = function(branchName) {
-  var target = this.origin.refs[branchName].get('target');
+  var target = this.origin.resolveID(branchName).get('target');
   var originTarget = this.findCommonAncestorWithRemote(
     target.get('id')
   );
@@ -668,7 +668,7 @@ GitEngine.prototype.validateBranchName = function(name) {
 
 GitEngine.prototype.validateAndMakeBranch = function(id, target) {
   id = this.validateBranchName(id);
-  if (this.refs[id]) {
+  if (this.doesRefExist(id)) {
     throw new GitError({
       msg: intl.str(
         'bad-branch-name',
@@ -696,7 +696,8 @@ GitEngine.prototype.validateAndMakeTag = function(id, target) {
 
 GitEngine.prototype.makeBranch = function(id, target) {
   if (this.refs[id]) {
-    throw new Error('woah already have that');
+    var err = new Error();
+    throw new Error('woah already have that ref ' + id + ' ' + err.stack);
   }
 
   var branch = new Branch({
@@ -780,8 +781,8 @@ GitEngine.prototype.printBranchesWithout = function(without) {
 
 GitEngine.prototype.printBranches = function(branches) {
   var result = '';
-  branches.forEach(function (branch) {
-    result += (branch.selected ? '* ' : '') + branch.id + '\n';
+  branches.forEach(branch => {
+    result += (branch.selected ? '* ' : '') + this.resolveName(branch.id).split('"')[1] + '\n';
   });
   throw new CommandResult({
     msg: result
@@ -1065,14 +1066,15 @@ GitEngine.prototype.push = function(options) {
     return;
   }
 
-  var sourceBranch = this.refs[options.source];
+  var sourceBranch = this.resolveID(options.source);
   if (sourceBranch && sourceBranch.attributes.type === 'tag') {
     throw new GitError({
       msg: intl.todo('Tags are not allowed as sources for pushing'),
     });
   }
 
-  if (!this.origin.refs[options.destination]) {
+  if (!this.origin.doesRefExist(options.destination)) {
+    console.warn('ref', options.destination);
     this.makeBranchOnOriginAndTrack(
       options.destination,
       this.getCommitFromRef(sourceBranch)
@@ -1083,7 +1085,7 @@ GitEngine.prototype.push = function(options) {
     this.animationFactory.playRefreshAnimation(this.origin.gitVisuals);
     this.animationFactory.playRefreshAnimation(this.gitVisuals);
   }
-  var branchOnRemote = this.origin.refs[options.destination];
+  var branchOnRemote = this.origin.resolveID(options.destination);
   var sourceLocation = this.resolveID(options.source || 'HEAD');
 
   // first check if this is even allowed by checking the sync between
@@ -1127,8 +1129,8 @@ GitEngine.prototype.push = function(options) {
     }
   }
 
-  // now here is the tricky part -- the difference between local master
-  // and remote master might be commits C2, C3, and C4, but the remote
+  // now here is the tricky part -- the difference between local main
+  // and remote main might be commits C2, C3, and C4, but the remote
   // might already have those commits. In this case, we don't need to
   // make them, so filter these out
   commitsToMake = commitsToMake.filter(function(commitJSON) {
@@ -1181,10 +1183,10 @@ GitEngine.prototype.push = function(options) {
     return this.animationFactory.playRefreshAnimation(this.origin.gitVisuals);
   }.bind(this));
 
-  // HAX HAX update master and remote tracking for master
+  // HAX HAX update main and remote tracking for main
   chain = chain.then(function() {
     var localCommit = this.getCommitFromRef(sourceLocation);
-    this.setTargetLocation(this.refs[ORIGIN_PREFIX + options.destination], localCommit);
+    this.setTargetLocation(this.resolveID(ORIGIN_PREFIX + options.destination), localCommit);
     return this.animationFactory.playRefreshAnimation(this.gitVisuals);
   }.bind(this));
 
@@ -1197,9 +1199,9 @@ GitEngine.prototype.pushDeleteRemoteBranch = function(
   remoteBranch,
   branchOnRemote
 ) {
-  if (branchOnRemote.get('id') === 'master') {
+  if (branchOnRemote.get('id') === 'main') {
     throw new GitError({
-      msg: intl.todo('You cannot delete master branch on remote!')
+      msg: intl.todo('You cannot delete main branch on remote!')
     });
   }
   // ok so this isn't too bad -- we basically just:
@@ -1301,8 +1303,8 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
   commitsToMake = Graph.getUniqueObjects(commitsToMake);
   commitsToMake = Graph.descendSortDepth(commitsToMake);
 
-  // now here is the tricky part -- the difference between local master
-  // and remote master might be commits C2, C3, and C4, but we
+  // now here is the tricky part -- the difference between local main
+  // and remote main might be commits C2, C3, and C4, but we
   // might already have those commits. In this case, we don't need to
   // make them, so filter these out
   commitsToMake = commitsToMake.filter(function(commitJSON) {
@@ -1313,7 +1315,7 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
     // need to get the parents first. since we order by depth, we know
     // the dependencies are there already
     var parents = parentIDs.map(function(parentID) {
-      return this.refs[parentID];
+      return this.resolveID(parentID);
     }, this);
     return this.makeCommit(parents, id);
   }.bind(this);
@@ -1345,7 +1347,7 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
 
     chain = chain.then(function() {
       return this.animationFactory.playHighlightPromiseAnimation(
-        this.origin.refs[commitJSON.id],
+        this.origin.resolveID(commitJSON.id),
         localBranch
       );
     }.bind(this));
@@ -1361,7 +1363,7 @@ GitEngine.prototype.fetchCore = function(sourceDestPairs, options) {
   chain = chain.then(function() {
     // update all the destinations
     sourceDestPairs.forEach(function (pair) {
-      var ours = this.refs[pair.destination];
+      var ours = this.resolveID(pair.destination);
       var theirCommitID = this.origin.getCommitFromRef(pair.source).get('id');
       // by definition we just made the commit with this id,
       // so we can grab it now
@@ -1400,7 +1402,7 @@ GitEngine.prototype.pull = function(options) {
     return;
   }
 
-  var destBranch = this.refs[options.destination];
+  var destBranch = this.resolveID(options.destination);
   // then either rebase or merge
   if (options.isRebase) {
     this.pullFinishWithRebase(pendingFetch, localBranch, destBranch);
@@ -1432,7 +1434,7 @@ GitEngine.prototype.pullFinishWithRebase = function(
   }.bind(this));
 
   chain = chain.then(function() {
-    // highlight last commit on o/master to color of
+    // highlight last commit on o/main to color of
     // local branch
     return this.animationFactory.playHighlightPromiseAnimation(
       this.getCommitFromRef(remoteBranch),
@@ -1497,7 +1499,7 @@ GitEngine.prototype.pullFinishWithMerge = function(
   }.bind(this));
 
   chain = chain.then(function() {
-    // highlight last commit on o/master to color of
+    // highlight last commit on o/main to color of
     // local branch
     return this.animationFactory.playHighlightPromiseAnimation(
       this.getCommitFromRef(remoteBranch),
@@ -1506,7 +1508,7 @@ GitEngine.prototype.pullFinishWithMerge = function(
   }.bind(this));
 
   chain = chain.then(function() {
-    // highlight commit on master to color of remote
+    // highlight commit on main to color of remote
     return this.animationFactory.playHighlightPromiseAnimation(
       this.getCommitFromRef(localBranch),
       remoteBranch
@@ -1596,6 +1598,19 @@ GitEngine.prototype.commit = function(options) {
   return newCommit;
 };
 
+GitEngine.prototype.resolveNameNoPrefix = function(someRef) {
+  // first get the obj
+  var obj = this.resolveID(someRef);
+  if (obj.get('type') == 'commit') {
+    return obj.get('id');
+  }
+  if (obj.get('type') == 'branch') {
+    return obj.get('id');
+  }
+  // we are dealing with HEAD
+  return this.resolveNameNoPrefix(obj.get('target'));
+};
+
 GitEngine.prototype.resolveName = function(someRef) {
   // first get the obj
   var obj = this.resolveID(someRef);
@@ -1611,7 +1626,8 @@ GitEngine.prototype.resolveName = function(someRef) {
 
 GitEngine.prototype.resolveID = function(idOrTarget) {
   if (idOrTarget === null || idOrTarget === undefined) {
-    throw new Error('Don\'t call this with null / undefined');
+    var err = new Error();
+    throw new Error('Don\'t call this with null / undefined: ' + err.stack);
   }
 
   if (typeof idOrTarget !== 'string') {
@@ -1652,8 +1668,13 @@ GitEngine.prototype.resolveRelativeRef = function(commit, relative) {
   return commit;
 };
 
+GitEngine.prototype.doesRefExist = function(ref) {
+  return !!this.refs[ref]
+};
+
 GitEngine.prototype.resolveStringRef = function(ref) {
   ref = this.crappyUnescape(ref);
+
   if (this.refs[ref]) {
     return this.refs[ref];
   }
@@ -1815,13 +1836,14 @@ GitEngine.prototype.pruneTreeAndPlay = function() {
     this.animationFactory.playRefreshAnimationSlow(this.gitVisuals);
 };
 
-GitEngine.prototype.pruneTree = function() {
+GitEngine.prototype.pruneTree = function(doPrintWarning = true) {
   var set = this.getUpstreamBranchSet();
   // don't prune commits that HEAD depends on
   var headSet = Graph.getUpstreamSet(this, 'HEAD');
   Object.keys(headSet).forEach(function(commitID) {
     set[commitID] = true;
   });
+  Object.keys(this.getUpstreamTagSet()).forEach(commitID => set[commitID] = true);
 
   var toDelete = [];
   this.commitCollection.each(function(commit) {
@@ -1836,7 +1858,7 @@ GitEngine.prototype.pruneTree = function() {
     // the switch sync
     return;
   }
-  if (this.command) {
+  if (this.command && doPrintWarning) {
     this.command.addWarning(intl.str('hg-prune-tree'));
   }
 
@@ -1856,7 +1878,6 @@ GitEngine.prototype.pruneTree = function() {
 
   return true;
 };
-
 GitEngine.prototype.getUpstreamBranchSet = function() {
   return this.getUpstreamCollectionSet(this.branchCollection);
 };
@@ -2026,21 +2047,19 @@ GitEngine.prototype.idSortFunc = function(cA, cB) {
     throw new Error('Could not parse commit ID ' + id);
   };
 
+  // We usually want to sort by reverse chronological order, aka the
+  // "latest" commits have the highest values. When we did this
+  // with date sorting, that means the commit C1 at t=0 should have
+  // a lower value than the commit C2 at t=1. We do this by doing
+  // t0 - t1 and get a negative number. Same goes for ID sorting,
+  // which means C1 - C2 = -1
   return getNumToSort(cA.get('id')) - getNumToSort(cB.get('id'));
 };
 
 GitEngine.prototype.dateSortFunc = function(cA, cB) {
-  var dateA = new Date(cA.get('createTime'));
-  var dateB = new Date(cB.get('createTime'));
-  if (dateA - dateB === 0) {
-    // hmmmmm this still needs fixing. we need to know basically just WHEN a commit was created, but since
-    // we strip off the date creation field, when loading a tree from string this fails :-/
-    // there's actually no way to determine it...
-    //c.warn('WUT it is equal');
-    //c.log(cA, cB);
-    return GitEngine.prototype.idSortFunc(cA, cB);
-  }
-  return dateA - dateB;
+  // We used to use date sorting, but its hacky so lets switch to ID sorting
+  // to eliminate non-determinism
+  return GitEngine.prototype.idSortFunc(cA, cB);
 };
 
 GitEngine.prototype.hgRebase = function(destination, base) {
@@ -2070,18 +2089,18 @@ GitEngine.prototype.hgRebase = function(destination, base) {
     moreSets.push(this.getDownstreamSet(id));
   }, this);
 
-  var masterSet = {};
-  masterSet[baseCommit.get('id')] = true;
+  var mainSet = {};
+  mainSet[baseCommit.get('id')] = true;
   [upstream, downstream].concat(moreSets).forEach(function(set) {
     Object.keys(set).forEach(function(id) {
-      masterSet[id] = true;
+      mainSet[id] = true;
     });
   });
 
-  // we also need the branches POINTING to master set
+  // we also need the branches POINTING to main set
   var branchMap = {};
   var upstreamSet = this.getUpstreamBranchSet();
-  Object.keys(masterSet).forEach(function(commitID) {
+  Object.keys(mainSet).forEach(function(commitID) {
     // now loop over that commits branches
     upstreamSet[commitID].forEach(function(branchJSON) {
       branchMap[branchJSON.id] = true;
@@ -2093,7 +2112,7 @@ GitEngine.prototype.hgRebase = function(destination, base) {
   chain = chain.then(function() {
     // now we just moved a bunch of commits, but we haven't updated the
     // dangling guys. lets do that and then prune
-    var anyChange = this.updateCommitParentsForHgRebase(masterSet);
+    var anyChange = this.updateCommitParentsForHgRebase(mainSet);
     if (!anyChange) {
       return;
     }
@@ -2144,6 +2163,21 @@ GitEngine.prototype.rebase = function(targetSource, currentLocation, options) {
   var stopSet = Graph.getUpstreamSet(this, targetSource);
   var toRebaseRough = this.getUpstreamDiffFromSet(stopSet, currentLocation);
   return this.rebaseFinish(toRebaseRough, stopSet, targetSource, currentLocation, options);
+};
+
+GitEngine.prototype.rebaseOnto = function(targetSource, oldSource, unit, options) {
+  if (this.isUpstreamOf(unit, targetSource)) {
+    this.setTargetLocation(unit, this.getCommitFromRef(targetSource));
+    this.command.setResult(intl.str('git-result-fastforward'));
+
+    this.checkout(unit);
+    return;
+  }
+
+  var stopSet = Graph.getUpstreamSet(this, targetSource);
+  var oldBranchSet = Graph.getUpstreamSet(this, oldSource);
+  var toRebaseRough = this.getUpstreamDiffFromSet(oldBranchSet, unit);
+  return this.rebaseFinish(toRebaseRough, stopSet, targetSource, unit, options);
 };
 
 GitEngine.prototype.getUpstreamDiffSetFromSet = function(stopSet, location) {
@@ -2503,7 +2537,7 @@ GitEngine.prototype.checkout = function(idOrTarget) {
 GitEngine.prototype.forceBranch = function(branchName, where) {
   branchName = this.crappyUnescape(branchName);
   // if branchname doesn't exist...
-  if (!this.refs[branchName]) {
+  if (!this.doesRefExist(branchName)) {
     this.branch(branchName, where);
   }
 
@@ -2600,7 +2634,7 @@ GitEngine.prototype.validateAndDeleteBranch = function(name) {
   var target = this.resolveID(name);
 
   if (target.get('type') !== 'branch' ||
-      target.get('id') == 'master' ||
+      target.get('id') == 'main' ||
       this.HEAD.get('target') === target) {
     throw new GitError({
       msg: intl.str('git-error-branch')
@@ -2625,7 +2659,7 @@ GitEngine.prototype.deleteBranch = function(branch) {
   // also in some cases external engines call our delete, so
   // verify integrity of HEAD here
   if (this.HEAD.get('target') === branch) {
-    this.HEAD.set('target', this.refs['master']);
+    this.HEAD.set('target', this.refs['main']);
   }
 
   if (branch.get('visBranch')) {
@@ -2715,7 +2749,7 @@ GitEngine.prototype.status = function() {
   if (this.getDetachedHead()) {
     lines.push(intl.str('git-status-detached'));
   } else {
-    var branchName = this.HEAD.get('target').get('id');
+    var branchName = this.resolveNameNoPrefix('HEAD');
     lines.push(intl.str('git-status-onbranch', {branch: branchName}));
   }
   lines.push('Changes to be committed:');
@@ -2872,8 +2906,8 @@ var Branch = Ref.extend({
    * Here is the deal -- there are essentially three types of branches
    * we deal with:
    * 1) Normal local branches (that may track a remote branch)
-   * 2) Local remote branches (o/master) that track an origin branch
-   * 3) Origin branches (master) that exist in origin
+   * 2) Local remote branches (o/main) that track an origin branch
+   * 3) Origin branches (main) that exist in origin
    *
    * With that in mind, we change our branch model to support the following
    */
@@ -2924,30 +2958,27 @@ var Commit = Backbone.Model.extend({
   },
 
   getLogEntry: function() {
-    // for now we are just joining all these things with newlines which
-    // will get placed by paragraph tags. Not really a fan of this, but
-    // it's better than making an entire template and all that jazz
     return [
       'Author: ' + this.get('author'),
       'Date: ' + this.get('createTime'),
-      '<br/>',
+      '',
       this.get('commitMessage'),
-      '<br/>',
+      '',
       'Commit: ' + this.get('id')
-    ].join('\n' ) + '\n';
+    ].join('<br/>') + '\n';
   },
 
   getShowEntry: function() {
     // same deal as above, show log entry and some fake changes
     return [
-      this.getLogEntry(),
+      this.getLogEntry().replace('\n', ''),
       'diff --git a/bigGameResults.html b/bigGameResults.html',
       '--- bigGameResults.html',
       '+++ bigGameResults.html',
       '@@ 13,27 @@ Winner, Score',
       '- Stanfurd, 14-7',
       '+ Cal, 21-14'
-    ].join('\n') + '\n';
+    ].join('<br/>') + '\n';
   },
 
   validateAtInit: function() {

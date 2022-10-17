@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var Q = require('q');
 var Backbone = require('backbone');
+var { marked } = require('marked');
 
 var Main = require('../app');
 var intl = require('../intl');
@@ -138,8 +139,8 @@ var ConfirmCancelView = ResolveRejectBase.extend({
     this.destination = options.destination;
     this.deferred = options.deferred || Q.defer();
     this.JSON = {
-      confirm: options.confirm || 'Confirm',
-      cancel: options.cancel || 'Cancel'
+      confirm: options.confirm || intl.str('confirm-button'),
+      cancel: options.cancel || intl.str('cancel-button')
     };
 
     this.render();
@@ -278,8 +279,18 @@ var ModalView = Backbone.View.extend({
     if (this.shown === value) { return; }
 
     if (value) {
+      Array.from(document.body.children).forEach(function(child) {
+        if (child.classList.contains('modalView')) return;
+        if (!child.hasAttribute('inert')) child.setAttribute('inert', '');
+      });
+
       this.stealKeyboard();
     } else {
+      Array.from(document.body.children).forEach(function(child) {
+        if (child.classList.contains('modalView')) return;
+        if (child.hasAttribute('inert')) child.removeAttribute('inert');
+      });
+
       this.releaseKeyboard();
     }
 
@@ -356,7 +367,7 @@ var ModalAlert = ContainedBase.extend({
 
   render: function() {
     var HTML = (this.JSON.markdown) ?
-      require('markdown').markdown.toHTML(this.JSON.markdown) :
+      marked(this.JSON.markdown) :
       this.template(this.JSON);
     // one more hack -- allow adding custom random HTML if specified
     if (this.options._dangerouslyInsertHTML) {
@@ -671,7 +682,7 @@ var CanvasTerminalHolder = BaseView.extend({
 
     // Set the new position/size
     this.$terminal.animate({
-      left: left + 'px',
+      right: right + 'px',
       top: top + 'px',
       height: height + 'px'
     }, this.getAnimationTime(), function () {

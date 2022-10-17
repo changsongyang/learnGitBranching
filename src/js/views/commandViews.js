@@ -1,4 +1,5 @@
 var Backbone = require('backbone');
+const {getAllCommands} = require('../sandbox/commands');
 
 var Main = require('../app');
 var CommandLineStore = require('../stores/CommandLineStore');
@@ -6,6 +7,23 @@ var CommandLineActions = require('../actions/CommandLineActions');
 
 var log = require('../log');
 var keyboard = require('../util/keyboard');
+
+const allCommands = Object.keys(getAllCommands());
+// Lets push a few commands up in the suggestion order,
+// which overrides the order from the exportj
+const autoCompleteSuggestionOrder = [
+  'levels', // above "level"
+  'help', // above help level since you might not be in a level
+  'show solution', // above show goal since you start with a goal view
+  'reset', // over reset solved
+  'import level', // over import tree
+];
+
+const allCommandsSorted = autoCompleteSuggestionOrder.concat(
+  // add the rest that arent in the list above
+  allCommands.map(command => autoCompleteSuggestionOrder.indexOf(command) > 0 ? null : command)
+  .filter(command => !!command)
+);
 
 var CommandPromptView = Backbone.View.extend({
   initialize: function() {
@@ -49,13 +67,32 @@ var CommandPromptView = Backbone.View.extend({
   },
 
   onKeyDown: function(e) {
-    // If its a tab, prevent losing focus
+    var el = e.target;
+
+    const shadowEl = document.querySelector('#shadow');
+
+    const currentValue = el.value;
+    const allCommand = currentValue.split(';');
+    const lastCommand = allCommand[allCommand.length - 1]
+      .replace(/\s\s+/g, ' ').replace(/^\s/, '');
+
+    shadowEl.innerHTML = '';
+    if (lastCommand.length) {
+      for (const c of allCommandsSorted) {
+        if (c.startsWith(lastCommand)) {
+          shadowEl.innerHTML = (currentValue + c.replace(lastCommand, '')).replace(/ /g, '&nbsp;');
+          break;
+        }
+      }
+    }
+
     if (e.keyCode === 9) {
       e.preventDefault();
-      // Maybe one day do tab completion or something? :O
-      return;
+      if (shadowEl.innerHTML) {
+        el.value = shadowEl.innerHTML.replace(/&nbsp;/g, ' ');
+      }
     }
-    var el = e.target;
+
     this.updatePrompt(el);
   },
 

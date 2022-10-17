@@ -67,6 +67,17 @@ exports.dialog = {
       ]
     }
   }],
+  'es_MX': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## ¡Buen trabajo!',
+        '',
+        'Resolviste el nivel en *{numCommands}* comandos; ',
+        'nuestra mejor solución usa: {best}.'
+      ]
+    }
+  }],
   'es_ES': [{
     type: 'ModalAlert',
     options: {
@@ -139,7 +150,7 @@ exports.dialog = {
       markdowns: [
         '## 훌륭합니다!!',
         '',
-        '*{numCommands}*개의 명렁으로 레벨을 통과했습니다; ',
+        '*{numCommands}*개의 명령으로 레벨을 통과했습니다; ',
         '모범 답안은 {best}개를 사용합니다.'
       ]
     }
@@ -154,5 +165,52 @@ exports.dialog = {
         'Đáp án của chúng tôi sử dụng {best}.'
       ]
     }
-  }]
+  }],
+  'sl_SI': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Dobro opravljeno!!',
+        '',
+        'Rešil si stopnjo z *{numCommands}* ukazi; ',
+        'naša rešitev uporabi {best}.'
+      ]
+    }
+  }],
+  'pl': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Dobra robota!!',
+        '',
+        'Rozwiązałeś poziom używając *{numCommands}* poleceń/ia; ',
+        'nasze rozwiązanie składa się z {best}.'
+      ]
+    }
+  }],
+  'ta_IN': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## ஆக சிரந்த செயல்!!',
+        '',
+        'நீங்கள் *{numCommands}* நிலைக்கான கட்டளை(கள்) கொண்டு தீர்வை அடிந்து விட்டீர்கள்; ',
+        'நமது தீர்வு {best}-ஐ பயன்படுத்து கின்றது.'
+      ]
+    }
+  }],
+   "it_IT": [
+    {
+      type: "ModalAlert",
+      options: {
+        markdowns: [
+          "## Ben fatto!!",
+          "",
+          "Hai risolto il livello con *{numCommands}* comando(i); ",
+          "noi l'abbiamo risolto con {best}.",
+        ],
+      },
+    },
+  ],
 };
+ 

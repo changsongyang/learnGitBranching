@@ -8,6 +8,7 @@ var Errors = require('../util/errors');
 var CommandProcessError = Errors.CommandProcessError;
 var LocaleStore = require('../stores/LocaleStore');
 var LocaleActions = require('../actions/LocaleActions');
+var LevelStore = require('../stores/LevelStore');
 var GlobalStateStore = require('../stores/GlobalStateStore');
 var GlobalStateActions = require('../actions/GlobalStateActions');
 var GitError = Errors.GitError;
@@ -50,6 +51,21 @@ var instantCommands = [
       msg: lines.join('\n')
     });
   }],
+  [/^alias (\w+)="(.+)"$/, function(bits) {
+    const alias = bits[1];
+    const expansion = bits[2];
+    LevelStore.addToAliasMap(alias, expansion);
+    throw new CommandResult({
+      msg: 'Set alias "'+alias+'" to "'+expansion+'"',
+    });
+  }],
+  [/^unalias (\w+)$/, function(bits) {
+    const alias = bits[1];
+    LevelStore.removeFromAliasMap(alias);
+    throw new CommandResult({
+      msg: 'Removed alias "'+alias+'"',
+    });
+  }],
   [/^locale (\w+)$/, function(bits) {
     LocaleActions.changeLocale(bits[1]);
     throw new CommandResult({
@@ -66,6 +82,12 @@ var instantCommands = [
     require('../app').getEvents().trigger('refreshTree');
     throw new CommandResult({
       msg: intl.str('flip-tree-command')
+    });
+  }],
+  [/^disableLevelInstructions$/, function() {
+    GlobalStateActions.disableLevelInstructions();
+    throw new CommandResult({
+      msg: intl.todo('Level instructions disabled'),
     });
   }],
   [/^refresh$/, function() {
@@ -93,6 +115,20 @@ var instantCommands = [
   }],
   [/^show +commands$/, function(bits) {
     var allCommands = getAllCommands();
+    var allOptions = Commands.commands.getOptionMap();
+    var commandToOptions = {};
+
+    Object.keys(allOptions).forEach(function(vcs) {
+      var vcsMap = allOptions[vcs];
+      Object.keys(vcsMap).forEach(function(method) {
+        var options = vcsMap[method];
+        if (options) {
+          commandToOptions[vcs + ' ' + method] = Object.keys(options).filter(option => option.length > 1);
+        }
+      });
+    });
+
+
     var lines = [
       intl.str('show-all-commands'),
       '<br/>'
@@ -100,6 +136,9 @@ var instantCommands = [
     Object.keys(allCommands)
       .forEach(function(command) {
         lines.push(command);
+        if (commandToOptions[command]) {
+          commandToOptions[command].forEach(option => lines.push('&nbsp;&nbsp;&nbsp;&nbsp;' + option));
+        }
       });
 
     throw new CommandResult({
@@ -154,6 +193,7 @@ var getAllCommands = function() {
   return allCommands;
 };
 
+exports.getAllCommands = getAllCommands;
 exports.instantCommands = instantCommands;
 exports.parse = util.genParseCommand(regexMap, 'processSandboxCommand');
 

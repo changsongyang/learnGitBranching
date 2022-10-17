@@ -1,42 +1,49 @@
 exports.level = {
-  "goalTreeString": "%7B%22branches%22%3A%7B%22master%22%3A%7B%22target%22%3A%22C7%27%22%2C%22id%22%3A%22master%22%7D%2C%22bugFix%22%3A%7B%22target%22%3A%22C3%22%2C%22id%22%3A%22bugFix%22%7D%2C%22side%22%3A%7B%22target%22%3A%22C5%22%2C%22id%22%3A%22side%22%7D%2C%22another%22%3A%7B%22target%22%3A%22C7%22%2C%22id%22%3A%22another%22%7D%7D%2C%22commits%22%3A%7B%22C0%22%3A%7B%22parents%22%3A%5B%5D%2C%22id%22%3A%22C0%22%2C%22rootCommit%22%3Atrue%7D%2C%22C1%22%3A%7B%22parents%22%3A%5B%22C0%22%5D%2C%22id%22%3A%22C1%22%7D%2C%22C2%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C2%22%7D%2C%22C3%22%3A%7B%22parents%22%3A%5B%22C2%22%5D%2C%22id%22%3A%22C3%22%7D%2C%22C4%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C4%22%7D%2C%22C5%22%3A%7B%22parents%22%3A%5B%22C4%22%5D%2C%22id%22%3A%22C5%22%7D%2C%22C6%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C6%22%7D%2C%22C7%22%3A%7B%22parents%22%3A%5B%22C6%22%5D%2C%22id%22%3A%22C7%22%7D%2C%22C3%27%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C3%27%22%7D%2C%22C4%27%22%3A%7B%22parents%22%3A%5B%22C3%27%22%5D%2C%22id%22%3A%22C4%27%22%7D%2C%22C7%27%22%3A%7B%22parents%22%3A%5B%22C4%27%22%5D%2C%22id%22%3A%22C7%27%22%7D%7D%2C%22HEAD%22%3A%7B%22target%22%3A%22master%22%2C%22id%22%3A%22HEAD%22%7D%7D",
+  "goalTreeString": "%7B%22branches%22%3A%7B%22main%22%3A%7B%22target%22%3A%22C7%27%22%2C%22id%22%3A%22main%22%7D%2C%22bugFix%22%3A%7B%22target%22%3A%22C3%22%2C%22id%22%3A%22bugFix%22%7D%2C%22side%22%3A%7B%22target%22%3A%22C5%22%2C%22id%22%3A%22side%22%7D%2C%22another%22%3A%7B%22target%22%3A%22C7%22%2C%22id%22%3A%22another%22%7D%7D%2C%22commits%22%3A%7B%22C0%22%3A%7B%22parents%22%3A%5B%5D%2C%22id%22%3A%22C0%22%2C%22rootCommit%22%3Atrue%7D%2C%22C1%22%3A%7B%22parents%22%3A%5B%22C0%22%5D%2C%22id%22%3A%22C1%22%7D%2C%22C2%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C2%22%7D%2C%22C3%22%3A%7B%22parents%22%3A%5B%22C2%22%5D%2C%22id%22%3A%22C3%22%7D%2C%22C4%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C4%22%7D%2C%22C5%22%3A%7B%22parents%22%3A%5B%22C4%22%5D%2C%22id%22%3A%22C5%22%7D%2C%22C6%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C6%22%7D%2C%22C7%22%3A%7B%22parents%22%3A%5B%22C6%22%5D%2C%22id%22%3A%22C7%22%7D%2C%22C3%27%22%3A%7B%22parents%22%3A%5B%22C1%22%5D%2C%22id%22%3A%22C3%27%22%7D%2C%22C4%27%22%3A%7B%22parents%22%3A%5B%22C3%27%22%5D%2C%22id%22%3A%22C4%27%22%7D%2C%22C7%27%22%3A%7B%22parents%22%3A%5B%22C4%27%22%5D%2C%22id%22%3A%22C7%27%22%7D%7D%2C%22HEAD%22%3A%7B%22target%22%3A%22main%22%2C%22id%22%3A%22HEAD%22%7D%7D",
   "solutionCommand": "git cherry-pick C3 C4 C7",
-  "compareOnlyMasterHashAgnostic": true,
+  "compareOnlyMainHashAgnostic": true,
   "disabledMap": {
     "git rebase": true
   },
-  "startTree": "{\"branches\":{\"master\":{\"target\":\"C1\",\"id\":\"master\"},\"bugFix\":{\"target\":\"C3\",\"id\":\"bugFix\"},\"side\":{\"target\":\"C5\",\"id\":\"side\"},\"another\":{\"target\":\"C7\",\"id\":\"another\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C1\"],\"id\":\"C4\"},\"C5\":{\"parents\":[\"C4\"],\"id\":\"C5\"},\"C6\":{\"parents\":[\"C1\"],\"id\":\"C6\"},\"C7\":{\"parents\":[\"C6\"],\"id\":\"C7\"}},\"HEAD\":{\"target\":\"master\",\"id\":\"HEAD\"}}",
+  "startTree": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\"},\"bugFix\":{\"target\":\"C3\",\"id\":\"bugFix\"},\"side\":{\"target\":\"C5\",\"id\":\"side\"},\"another\":{\"target\":\"C7\",\"id\":\"another\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C2\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C1\"],\"id\":\"C4\"},\"C5\":{\"parents\":[\"C4\"],\"id\":\"C5\"},\"C6\":{\"parents\":[\"C1\"],\"id\":\"C6\"},\"C7\":{\"parents\":[\"C6\"],\"id\":\"C7\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
   "name": {
     "fr_FR": "Introduction à cherry-pick",
     "en_US": "Cherry-pick Intro",
-    "de_DE": "Einführung Cherry-picking",
-    "ja"   : "cherry-pick入門",
+    "de_DE": "Einführung Cherry-Picking",
+    "ja": "cherry-pick入門",
     "es_AR": "Introducción a cherry-pick",
     "es_ES": "Introducción a cherry-pick",
+    "es_MX": "Introducción a cherry-pick",
     "pt_BR": "Introdução ao cherry-pick",
-    "gl"   : "Introuducción a cherry-pick",
+    "gl": "Introuducción a cherry-pick",
     "zh_CN": "Git Cherry-pick",
     "zh_TW": "介紹 cherry-pick",
     "ru_RU": "Введение в Cherry-pick",
-    "ko"   : "Cherry-pick 소개",
+    "ko": "Cherry-pick 소개",
     "uk": "Знайомство з cherry-pick",
-    "vi"   : "Giới thiệu về cherry-pick"
+    "vi": "Giới thiệu về cherry-pick",
+    "sl_SI": "Uvod v Cherry-pick",
+    "it_IT": "Introduzione al cherry-pick",
+    "pl": "Wprowadzenie do cherry-pick"
   },
   "hint": {
     "fr_FR": "git cherry-pick suivi par les noms de commits",
     "en_US": "git cherry-pick followed by commit names!",
     "de_DE": "git cherry-pick gefolgt von Commit-Namen.",
-    "ja"   : "git cherry-pickの後にコミット名を追加",
+    "ja": "git cherry-pickの後にコミット名を追加",
     "es_AR": "git cherry-pick seguido de los nombres de los commits",
     "es_ES": "git cherry-pick seguido de los nombres de los commits",
     "pt_BR": "git cherry-pick seguido dos nomes dos commits",
-    "gl"   : "git cherry-pick seguido das referencias a commits",
+    "gl": "git cherry-pick seguido das referencias a commits",
     "zh_CN": "git cherry-pick 后面要跟提交的名字",
     "zh_TW": "git cherry-pick 後面要接著 commit 的名稱",
     "ru_RU": "git cherry-pick основывается на именах коммитов!",
-    "ko"   : "커밋의 이름들로 git cherry-pick 하세요!",
+    "ko": "커밋의 이름들로 git cherry-pick 하세요!",
     "uk": "git cherry-pick базується на іменах комітів!",
-    "vi"   : "git cherry-pick sau đó là tên commit!"
+    "vi": "git cherry-pick sau đó là tên commit!",
+    "sl_SI": "git cherry-pick nato pa imena commitov.",
+    "it_IT": "git cherry-pick seguito dai nomi dei commit!",
+    "pl": "git cherry-pick a po nim nazwy commitów!",
   },
   "startDialog": {
     "en_US": {
@@ -76,20 +83,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Here's a repository where we have some work in branch `side` that we want to copy to `master`. This could be accomplished through a rebase (which we have already learned), but let's see how cherry-pick performs."
+              "Here's a repository where we have some work in branch `side` that we want to copy to `main`. This could be accomplished through a rebase (which we have already learned), but let's see how cherry-pick performs."
             ],
             "afterMarkdowns": [
               "That's it! We wanted commits `C2` and `C4` and git plopped them down right below us. Simple as that!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "To complete this level, simply copy some work from the three branches shown into master. You can see which commits we want by looking at the goal visualization.",
+              "To complete this level, simply copy some work from the three branches shown into main. You can see which commits we want by looking at the goal visualization.",
               ""
             ]
           }
@@ -104,9 +111,9 @@ exports.level = {
             "markdowns": [
               "## Déplacer votre travail",
               "",
-              "Nous avons maintenant pratiqué les bases de git -- commits, branches, et déplacements dans l'arbre des commits. Ces seuls concepts sont suffisants pour utiliser 90% du pouvoir des dépôts git et satisfaire les principaux besoins des développeurs.",
+              "Nous avons maintenant pratiqué les bases de Git -- commits, branches, et déplacements dans l'arbre des commits. Ces seuls concepts sont suffisants pour utiliser 90% du pouvoir des dépôts Git et satisfaire les principaux besoins des développeurs.",
               "",
-              "Les 10% restants, cependant, peuvent être assez utiles pour les systèmes assez complexes (ou quand vous vous êtes mis tout seul dans le pétrin). Le prochain concept que nous allons aborder est \"le déplacement de travail\" (moving work around) -- en d'autres termes, c'est une façon pour les développeurs de dire  \"Je veux ce travail ici et cet autre là.\".",
+              "Les 10% restants, cependant, peuvent être assez utiles pour les systèmes assez complexes (ou quand vous vous êtes mis tout seul dans le pétrin). Le prochain concept que nous allons aborder est \"déplacer son travail\" (moving work around) -- en d'autres termes, c'est une façon pour les développeurs de dire  \"Je veux ce travail ici et cet autre là.\".",
               "",
               "Cela peut sembler compliqué, mais c'est un concept simple."
             ]
@@ -118,7 +125,7 @@ exports.level = {
             "markdowns": [
               "## Git Cherry-pick",
               "",
-              "La première commande de cette série est `git cherry-pick`. Elle a le prototype suivant :",
+              "La première commande de cette série est `git cherry-pick`. Elle s'utilise ainsi :",
               "",
               "* `git cherry-pick <Commit1> <Commit2> <...>`",
               "",
@@ -133,20 +140,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Ici le dépôt que nous avons contient du travail dans la branche `side`, que nous voulons copier dans `master`. Cela pourrait être fait avec un rebase (que nous avons déjà appris), mais voyons comment cherry-pick fonctionne."
+              "Ici le dépôt que nous avons contient du travail dans la branche `side`, que nous voulons copier dans `main`. Cela pourrait être fait avec un rebase (que nous avons déjà appris), mais voyons comment cherry-pick fonctionne."
             ],
             "afterMarkdowns": [
-              "Voilà ! Nous voulions les commits `C2` et `C4` et git les a fait apparaître juste sous nos jambes. Aussi simple que ça !"
+              "Voilà ! Nous voulions les commits `C2` et `C4` et Git les a fait apparaître juste sous nos pieds. Aussi simple que ça !"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Pour finir ce niveau, copiez simplement le travail désigné dans la branche master. Vous pouvez voir les commits que nous souhaitons avoir en regardant dans la fenêtre d'objectif.",
+              "Pour finir ce niveau, copiez simplement le travail désigné dans la branche main. Vous pouvez voir les commits que nous souhaitons avoir en regardant dans la fenêtre d'objectif.",
               ""
             ]
           }
@@ -161,9 +168,9 @@ exports.level = {
             "markdowns": [
               "## Moviendo el trabajo por ahí",
               "",
-              "Hasta ahora cubrimos lo básico de git -- commitear, branchear, y movernos por el árbol de commits. Estos conceptos alcanzan para aprovechar el 90% del poder de los repositorios de git y cubrir las necesidades principales de los desarrolladores.",
+              "Hasta ahora cubrimos lo básico de git -- commitear, branchear, y movernos por el árbol de commits. Estos conceptos alcanzan para aprovechar el 90% del poder de los repositorios de git y cubrir las necesidades principales de quienes programan.",
               "",
-              "El 10% restante, sin embargo, puede ser bastante útil en flujos de trabajo complejos (o cuando te metiste en algún problema complicado). El próximo concepto que vamos a cubrir es el de \"mover el trabajo por ahí\" -- en otras palabras, una forma que tienen los desarrolladores de decir \"Quiero este trabajo allá y este otro allá\" de una manera precisa, elocuente y flexible.",
+              "El 10% restante, sin embargo, puede ser bastante útil en flujos de trabajo complejos (o cuando te metiste en algún problema complicado). El próximo concepto que vamos a cubrir es el de \"mover el trabajo por ahí\" -- en otras palabras, una forma que tienen quienes programan de decir \"Quiero este trabajo allá y este otro allá\" de una manera precisa, elocuente y flexible.",
               "",
               "Puede parecer un montón, pero es un concepto bastante simple."
             ]
@@ -190,20 +197,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Acá tenemos un repositorio con algo de trabajo en la rama `side` que queremos copiar a `master`. Podríamos lograrlo con un rebase (y ya aprendimos cómo), pero veamos cómo se comporta cherry-pick."
+              "Acá tenemos un repositorio con algo de trabajo en la rama `side` que queremos copiar a `main`. Podríamos lograrlo con un rebase (y ya aprendimos cómo), pero veamos cómo se comporta cherry-pick."
             ],
             "afterMarkdowns": [
               "¡Eso es todo! Queríamos los commits `C2` y `C4` y git los aplicó justo donde estábamos. ¡Tan simple como eso!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Para completar este nivel, simplemente copiá algo de trabajo desde otras tres ramas a master. Podés ver qué commits queremos en la visualización del objetivo.",
+              "Para completar este nivel, simplemente copiá algo de trabajo desde otras tres ramas a main. Podés ver qué commits queremos en la visualización del objetivo.",
               ""
             ]
           }
@@ -247,20 +254,77 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "A continuación tenemos un repositorio con algo de trabajo en la rama `side` que queremos copiar a `master`. Podríamos lograrlo con un rebase (y ya aprendimos cómo), pero veamos cómo se comporta cherry-pick."
+              "A continuación tenemos un repositorio con algo de trabajo en la rama `side` que queremos copiar a `main`. Podríamos lograrlo con un rebase (y ya aprendimos cómo), pero veamos cómo se comporta cherry-pick."
             ],
             "afterMarkdowns": [
               "¡Eso es todo! Queríamos los commits `C2` y `C4` y git los aplicó justo donde estábamos. ¡Tan simple como eso!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Para completar este nivel, simplemente copia algo de trabajo desde otras tres ramas a master. Puedes ver qué commits queremos en la visualización del objetivo.",
+              "Para completar este nivel, simplemente copia algo de trabajo desde otras tres ramas a main. Puedes ver qué commits queremos en la visualización del objetivo.",
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    "es_MX": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Moviendo el trabajo por ahí",
+              "",
+              "Hasta ahora hemos cubierto lo básico de Git -- hacer confirmaciones, crear ramas y movernos por el árbol de confirmaciones. Estos conceptos alcanzan para aprovechar el 90% del poder de los repositorios de Git y cubrir las necesidades principales de los desarrolladores.",
+              "",
+              "El 10% restante, sin embargo, puede ser bastante útil en flujos de trabajo complejos (o cuando te metiste en algún problema complicado). El próximo concepto que vamos a cubrir es el de \"mover el trabajo por ahí\" -- en otras palabras, una forma que tienen los desarrolladores de decir \"Quiero este trabajo aquí y este otro allí\" de una manera precisa, elocuente y flexible.",
+              "",
+              "Puede parecer un montón, pero es un concepto bastante simple."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Cherry-pick",
+              "",
+              "El primer comando en esta serie se llama `git cherry-pick`. Tiene la siguiente forma:",
+              "",
+              " `git cherry-pick <Commit1> <Commit2> <...>`",
+              "",
+              "Es una manera bastante directa de decir que quieres copiar una serie de commits sobre tu ubicación actual (`HEAD`). Personalmente amo `cherry-pick` porque hay muy poca magia involucrada y es bastante simple de entender.",
+              "",
+              "¡Veamos una demostración!",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Aquí tenemos un repositorio donde tenemos algo de trabajo en la rama `side` que queremos copiar a `main`. Podríamos lograrlo con un rebase (y ya aprendimos cómo), pero veamos cómo se comporta cherry-pick."
+            ],
+            "afterMarkdowns": [
+              "¡Eso es todo! Queríamos los commits `C2` y `C4` y Git los aplicó justo donde estábamos. ¡Tan simple como eso!"
+            ],
+            "command": "git cherry-pick C2 C4",
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, simplemente copia algo de trabajo desde otras tres ramas a main. Puedes ver qué commits queremos en la visualización del objetivo.",
               ""
             ]
           }
@@ -304,20 +368,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Aqui está um repositório onde temos algum trabalho no ramo `side` que desejamos copiar para o `master`. Isso poderia ser obtido por meio de um rebase (que já aprendemos), mas vamos ver como o cherry-pick se sai."
+              "Aqui está um repositório onde temos algum trabalho no ramo `side` que desejamos copiar para o `main`. Isso poderia ser obtido por meio de um rebase (que já aprendemos), mas vamos ver como o cherry-pick se sai."
             ],
             "afterMarkdowns": [
               "É isso! Queríamos os commits `C2` e `C4` e o git os inseriu logo abaixo de nós. Simples assim!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Para completar este nível, simplesmente copie algum trabalho dos outros três ramos para o master. Você pode ver quais commits queremos copiar na visualização do objetivo.",
+              "Para completar este nível, simplesmente copie algum trabalho dos outros três ramos para o main. Você pode ver quais commits queremos copiar na visualização do objetivo.",
               ""
             ]
           }
@@ -361,20 +425,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Aquí está un repositorio onde hai algún traballo na rama `side` que desexamos copiar para a rama `master`. Iso podería ser obtido por medio dun rebase (que xa aprendemos), pero imos ver como o resolve cherry-pick."
+              "Aquí está un repositorio onde hai algún traballo na rama `side` que desexamos copiar para a rama `main`. Iso podería ser obtido por medio dun rebase (que xa aprendemos), pero imos ver como o resolve cherry-pick."
             ],
             "afterMarkdowns": [
               "¡Eso é! Queríamos os commits `C2` e `C4` e git insertounos por baixo de nós. ¡Moi sinxelo!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Para completar este nivel, copia algo de traballo das outras ramas na master. Podes ver qué commits queremos copiar na visualización do obxectivo.",
+              "Para completar este nivel, copia algo de traballo das outras ramas na main. Podes ver qué commits queremos copiar na visualización do obxectivo.",
               ""
             ]
           }
@@ -418,20 +482,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "這裡有一個 repo，在 `side` branch 中，我們有一些 commit 想要複製到 `master` branch 上，這可以透過一個 rebase 來完成（我們之前已經學到了），但是讓我們看看 `git cherry-pick` 怎麼做。"
+              "這裡有一個 repo，在 `side` branch 中，我們有一些 commit 想要複製到 `main` branch 上，這可以透過一個 rebase 來完成（我們之前已經學到了），但是讓我們看看 `git cherry-pick` 怎麼做。"
             ],
             "afterMarkdowns": [
               "就是那樣！我們複製了 `C2` 以及 `C4` 並且把它們放到我們的後面，很簡單吧！"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "要完成這個關卡，只需要從三個 branch 複製幾個 commit 到 `master` 下面，你可以從視覺化的目標看到我們需要哪些 commit。",
+              "要完成這個關卡，只需要從三個 branch 複製幾個 commit 到 `main` 下面，你可以從視覺化的目標看到我們需要哪些 commit。",
               ""
             ]
           }
@@ -474,20 +538,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "这里有一个仓库, 我们想将 `side` 分支上的工作复制到 `master` 分支，你立刻想到了之前学过的 `rebase` 了吧？但是咱们还是看看 `cherry-pick` 有什么本领吧。"
+              "这里有一个仓库, 我们想将 `side` 分支上的工作复制到 `main` 分支，你立刻想到了之前学过的 `rebase` 了吧？但是咱们还是看看 `cherry-pick` 有什么本领吧。"
             ],
             "afterMarkdowns": [
               "这就是了！我们只需要提交记录 `C2` 和 `C4`，所以 Git 就将被它们抓过来放到当前分支下了。 就是这么简单!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "要通过此关, 只需要简单的将三个分支中的提交记录复制到 master 上就可以了。目标窗口展示了我们想要哪些提交记录，如果你不小心关掉了的话，通过 `show goal` 命令可以打开，左上角也有“显示目标按钮”",
+              "要通过此关, 只需要简单的将三个分支中的提交记录复制到 main 上就可以了。目标窗口展示了我们想要哪些提交记录，如果你不小心关掉了的话，通过 `show goal` 命令可以打开，左上角也有“显示目标按钮”",
               ""
             ]
           }
@@ -502,7 +566,7 @@ exports.level = {
             "markdowns": [
               "## Inhalte verschieben",
               "",
-              "Bis jetzt haben wir uns die Grundlagen von Git angeschaut -- comitten, verzweigen und sich im Commit-Baum bewegen. Nur damit lässt sich schon 90% der Macht von Git-Repositories nutzen und die meisten Anforderungen von Entwicklern erfüllen.",
+              "Bis jetzt haben wir uns die Grundlagen von Git angeschaut -- comitten, verzweigen und sich im Commit-Baum bewegen. Nur damit lässt sich schon 90% der Macht von Git-Repositorys nutzen und die meisten Anforderungen von Entwicklern erfüllen.",
               "",
               "Die übrigen 10% jedoch können in komplexeren Abläufen sehr hilfreich sein (oder wenn man sich in eine schwierige Lage manövriert hat). Das nächste was wir uns anschauen, ist, Inhalte durch den Commit-Baum zu schieben. Es gibt dem Entwickler die Möglichkeit in präziser, eloquenter Manier zu sagen \"Ich will diese Inhalte hier und diese dort haben\".",
               "",
@@ -520,7 +584,7 @@ exports.level = {
               "",
               "* `git cherry-pick <Commit1> <Commit2> <...>`",
               "",
-              "Er ist eine einfache Möglichkeit um auszudrücken, dass du eine Folge von Commits unter deinen aktuellen Checkout (also `HEAD`) hängen möchtest. Ich persönlich liebe `cherry-pick`, weil es wenig Magic enthält und einfach zu verstehen ist.",
+              "Er ist eine einfache Möglichkeit um auszudrücken, dass du eine Folge von Commits unter deinen aktuellen Checkout (also `HEAD`) hängen möchtest. Ich persönlich liebe `cherry-pick`, weil es wenig Magie enthält und einfach zu verstehen ist.",
               "",
               "Schauen wir's uns mal an.",
               ""
@@ -531,20 +595,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Hier haben wir ein Repository mit einigem Zeugs im Branch `side`, das wir in den Branch `master` kopieren wollen. Das könnten wir mit einem Rebase machen (wie bereits gesehen), aber schauen wir mal wie das mit `cherry-pick` geht."
+              "Hier haben wir ein Repository mit einigem Zeugs im Branch `side`, das wir in den Branch `main` kopieren wollen. Das könnten wir mit einem Rebase machen (wie bereits gesehen), aber schauen wir mal, wie das mit `cherry-pick` geht."
             ],
             "afterMarkdowns": [
-              "Das war's! Wir wollten die commits `C2` und `C4` und Git hat die einfach unter unseren aktuellen Checkout kopiert. So einfach ist das."
+              "Das war's! Wir wollten die Commits `C2` und `C4` und Git hat die einfach unter unseren aktuellen Checkout kopiert. So einfach ist das."
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Um diesen Level zu schaffen musst du einfach nur einige Commits aus den drei gezeigten Branches in den `master` kopieren. Der Zielbaum zeigt dir, welche.",
+              "Um diesen Level zu schaffen, musst du einfach nur einige Commits aus den drei gezeigten Branches in den `main` kopieren. Der Zielbaum zeigt dir, welche.",
               ""
             ]
           }
@@ -559,7 +623,7 @@ exports.level = {
             "markdowns": [
               "## コードの移動",
               "",
-              "今まででは、gitの基本をひたすら見てきました -- コミットしたりブランチを派生したり、そしてソースツリーの中の色々な場所に移動することなどです。これらの概念だけで、gitリポジトリの力を90%使いこなすことができ、開発者の主な需要を満たしています。",
+              "今まででは、gitの基本をひたすら見てきました -- コミットしたりブランチを派生したり、そしてソースツリーの中の色々な場所に移動することなどです。これらの概念だけで、gitリポジトリの力を90%使いこなすことができ、開発者としての主な需要を満たしています。",
               "",
               "しかし最後の10%はより複雑なワークフローやちょっとトラブった時にとても役にたちます。これから取り上げる次の課題は「作業内容の移動」 –- 詳しく言えば、「この作業はここに置き、その作業はそこに置きたい」と言う開発者のために、優しく具体的で正確にその方法をお教えしましょう。",
               "",
@@ -588,20 +652,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "このリポジトリには、現在`side`ブランチから`master`にコピーしたいコードがあります。この前に学んだrebaseコマンドでも実現可能ですが、ここではcherry-pickの動作を見ていきましょう。"
+              "このリポジトリには、現在`side`ブランチから`main`にコピーしたいコードがあります。この前に学んだrebaseコマンドでも実現可能ですが、ここではcherry-pickの動作を見ていきましょう。"
             ],
             "afterMarkdowns": [
               "これだけで終わりです！コミット`C2` と `C4`を取得したかったわけですが、gitが現在の位置の直下に落としてくれました。単純ですね！"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "このレベルをクリアするには、３つのブランチからmasterにコードをコピーしてください。どのコミットを取得するかについてはゴールのツリーをみてください。",
+              "このレベルをクリアするには、３つのブランチからmainにコードをコピーしてください。どのコミットを取得するかについてはゴールのツリーをみてください。",
               ""
             ]
           }
@@ -645,13 +709,13 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Вот репозиторий, где есть некие изменения в ветке `side`, которые мы хотим применить и в ветку `master`. Мы можем сделать это при помощи команды rebase, которую мы уже прошли, но давай посмотрим, как cherry-pick справится с этой задачей."
+              "Вот репозиторий, где есть некие изменения в ветке `side`, которые мы хотим применить и в ветку `main`. Мы можем сделать это при помощи команды rebase, которую мы уже прошли, но давай посмотрим, как cherry-pick справится с этой задачей."
             ],
             "afterMarkdowns": [
               "Вуаля! Мы хотели перенести коммиты `C2` и `C4`, Git дал нам их там, где они нужны. Всё просто!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
@@ -665,7 +729,7 @@ exports.level = {
         }
       ]
     },
-	"ko": {
+    "ko": {
       "childViews": [
         {
           "type": "ModalAlert",
@@ -675,9 +739,9 @@ exports.level = {
               "",
               "지금까지 우리는 git의 기초를 배웠습니다. -- 커밋을하고, 브랜치를 만들고, 소스 트리 여기저기를 돌아다녔습니다. 이런 개념들을 아는 것만으로도 git repository의 힘을 90%이상 사용하고 개발자들이 필요로하는 작업의 대부분을 할 수 있습니다.",
               "",
-              "그 나머지 10% 기능이, 복잡한 작업(또는 작업중 막혔을때)중에 꽤 유용할 수 있습니다. 이제 배워 볼 다음 개념은 \"작업을 여기저로 올기기\" 다시 말해, 개발자들의 언어로 \"이 일은 여기에 저 일은 저기에 두고 싶어\" 정확하고 우아하고 유연하게.",
+              "그 나머지 10% 기능이, 복잡한 작업(또는 작업중 막혔을때) 중에 꽤 유용할 수 있습니다. 이제 배워 볼 다음 개념은 \"작업을 여기저로 옮기기\" 다시 말해, 개발자들의 언어로 \"이 일은 여기에, 저 일은 저기에 두고 싶어\" 정확하고 우아하고 유연하게.",
               "",
-              "다소 과해 보일 수 있는데, 간단한 개념입니다."
+              "다소 과해 보일 수 있지만, 간단한 개념입니다."
             ]
           }
         },
@@ -702,20 +766,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "여기 repository가 있습니다. `master`와 master로 복사하고 싶은 작업이 있는 브랜치 `side`가 있습니다. 이것은 rebase를 통해서 할 수 있습니다(이미 배운), 하지만 체리-픽이 이 작업을 어떻게 수행하는지 확인해 봅시다."
+              "여기 repository가 있습니다. `main` 으로 복사하고 싶은 작업이 있는 브랜치 `side`가 있습니다. 이것은 rebase를 통해서 할 수 있습니다(이미 배운), 하지만 체리-픽이 이 작업을 어떻게 수행하는지 확인해 봅시다."
             ],
             "afterMarkdowns": [
-              "됬습니다! 우리는 `C2`와 `C4` 커밋을 원했고 git이 우리가 원하는 곳 바로 밑에 톡 떨어뜨려 줬습니다. 아주 간단하죠!"
+              "됐습니다! 우리는 `C2`와 `C4` 커밋을 원했고 git이 우리가 원하는 곳 바로 밑에 톡 떨어뜨려 줬습니다. 아주 간단하죠!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "이 레벨을 통과하기 위해서는 몇개의 작업을 세개의 브랜치들에서 master로 복사해와야합니다. 어떤 커밋들이 필요한지는 goal을 보고 확인하면 됩니다.",
+              "이 레벨을 통과하기 위해서는 몇개의 작업을 세개의 브랜치들에서 `main` 브랜치로 복사해와야합니다. 어떤 커밋들이 필요한지는 goal을 보고 확인하면 됩니다.",
               ""
             ]
           }
@@ -759,20 +823,20 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Ми бачимо репозиторій де є певні зміни в гілці `side` які ми хочемо скопіювати в  `master`. Для цього можна використати rebase (який ми вже вивчили), але подивимось як з цим впорається cherry-pick."
+              "Ми бачимо репозиторій де є певні зміни в гілці `side` які ми хочемо скопіювати в  `main`. Для цього можна використати rebase (який ми вже вивчили), але подивимось як з цим впорається cherry-pick."
             ],
             "afterMarkdowns": [
               "Овва! Ми хотіли коміти `C2` та `C4` і git додав їх до поточного розташування. Просто й доступно!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Щоб пройти це рівень, просто скопіюй якісь зміни з трьох гілок показаних на діаграмі в master. В візуалізації видно які коміти потрібно скопіювати.",
+              "Щоб пройти це рівень, просто скопіюй якісь зміни з трьох гілок показаних на діаграмі в main. В візуалізації видно які коміти потрібно скопіювати.",
               ""
             ]
           }
@@ -816,25 +880,197 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Ở đây ta có một kho chứa mà ta muốn sao chép thành quả công việc từ nhánh `side` sang nhánh `master`. Có thể dùng rebase để làm việc này (kỹ thuật mà ta đã học), nhưng hãy xem thử cherry-pick làm điều này ra sao."
+              "Ở đây ta có một kho chứa mà ta muốn sao chép thành quả công việc từ nhánh `side` sang nhánh `main`. Có thể dùng rebase để làm việc này (kỹ thuật mà ta đã học), nhưng hãy xem thử cherry-pick làm điều này ra sao."
             ],
             "afterMarkdowns": [
               "Thế thôi! Chúng ta chỉ cần các commit `C2` và` C4`, vì vậy Git sẽ lấy chúng và đặt chúng dưới nhánh hiện tại. Thật đơn giản!"
             ],
             "command": "git cherry-pick C2 C4",
-            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout master; git commit;"
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
           }
         },
         {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Để hoàn thành cấp độ này, hãy copy thành quả công việc từ 3 nhánh khác vào master. Bạn có thể nhìn vào mô tả mục tiêu để biết chúng ta cần những commit nào.",
+              "Để hoàn thành cấp độ này, hãy copy thành quả công việc từ 3 nhánh khác vào main. Bạn có thể nhìn vào mô tả mục tiêu để biết chúng ta cần những commit nào.",
               ""
             ]
           }
         }
       ]
-    }
+    },
+    "sl_SI": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Premikanje dela naokoli",
+              "",
+              "Zaenkrat smo pokrili osnove gita -- commitanje, branchanje in pomikanje po drevesu. Samo te koncepti so dovolj za koriščenje 90% moči git repozitorijev in pokrijejo večino potreb razvijalcev.",
+              "",
+              "Preostalih 10% pa je lahko kar uporabnih med reševanjem kompleksnejših situacij (ali ko ste zašli v zagato). Naslednji koncept, ki ga bomo pokrili je \"premikanje dela naokoli\" -- z drugimi besedami, tako razvijalci rečejo \"Rad bi to delo tu in tisto delo tam\" na natančen, zgovoren in prilagodljiv način.",
+              "",
+              "Morda se zdi veliko, a gre za preprost koncept."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Cherry-pick",
+              "",
+              "Prvi ukaz v zaporedju je `git cherry-pick`. Je sledeče oblike:",
+              "",
+              "* `git cherry-pick <Commit1> <Commit2> <...>`",
+              "",
+              "Gre za jasen način, da povemo, da bi radi skopirali zaporedje commitov pod trenutno lokacijo (`HEAD`). Sam imam rad `cherry-pick`, ker je vključeno le malo čarovnije in je preprost za razumet.",
+              "",
+              "Poglejmo predstavitev!",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Tu je repozitorij, kjer imamo nekaj dela na branchu `side`, ki bi ga radi skopirali na `main`. To bi lahko dosegli z rebase-om (kar smo se že naučili), ampak poglejmo kako se odreže cherry-pick."
+            ],
+            "afterMarkdowns": [
+              "To je to! Želeli smo commita `C2` in `C4` in git ju je prilimal točno pod nas. Preprosto!"
+            ],
+            "command": "git cherry-pick C2 C4",
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Za končanje te stopnje enostavno skopiraj nekaj dela iz predstavljenih treh branchev v main. V priloženi vizualizaciji lahko vidiš katere commite.",
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    "pl": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Przenoszenie pracy",
+              "",
+              "Do tej pory zajmowaliśmy się podstawami Gita - commitami, gałęziami i poruszaniem się w drzewie źródłowym. Samo to wystarczy, aby wykorzystać 90% mocy repozytoriów Git i zaspokoić główne potrzeby programistów.",
+              "",
+              "Pozostałe 10% może być jednak dość użyteczne podczas niecodziennych zadań (lub kiedy wpakujesz się w kłopoty). Kolejny temat, który zamierzamy omówić, to \"przenoszenie pracy\" - innymi słowy, jest to sposób, w jaki programiści mogą powiedzieć: \"Chcę te zmiany tu, a tamte tam\" w precyzyjny, elegancki i elastyczny sposób.",
+              "",
+              "Może się to wydawać skomplikowane, ale tak nie jest."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git cherry-pick",
+              "",
+              "Pierwsze polecenie w tej serii nazywa się `git cherry-pick`. Przyjmuje ono następującą formę:",
+              "",
+              "* `git cherry-pick <Commit1> <Commit2> <...>`",
+              "",
+              "Jest to bardzo prosty sposób określenia, że chcesz przenieść zmiany poniżej swojej obecnej lokalizacji (`HEAD`). Osobiście uwielbiam `cherry-pick`, ponieważ działa prosto i skutecznie.",
+              "",
+              "Zobaczmy demo!",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "W tym repozytorium mamy trochę pracy na gałęzi `side`, którą chcemy skopiować do gałęzi `main`. Można by to osiągnąć przy użyciu rebase (którego już się nauczyliśmy), ale zobaczmy, jak działa cherry-pick."
+            ],
+            "afterMarkdowns": [
+              "No i fajnie! Chcieliśmy commity `C2` i `C4` i Git zrzucił je nam zaraz pod spód. Bułka z masłem!"
+            ],
+            "command": "git cherry-pick C2 C4",
+            "beforeCommand": "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Aby ukończyć ten poziom, po prostu skopiuj część pracy z trzech pokazanych gałęzi do `main`. Commity, które należy skopiować, znajdują się na wizualizacji celu.",
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    "it_IT": {
+      childViews: [
+        {
+          type: "ModalAlert",
+          options: {
+            markdowns: [
+              "## Spostare il lavoro in giro",
+              "",
+              "Finora abbiamo intravisto le basi di git -- creazione di commit, rami, e come spostarsi sull'albero dei commit. Questi concetti sono sufficienti per sfruttare il 90% della potenza di git, e soddisfano gli utilizzi standard degli sviluppatori.",
+              "",
+              'Il restante 10%, può rivelarsi utile in situazioni più complesse (o se ti sei messo nei guai). Il prossimo concetto che affronteremo è lo "spostare il lavoro in giro" -- in altre parole, è un modo per gli sviluppatori di dire "Voglio questo lavoro qua e quel lavoro là" in maniera chiara e precisa.',
+              "",
+              "Sembra un grosso lavoro, ma è un concetto semplice.",
+            ],
+          },
+        },
+        {
+          type: "ModalAlert",
+          options: {
+            markdowns: [
+              "## Git Cherry-pick",
+              "",
+              "Il primo comando si chiama `git cherry-pick`. Il comando ha il seguente aspetto:",
+              "",
+              "* `git cherry-pick <Commit1> <Commit2> <...>`",
+              "",
+              "È un modo chiaro e diretto di dire che vuoi la copia di una serie di commit da applicare sulla posizione in cui ti trovi attualmente (`HEAD`). Io personalmente adoro `cherry-pick` perché semplice e facile da capire.",
+              "",
+              "Vediamo una demo!",
+              "",
+            ],
+          },
+        },
+        {
+          type: "GitDemonstrationView",
+          options: {
+            beforeMarkdowns: [
+              "In questo repository abbiamo del lavoro nel ramo `side` che vogliamo copiare nel `main`. Questo può essere eseguito tramite rebase (che abbiamo già imparato), ma vediamo il cherry-pick all'opera.",
+            ],
+            afterMarkdowns: [
+              "Ecco qua! Volevamo i commit `C2` e `C4` e git li ha copiati sotto di noi. Semplicissimo!",
+            ],
+            command: "git cherry-pick C2 C4",
+            beforeCommand:
+              "git checkout -b side; git commit; git commit; git commit; git checkout main; git commit;",
+          },
+        },
+        {
+          type: "ModalAlert",
+          options: {
+            markdowns: [
+              "Per completare questo livello, copia il lavoro dai tre rami sul main. Puoi vedere quali sono i commit richiesti guardando l'obiettivo.",
+              "",
+            ],
+          },
+        },
+      ],
+    },
   }
 };

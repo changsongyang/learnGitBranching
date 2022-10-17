@@ -56,22 +56,21 @@ class MainHelperBarView extends React.Component {
         this.setState({
           shownBar: BARS.COMMANDS
         });
-      }.bind(this)
+      }.bind(this),
+      title: 'Show commands'
     }, {
       icon: 'globe',
       onClick: function() {
         this.setState({
           shownBar: BARS.INTL
         });
-      }.bind(this)
+      }.bind(this),
+      title: 'Show available languages'
     }, {
       newPageLink: true,
       icon: 'twitter',
-      href: 'https://twitter.com/petermcottle'
-    }, {
-      newPageLink: true,
-      icon: 'facebook',
-      href: 'https://www.facebook.com/LearnGitBranching'
+      href: 'https://twitter.com/petermcottle',
+      title: 'Follow me on Twitter'
     }];
   }
 

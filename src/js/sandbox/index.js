@@ -85,7 +85,7 @@ var Sandbox = Backbone.View.extend({
   },
 
   releaseControl: function() {
-    // we will be handling commands that are submitted, mainly to add the sanadbox
+    // we will be handling commands that are submitted, mainly to add the sandbox
     // functionality (which is included by default in ParseWaterfall())
     Main.getEventBaton().releaseBaton('commandSubmitted', this.commandSubmitted, this);
     // we obviously take care of sandbox commands
@@ -234,6 +234,15 @@ var Sandbox = Backbone.View.extend({
   },
 
   resetSolved: function(command, deferred) {
+    if (command.get('regexResults').input !== 'reset solved --confirm') {
+      command.set('error', new Errors.GitError({
+        msg: 'Reset solved will mark each level as not yet solved; because ' +
+             'this is a destructive command, please pass in --confirm to execute',
+      }));
+      command.finishWith(deferred);
+      return;
+    }
+
     LevelActions.resetLevelsSolved();
     command.addWarning(
       intl.str('solved-map-reset')

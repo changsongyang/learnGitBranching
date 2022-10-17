@@ -219,7 +219,7 @@ GitVisuals.prototype.animateAllAttrKeys = function(keys, attr, speed, easing) {
 GitVisuals.prototype.finishAnimation = function(speed) {
   speed = speed || 1.0;
   if (!speed) {
-    throw new Error('need speed by time i finish animation' + speed);
+    throw new Error('need speed by time i finish animation ' + speed);
   }
 
   var _this = this;
@@ -240,7 +240,7 @@ GitVisuals.prototype.finishAnimation = function(speed) {
       opacity: 0,
       'font-weight': 500,
       'font-size': '32pt',
-      'font-family': 'Monaco, Courier, font-monospace',
+      'font-family': 'Menlo, Monaco, Consolas, \'Droid Sans Mono\', monospace',
       stroke: '#000',
       'stroke-width': 2,
       fill: '#000'
@@ -309,7 +309,7 @@ GitVisuals.prototype.finishAnimation = function(speed) {
     animationDone.resolve();
   })
   .fail(function(reason) {
-    console.warn('animation error' + reason);
+    console.warn('animation error ' + reason);
   })
   .done();
 
@@ -550,8 +550,8 @@ GitVisuals.prototype.calcBranchStacks = function() {
     map[thisId].sort(function(a, b) {
       var aId = a.obj.get('id');
       var bId = b.obj.get('id');
-      if (aId == 'master' || bId == 'master') {
-        return aId == 'master' ? -1 : 1;
+      if (aId == 'main' || bId == 'main') {
+        return aId == 'main' ? -1 : 1;
       }
       return aId.localeCompare(bId);
     });
