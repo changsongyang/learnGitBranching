@@ -366,8 +366,8 @@ var SeriesView = BaseView.extend({
   className: 'seriesView box flex1 vertical',
   template: _.template($('#series-view').html()),
   events: {
-    'click div.levelIcon': 'click',
-    'mouseenter div.levelIcon': 'enterIcon'
+    'click a.levelIcon': 'click',
+    'mouseenter a.levelIcon': 'enterIcon'
   },
 
   initialize: function(options) {
@@ -402,7 +402,7 @@ var SeriesView = BaseView.extend({
   updateSolvedStatus: function() {
     // this is a bit hacky, it really should be some nice model
     // property changing but it's the 11th hour...
-    var toLoop = this.$('div.levelIcon').each(function(index, el) {
+    var toLoop = this.$('a.levelIcon').each(function(index, el) {
       var id = $(el).attr('data-id');
       $(el).toggleClass('solved', LevelStore.isLevelSolved(id));
     });
