@@ -1,3 +1,5 @@
+const { Branch } = require("../git");
+
 exports.dialog = {
   'en_US': [{
     type: 'ModalAlert',
@@ -684,17 +686,23 @@ exports.dialog = {
         '',
         'Bạn có hứng thú học Git? Bạn đến đúng nơi rồi đấy! ',
         '"Học Nhánh Git" là cách trực quan và hiệu quả nhất để học Git trên web; ',
-        'thông qua một loạt các thử thách cấp độ thú vị, bạn sẽ từng bước tìm hiểu sức mạnh của git',
+        'thông qua một loạt các thử thách cấp độ thú vị, bạn sẽ từng bước tìm hiểu sức mạnh của Git.',
         '',
-        'Sau khi hội thoại này đóng lại, bạn sẽ thấy nhiều cấp độ mà chúng tôi cung cấp. ',
-        'Nếu bạn là người mới thì hãy bắt đầu từ bài đầu tiên. Nếu bạn đã có hiểu biết cơ bản về git, ',
+        'Sau khi hộp thoại này đóng lại, bạn sẽ thấy nhiều cấp độ mà chúng tôi cung cấp. ',
+        'Nếu bạn là người mới thì hãy bắt đầu từ bài đầu tiên. Nếu bạn đã có hiểu biết cơ bản về Git, ',
         'hãy thử những bài mang tính thách thức hơn phía sau.',
         '',
-        'Bạn có thể dùng lệnh `show commands` để xem tất cả các lệnh hiện hữu.',
+        'Bạn có thể dùng lệnh `show commands` để xem tất cả các lệnh được hỗ trợ.',
         '',
-        'Ghi chú: Nếu muốn trực tiếp vào hộp cát ở lần sau?',
+        'Ghi chú: Nếu muốn trực tiếp vào hộp cát (sandbox) ở lần sau?',
         'Hãy dùng',
-        '[đường link đặc biệt này của chúng tôi](https://pcottle.github.io/learnGitBranching/?locale=vi&NODEMO)'
+        '[đường link đặc biệt này của chúng tôi](https://pcottle.github.io/learnGitBranching/?locale=vi&NODEMO)',
+        '',
+        'Tái bút: GitHub đã đổi tên cho nhánh mặc định là `main` thay vì `master` ',
+        'nhằm tránh dùng thuật ngữ có xu hướng thiên vị [(xem chi tiết tại đây)](https://github.com/github/renaming). ',
+        'Để bắt kịp xu hướng công nghệ này, chúng tôi cũng đã cập nhật "Học Nhánh Git" sử ',
+        'dụng `main` thay thế cho `master` trong các bài học. Việc đổi tên được thực hiện khá nhất quán cho đến ',
+        'thời điểm hiện tại, nhưng nếu bạn phát hiện bất kỳ lỗi nào, đừng ngần ngại mà gửi một pull request (PR), hoặc tạo một vấn đề (New issue).'
       ]
     }
   }],
@@ -809,4 +817,34 @@ exports.dialog = {
       },
     },
   ],
+  'tr_TR': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Learn Git Branching\'e hoşgeldiniz.',
+        '',
+        'Git öğrenmeye ilgi duyuyor musunuz? O zaman doğru yerdesiniz!',
+        '"Learn Git Branching," Git\'i öğrenmenin en görsel ve etkileşimli yoludur.',
+        'web üzerinde; sizi heyecan verici seviyelerle zorlayacak, güçlü özelliklerin adım adım gösterimlerini sunacak',
+        've belki de eğlenceli vakit geçirmenizi sağlayacaktır.',
+        '',
+        'Bu iletişim kutusunu geçtikten sonra sunduğumuz çeşitli seviyeleri göreceksiniz. Eğer yeni başlayan biriyseniz, ',
+        'sadece ilk seviyeye başlayabilirsiniz. Eğer zaten Git temellerini biliyorsanız, ',
+        'daha sonraki daha zorlu seviyeleri deneyebilirsiniz.',
+        '',
+        'Terminalde `show commands` ile mevcut tüm komutları görebilirsiniz.',
+        '',
+        'Not: Bir sonraki seferde doğrudan bir deneme ortamına gitmek mi istiyorsunuz\?',
+        'Denemek için bu özel bağlantıyı kullanın:  ',
+        '[özel bağlantı](https://pcottle.github.io/learnGitBranching/?NODEMO)',
+        '',
+        'Not: GitHub, önyargılı terimlerden uzaklaşmak için varsayılan Branch ismini `master` yerine `main`  ',
+        'olarak adlandırmaya başladı [(daha fazla detay için tıklayın)](https://github.com/github/renaming). ',
+        'Biz de sektör genelindeki harekete uygun olarak, "Learn Git Branching" ',
+        'derslerimizde de `master` yerine `main` kullanımını güncelledik. Bu adlandırmanın ',
+        'şu anda oldukça tutarlı olması gerekiyor, ancak herhangi bir hata fark ederseniz,',
+        'lütfen bir PR (veya issue) göndermekten çekinmeyin.'
+      ]
+    }
+  }],
 };

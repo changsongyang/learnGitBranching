@@ -36,6 +36,7 @@ exports.level = {
     "sl_SI": "Žongliranje s Commiti",
     "it_IT": "Giocoliere di commit",
     "pl": "Żonglowanie commitami",
+    "tr_TR": "Commit Hokkabazlığı",
   },
   "hint": {
     "en_US": "The first command is git rebase -i HEAD~2",
@@ -55,6 +56,7 @@ exports.level = {
     "sl_SI": "Prvi ukaz je git rebase -i HEAD~2.",
     "it_IT": "Il primo comando è git rebase -i HEAD~2",
     "pl": "Pierwsze polecenie to: git rebase -i HEAD~2",
+    "tr_TR": "İlk komutunuz git rebase -i HEAD~2"
   },
   "startDialog": {
     "en_US": {
@@ -548,7 +550,7 @@ exports.level = {
               "",
               "Có một tình huống xảy ra khá thường xuyên. Bạn có vài thay đổi trên (`newImage`) và một vài thay đổi khác trên (`caption`) và chúng lại liên quan đến nhau, nên chúng nằm chồng lên nhau trong kho của bạn (một lại nối một).",
               "",
-              "Tréo ngoe là bạn lại phải điều chỉnh một chút ở commit trước. Giả sử như tay thiết kết muốn ta đổi chiều của `newImage` một chút, mặc dù commit ấy đã xưa lắm rồi!!"
+              "Tréo ngoe là bạn lại phải điều chỉnh một chút ở commit trước. Giả sử như tay thiết kế muốn ta đổi chiều của `newImage` một chút, mặc dù commit ấy đã xưa lắm rồi!!"
             ]
           }
         },
@@ -564,7 +566,7 @@ exports.level = {
               "* Cuối cùng, ta sẽ chuyển `main` tới phần đã cập nhật để hoàn thành cấp độ (dùng cách nào tùy bạn)",
               "",
               "Có nhiều cách để hoàn thành mục tiêu (Tôi thấy bạn hấp háy sang cherry-pick rồi đấy), rồi ta sẽ thấy chúng nhiều hơn, nhưng giờ hãy cứ tập trung vào kỹ thuật này đã.",
-              "Sau cùng thì, để ý các dấu nháy đơn(') chứ?-- vì ta đã chuyển commit 2 lần, nên chúng có thêm một dấu nháy đơn. Và một dấu nữa cho commit mà ta đã sửa đổi, thế là ta có trạng thái cuối cùng của cây lịch sử ",
+              "Sau cùng thì, hãy để ý các dấu nháy đơn (') -- Vì ta đã chuyển commit 2 lần, nên chúng có thêm một dấu nháy đơn và một dấu nữa cho commit mà ta đã sửa đổi, thế là ta có trạng thái cuối cùng của cây lịch sử ",
               "",
               "Nói cách khác, khi tôi so sánh kết quả, tôi chỉ so sánh cấu trúc của cây lịch sử. Sự khác biệt về số lượng `'`  không được bao gồm trong so sánh. Miễn là cấu trúc nhánh `main` của bạn giống với cấu trúc đích, tôi sẽ vẫn để bạn qua bài."
             ]
@@ -673,6 +675,40 @@ exports.level = {
           },
         },
       ],
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit Hokkabazlığı",
+              "",
+              "Şimdiki senaryomuz aslında sık karşılaşılan başka bir durumdur. İlgili olan iki değişiklik kümeniz (`newImage` ve `caption`) vardır, bu nedenle bu iki küme reponuzda  üst üste yığılıdır (veya diğer adıyla birbiri ardına gelmişlerdir).",
+              "",
+              "Zor olan şey, bazen önceki bir commit üzerinde küçük bir değişiklik yapmanız gerektiğidir. Bu durumda, tasarım ekibi `newImage` 'in boyutlarını biraz değiştirmemizi istiyor, ancak bu commit geçmişimizde çok eski bir tarihte yer alıyor!!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu zorluğun üstesinden şu şekilde gelebiliriz:",
+              "",
+              "* `git rebase -i` komutu ile değiştirmek istediğimiz commit'i en üste getireceğiz.",
+              "* Küçük değişikliği yapmak için `git commit --amend` komutunu kullanacağız.",
+              "* Ardından, `git rebase -i` komutu ile komitleri önceki sıralarına geri döndüreceğiz.",
+              "* Son olarak, main branch'ini ağacın bu güncellenmiş kısmına taşıyarak seviyeyi bitireceğiz (tabi sizin seçtiğiniz yöntemle).",
+              "",
+              "Bunu başarmak için birçok yol vardır (cherry-pick komutuna göz diktiğinizi görüyorum) ve ileride daha fazlasını göreceğiz, ancak şimdilik bu tekniğe odaklanalım.",
+              "Son olarak, buradaki hedef duruma dikkat edin - commit'leri iki kez taşıdığımızdan, her ikisi de bir tırnak işareti alıyor. Değiştirdiğimiz commit için bir tırnak işareti daha eklenir, bu da bize ağacın son halini verir. ",
+              "",
+              "Şunu da belirtmek isteriz ki, artık seviyeleri yapı ve göreceli tırnak işareti farklılıklarına göre karşılaştırabiliyoruz. Ağacınızın `main` branch'i aynı yapıya ve göreceli tırnak işareti farklılıklarına sahip olduğu sürece tam puan alacaksınız."
+            ]
+          }
+        }
+      ]
     },
   }
 };

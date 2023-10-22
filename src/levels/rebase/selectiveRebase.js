@@ -12,6 +12,7 @@ exports.level = {
     "fr_FR": "Branche spaghetti",
     "de_DE": "Branch-Spaghetti",
     "es_AR": "Ensalada de branches",
+    "es_MX": "Espagueti de ramas",
     "es_ES": "Ensalada de ramas",
     "pt_BR": "Espaguete de ramos",
     "gl": "Espaguete de ramas",
@@ -30,6 +31,7 @@ exports.level = {
     "fr_FR": "Faites attention à tout faire dans le bon ordre ! La première branche d'abord, puis la seconde, puis la troisième",
     "de_DE": "Stelle sicher, dass du alles in der richtigen Reihenfolge machst! Branche erst one, dann two, dann three.",
     "es_AR": "¡Asegurate de hacer las cosas en el orden correcto! Brancheá `one` primero, después `two`, y después `three`.",
+    "es_MX": "¡Asegúrate de hacer las cosas en el orden correcto! Primero la rama uno, después la dos, y después la tres.",
     "es_ES": "¡Asegúrate de hacer las cosas en el orden correcto! Crea primero la rama `one`, después `two`, y después `three`.",
     "pt_BR": "Certifique-se de fazer tudo na ordem correta! Crie o ramo `one` primeiro, depois `two`, depois `three`.",
     "gl": "¡Afiánzate de facer as cousas no orde correcto! Crea ramas `one` de primeiras, e logo `two` e `three`.",
@@ -100,6 +102,26 @@ exports.level = {
               "La rama `one` necesita reordenarse, y eliminar `C5`. `two` necesita sólo reordenamiento, y `three` ¡sólo necesita un commit!",
               "",
               "Te vamos a dejar darte cuenta cómo resolver este -- asegurate de mirar la solución, después, usando `show solution`. "
+            ]
+          }
+        }
+      ]
+    },
+    "es_MX": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Espagueti de ramas",
+              "",
+              "¡Oh vaya! Tenemos un _pequeño_ objetivo al que llegar en este nivel.",
+              "",
+              "La rama `main` se encuentra algunos commits por delante de las ramas `one`, `two` y `three`. Por alguna razón, necesitamos actualizar esas tres ramas con versiones modificadas de los últimos commits de main.",
+              "",
+              "La rama `one` necesita esos commits reordenados, y eliminar/excluir a `C5`. La rama `two` sólo necesita reordenarlos, y `three` ¡sólo necesita avanzar un commit!",
+              "",
+              "Vamos a dejar que averigues cómo resolver este -- asegúrate de revisar nuestra solución después, usando `show solution`. "
             ]
           }
         }
@@ -315,16 +337,17 @@ exports.level = {
               "",
               "Chààà, anh bạn! Thử thách lần này hơi khoai đây.",
               "",
-              "Hiện tại thì nhánh `main` đang có nhiều commit hơn các nhánh `one`, `two` và `three`. Vì một lý do nào đó, ta cần cập nhật những commit trên nhánh `main` lên các nhánh còn lại kèm với một vài điều chỉnh .",
+              "Hiện tại thì nhánh `main` đang có trước vài commit so với các nhánh `one`, `two` và `three`. Vì một lý do nào đó, ta cần cập nhật những commit trên nhánh `main` lên các nhánh còn lại kèm với một vài điều chỉnh.",
               "",
-              "Nhánh `one` thì cần sắp xếp lại và xóa commit `C5`, trong khi đó nhánh `two` thì đơn giản sắp xếp, còn `three` thì chỉ cần một commit!",
+              "Nhánh `one` cần sắp xếp lại commit và xóa commit `C5`, nhánh `two` chỉ cần sắp xếp commit, còn `three` thì cần chuyển đi một commit!",
               "",
               "Cố gắng động não tìm ra cách đi nhé -- khi bạn làm xong thì nhớ so sánh với đáp án của chúng tôi bằng lệnh `show solution`. "
             ]
           }
         }
       ]
-    }, "sl_SI": {
+    },
+    "sl_SI": {
       "childViews": [
         {
           "type": "ModalAlert",

@@ -281,7 +281,7 @@ exports.dialog = {
         '  * Định nghĩa cây mục tiêu với ```define goal```. Định nghĩa mục tiêu đồng thời cũng xác định đáp án',
         '  * Có thể định nghĩa gợi ý với ```define hint```',
         '  * Chỉnh sửa tên với ```define name```',
-        '  * Có thể định nghĩa hội thoại bắt đầu với ```edit dialog```',
+        '  * Có thể định nghĩa hộp thoại bắt đầu với ```edit dialog```',
         '  * Nhập lệnh ```finish``` xuất cấp độ của bạn dưới dạng JSON!'
       ]
     }
@@ -364,5 +364,24 @@ exports.dialog = {
       },
     },
   ],
+  'tr_TR': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Level oluşturucusuna hoş geldiniz!',
+        '',
+        'İşte ana adımlar:',
+        '',
+        '  * Git komutlarıyla başlangıç ortamını ayarlayın',
+        '  * Başlangıç ağacını ```define start``` ile tanımlayın',
+        '  * (İdeal) çözümü oluşturan git komutlarını girin',
+        '  * Hedef ağacını ```define goal``` ile tanımlayın. Hedefi tanımlamak aynı zamanda çözümü tanımlar',
+        '  * İsteğe bağlı olarak ipucu ekleyin ```define hint```',
+        '  * İsmi düzenleyin ```define name```',
+        '  * İsteğe bağlı olarak hoş bir başlangıç diyalogu tanımlayın ```edit dialog```',
+        '  * Level JSON\'unuzu çıkarmak için ```finish``` komutunu girin!'
+      ]
+    }
+  }],
 };
 
