@@ -22,6 +22,14 @@ var assertIsRef = function(engine, ref) {
   engine.resolveID(ref); // will throw git error if can't resolve
 };
 
+var assertRefNoModifiers = function(ref) {
+  if (/~|\^/.test(ref)) {
+    throw new GitError({
+      msg: intl.str('git-error-exist', {ref: ref})
+    });
+  }
+}
+
 var validateBranchName = function(engine, name) {
   return engine.validateBranchName(name);
 };
@@ -219,6 +227,7 @@ var commandConfig = {
   pull: {
     regex: /^git +pull($|\s)/,
     options: [
+      '--force',
       '--rebase'
     ],
     execute: function(engine, command) {
@@ -229,6 +238,7 @@ var commandConfig = {
       }
 
       var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
       var generalArgs = command.getGeneralArgs();
       if (commandOptions['--rebase']) {
         generalArgs = commandOptions['--rebase'].concat(generalArgs);
@@ -253,8 +263,13 @@ var commandConfig = {
       var firstArg = generalArgs[1];
       // COPY PASTA validation code from fetch. maybe fix this?
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
+        assertRefNoModifiers(source);
         destination = validateBranchNameIfNeeded(
           engine,
           crappyUnescape(refspecParts[1])
@@ -264,7 +279,6 @@ var commandConfig = {
         source = firstArg;
         assertIsBranch(engine.origin, source);
         // get o/main locally if main is specified
-        destination = engine.origin.resolveID(source).getPrefixedID();
       } else {
         // can't be detached
         if (engine.getDetachedHead()) {
@@ -277,13 +291,13 @@ var commandConfig = {
         var branch = engine.getOneBeforeCommit('HEAD');
         var branchName = branch.get('id');
         assertBranchIsRemoteTracking(engine, branchName);
-        destination = branch.getRemoteTrackingBranchID();
-        source = destination.replace(ORIGIN_PREFIX, '');
+        source = branch.getRemoteTrackingBranchID().replace(ORIGIN_PREFIX, '');
       }
 
       engine.pull({
         source: source,
         destination: destination,
+        force: force,
         isRebase: !!commandOptions['--rebase']
       });
     }
@@ -375,6 +389,9 @@ var commandConfig = {
 
   fetch: {
     regex: /^git +fetch($|\s)/,
+    options: [
+      '--force',
+    ],
     execute: function(engine, command) {
       if (!engine.hasOrigin()) {
         throw new GitError({
@@ -384,14 +401,21 @@ var commandConfig = {
 
       var source;
       var destination;
+      var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
       var generalArgs = command.getGeneralArgs();
       command.twoArgsForOrigin(generalArgs);
       assertOriginSpecified(generalArgs);
 
       var firstArg = generalArgs[1];
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
+        assertRefNoModifiers(source);
         destination = validateBranchNameIfNeeded(
           engine,
           crappyUnescape(refspecParts[1])
@@ -405,7 +429,6 @@ var commandConfig = {
         source = firstArg;
         assertIsBranch(engine.origin, source);
         // get o/main locally if main is specified
-        destination = engine.origin.resolveID(source).getPrefixedID();
       }
       if (source) { // empty string fails this check
         assertIsRef(engine.origin, source);
@@ -413,7 +436,8 @@ var commandConfig = {
 
       engine.fetch({
         source: source,
-        destination: destination
+        destination: destination,
+        force: force
       });
     }
   },
@@ -589,6 +613,47 @@ var commandConfig = {
     }
   },
 
+  mergeMR: {
+    regex: /^git +merge[MP]R($|\s)/,
+    options: ['--delete-after-merge'],
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      var commandOptions = command.getOptionsMap();
+      if (!engine.hasOrigin()) {
+        throw new GitError({
+          msg: intl.str('git-error-origin-required'),
+        });
+      }
+
+      command.validateArgBounds(generalArgs, 2, 2);
+
+      var fromBranch = validateOriginBranchName(engine, generalArgs[0]);
+      var intoBranch = validateOriginBranchName(engine, generalArgs[1]);
+
+      var origin = engine.origin;
+
+      origin.checkout(intoBranch);
+      var mergeCommit = origin.merge(fromBranch, { noFF: true });
+
+      origin.animationFactory.genCommitBirthAnimation(
+        origin.animationQueue,
+        mergeCommit,
+        origin.gitVisuals
+      );
+
+      if (!!commandOptions['--delete-after-merge']) {
+        origin.validateAndDeleteBranch(fromBranch);
+      }
+
+      origin.checkout('main');
+
+      origin.animationFactory.playRefreshAnimationAndFinish(
+        origin.gitVisuals,
+        origin.animationQueue
+      );
+    }
+  },
+
   revlist: {
     dontCountForGolf: true,
     displayName: 'rev-list',
@@ -760,6 +825,7 @@ var commandConfig = {
       var source;
       var sourceObj;
       var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
       var isDelete = commandOptions['-d'] || commandOptions['--delete'];
 
       // git push is pretty complex in terms of
@@ -801,6 +867,10 @@ var commandConfig = {
       }
 
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
         destination = validateBranchName(engine, refspecParts[1]);
@@ -845,7 +915,7 @@ var commandConfig = {
         // are always, always strings. very important :D
         destination: destination,
         source: source,
-        force: !!commandOptions['--force']
+        force: force
       });
     }
   },
